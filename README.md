@@ -1,9 +1,11 @@
 ﻿# BadmintonManage
-Badminton Booking Master
+BADMINTON BOOKING MASTER
+
 Guest:
 - Tìm kiếm thông tin sân dựa trên vị trí, giờ hoạt động, giờ có thể vào chơi.
 - Thêm xem thông tin chi tiết của sân: hình ảnh, địa chỉ, thời gian hoạt động, giá của từng khung giờ (Ly)
 - Đăng ký tài khoản, Customer.
+
 Customer:
 - Thêm Quản lý tài khoản: (Ly)
 Đăng nhập (Quên mật khẩu) / Đăng xuất
@@ -15,6 +17,7 @@ Xem lịch sử đặt sân và thanh toán
 - Hủy sân/ dời lịch
 - Đánh giá, giải đáp thắc mắc
 - Chính sách VIP
+
 Court Manager: (tao nghĩ 1 vài chức năng của thằng này nên đem xuống cho thằng staff (Toại))
 - Đăng ký thông tin sân; thông tin tài khoản thanh toán.
 - Đăng ký thông tin loại hình đặt lịch, time slot (time frame) của sân. Giá cho từng slot ứng với từng cách đặt lịch khác nhau.
@@ -23,6 +26,7 @@ Court Manager: (tao nghĩ 1 vài chức năng của thằng này nên đem xuố
 - Thêm chức năng quản lý staff (Toại)
 - Thêm Quản lý doanh thu: theo ngày/tuần/tháng (Ly)
 - Thêm Tạo các chương trình khuyến mãi, giảm giá trong các dịp lễ, đặc biệt (Ly)
+
 Court Staff:
 - Thực hiện check in cho customer.
 - Kiểm tra tình hình hoạt động sân.
