@@ -3,7 +3,7 @@ BADMINTON BOOKING MASTER
 
 Guest:
 - Tìm kiếm thông tin sân dựa trên vị trí, giờ hoạt động, giờ có thể vào chơi.
--  Xem thông tin chi tiết của sân: hình ảnh, địa chỉ, thời gian hoạt động, giá của từng khung giờ 
+- Xem thông tin chi tiết của sân: hình ảnh, địa chỉ, thời gian hoạt động, giá của từng khung giờ 
 - Đăng ký tài khoản, Customer.
 
 Customer:
@@ -34,5 +34,16 @@ Court Staff:
 System Admin: 
 - Quản lý thông tin tài khoản.
 - Quản lý thông tin Sân cầu lông.
-- Đăng ký thông tin sân mới.
+- Đăng ký thông tin sân mới.|
 
+|- BBM
+    |- BBM #App gốc
+    |- GuestApp
+    |- CustomerApp
+    |- CourtManagerApp
+    |- CourtStaffApp
+    |- SystemAdminApp
+    |- Account
+    |- Court
+    |- Payment
+    |- Notification
