@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+def TimeSlot(request):
+    return HttpResponse("Hello world!")
+
+def VeDatSan(request):
+    return HttpResponse("Hello world!")
+
+def HoaDon(request):
+    return HttpResponse("Hello world!")
