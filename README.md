@@ -39,12 +39,7 @@ System Admin:
 |- BBM
 
     |- BBM #App gốc
-    |- GuestApp
-    |- CustomerApp
-    |- CourtManagerApp
-    |- CourtStaffApp
-    |- SystemAdminApp
-    |- Account
-    |- Court
-    |- Payment
-    |- Notification
+    |- B_Court #App quản lý sân
+    |- B_Booking #App quản lý việc đặt sân và thanh toán
+    |- B_User #App quản lý người dùng
+    |- B_VIP #App quản lý cơ chế VIP
