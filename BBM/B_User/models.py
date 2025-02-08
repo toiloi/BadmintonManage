@@ -3,9 +3,11 @@ from B_Court.models import Court
 
 # Create your models here.
 class Account(models.Model):
-    roleId = models.IntegerField(default='0')
+    roleId = models.IntegerField(default='1')
     useName= models.CharField(default='', max_length=20)
     password = models.CharField(default='',max_length=20)
+    def __str__(self):
+        return f"{self.useName}"
 
 class User(models.Model):
     sdt= models.IntegerField(default=0)
@@ -19,16 +21,25 @@ class User(models.Model):
 
 class Position(models.Model):
     soNha = models.CharField(max_length=255,default='')
+    xa = models.CharField(max_length=255,default='')
     huyen = models.CharField(max_length=255,default='')
     tinh = models.CharField(max_length=255,default='')
     quocGia = models.CharField(max_length=255,default='')
+    def __str__(self):
+        return f"{self.soNha} {self.huyen} {self.tinh} {self.quocGia}"
 
 class Customer(User):
     note = models.CharField(max_length=255,default='')
     position = models.ForeignKey(Position,on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.fullName} {self.account}"
 
 class CourtStaff(User):
     court = models.ForeignKey(Court, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.fullName} {self.account} {self.court}"
 
 class CourtManager(User):
     court = models.ForeignKey(Court, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.fullName} {self.account} {self.court}"
