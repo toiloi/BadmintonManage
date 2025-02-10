@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def Account(request):
-    return HttpResponse("Hello world!")
-
 def Position(request):
     return HttpResponse("Hello world!")
 

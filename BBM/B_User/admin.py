@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account, Position, CourtStaff, CourtManager, Customer
+from .models import Position, CourtStaff, CourtManager, Customer
 
 # Register your models here.
 # admin.site.register(Account)
@@ -8,22 +8,17 @@ from .models import Account, Position, CourtStaff, CourtManager, Customer
 # admin.site.register(CourtStaff)
 # admin.site.register(Customer)
 
-class AccountAdmin(admin.ModelAdmin):
-  list_display = ("useName",)
-
 class PositionAdmin(admin.ModelAdmin):
   list_display = ("soNha", "xa", "huyen", "tinh", "quocGia")
 
 class CourtManagerAdmin(admin.ModelAdmin):
-  list_display = ("fullName", "account", "court")
+  list_display = ("fullName", "account",)
 
 class CourtStaffAdmin(admin.ModelAdmin):
   list_display = ("fullName", "account", "court")
 
 class CustomerAdmin(admin.ModelAdmin):
   list_display = ("fullName", "account",)
-  
-admin.site.register(Account, AccountAdmin)
 
 admin.site.register(Position, PositionAdmin)
 

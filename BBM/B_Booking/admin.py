@@ -7,10 +7,10 @@ from .models import TimeSlot, VeDatSan, HoaDon
 # admin.site.register(HoaDon)
 
 class TimeSlotAdmin(admin.ModelAdmin):
-  list_display = ("timeslot", "court",)
+  list_display = ("timeslot",)
 
 class VeDatSanAdmin(admin.ModelAdmin):
-  list_display = ("maVe", "timeslot",)
+  list_display = ("maVe",)
 
 class HoaDonAdmin(admin.ModelAdmin):
   list_display = ("maHoaDon", "ngayTao",)
