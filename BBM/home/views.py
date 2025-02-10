@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 def home(request):
-    return render(request, 'home/home.html')
+    return render(request, 'home/z.html')
 
 def user_login(request):
     if request.method == "POST":
@@ -19,6 +19,11 @@ def user_login(request):
             return render(request, "home/login.html", {"error": "Tên đăng nhập hoặc mật khẩu không đúng"})
     
     return render(request, "home/login.html", {"user":request.user})
+
+def search(request):
+    query = request.GET.get('query', '')
+    # Thêm logic xử lý tìm kiếm ở đây
+    return render(request, 'search.html', {'query': query})
 
 def user_logout(request):
     logout(request)
