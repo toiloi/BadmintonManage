@@ -1,0 +1,564 @@
+{% extends "master.html" %}
+
+
+{%block content%} 
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xxl-8 mb-6 order-0">
+        <div class="card">
+          
+        </div>
+      </div>
+     
+      <!-- Total Revenue -->
+      <div class="col-12 col-xxl-10 order-2 order-md-3 order-xxl-2 mb-6">
+        <div class="card">
+          <div class="row row-bordered g-0">
+            <div class="col-lg-8">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <div class="card-title mb-0">
+                  <h5 class="m-0 me-2">Total Revenue</h5>
+                </div>
+                <div class="dropdown">
+                  <button
+                    class="btn p-0"
+                    type="button"
+                    id="totalRevenue"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="bx bx-dots-vertical-rounded bx-lg text-muted"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalRevenue">
+                    <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                    <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                    <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                  </div>
+                </div>
+              </div>
+              <div id="totalRevenueChart" class="px-3"></div>
+            </div>
+            <div class="col-lg-4 d-flex align-items-center">
+              <div class="card-body px-xl-9">
+                <div class="text-center mb-6">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary">
+                      <script>
+                        document.write(new Date().getFullYear() - 1);
+                      </script>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="javascript:void(0);">2021</a></li>
+                      <li><a class="dropdown-item" href="javascript:void(0);">2020</a></li>
+                      <li><a class="dropdown-item" href="javascript:void(0);">2019</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div id="growthChart"></div>
+                <div class="text-center fw-medium my-6">62% Company Growth</div>
+
+                <div class="d-flex gap-3 justify-content-between">
+                  <div class="d-flex">
+                    <div class="avatar me-2">
+                      <span class="avatar-initial rounded-2 bg-label-primary"
+                        ><i class="bx bx-dollar bx-lg text-primary"></i
+                      ></span>
+                    </div>
+                    <div class="d-flex flex-column">
+                      <small>
+                        <script>
+                          document.write(new Date().getFullYear() - 1);
+                        </script>
+                      </small>
+                      <h6 class="mb-0">$32.5k</h6>
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    <div class="avatar me-2">
+                      <span class="avatar-initial rounded-2 bg-label-info"
+                        ><i class="bx bx-wallet bx-lg text-info"></i
+                      ></span>
+                    </div>
+                    <div class="d-flex flex-column">
+                      <small>
+                        <script>
+                          document.write(new Date().getFullYear() - 2);
+                        </script>
+                      </small>
+                      <h6 class="mb-0">$41.2k</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Total Revenue -->
+      
+    </div>
+    <div class="row">
+      <!-- Order Statistics -->
+      <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-6">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between">
+            <div class="card-title mb-0">
+              <h5 class="mb-1 me-2">Booking Statistics</h5>
+              <p class="card-subtitle">42.82k Total Sales</p>
+            </div>
+            <div class="dropdown">
+              <button
+                class="btn text-muted p-0"
+                type="button"
+                id="orederStatistics"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded bx-lg"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                <a class="dropdown-item" href="javascript:void(0);">Share</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-6">
+              <div class="d-flex flex-column align-items-center gap-1">
+                <h3 class="mb-1">8,258</h3>
+                <small>Total Orders</small>
+              </div>
+              <div id="orderStatisticsChart"></div>
+            </div>
+            <ul class="p-0 m-0">
+              <li class="d-flex align-items-center mb-5">
+                <div class="avatar flex-shrink-0 me-3">
+                  <span class="avatar-initial rounded bg-label-primary"
+                    ><i class="bx bx-mobile-alt"></i
+                  ></span>
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <h6 class="mb-0">Electronic</h6>
+                    <small>Mobile, Earbuds, TV</small>
+                  </div>
+                  <div class="user-progress">
+                    <h6 class="mb-0">82.5k</h6>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center mb-5">
+                <div class="avatar flex-shrink-0 me-3">
+                  <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <h6 class="mb-0">Fashion</h6>
+                    <small>T-shirt, Jeans, Shoes</small>
+                  </div>
+                  <div class="user-progress">
+                    <h6 class="mb-0">23.8k</h6>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center mb-5">
+                <div class="avatar flex-shrink-0 me-3">
+                  <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <h6 class="mb-0">Decor</h6>
+                    <small>Fine Art, Dining</small>
+                  </div>
+                  <div class="user-progress">
+                    <h6 class="mb-0">849k</h6>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center">
+                <div class="avatar flex-shrink-0 me-3">
+                  <span class="avatar-initial rounded bg-label-secondary"
+                    ><i class="bx bx-football"></i
+                  ></span>
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <h6 class="mb-0">Sports</h6>
+                    <small>Football, Cricket Kit</small>
+                  </div>
+                  <div class="user-progress">
+                    <h6 class="mb-0">99</h6>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ Order Statistics -->
+
+      <!-- Expense Overview -->
+      <div class="col-md-6 col-lg-4 order-1 mb-6">
+        <div class="card h-100">
+          <div class="card-header nav-align-top">
+            <ul class="nav nav-pills" role="tablist">
+              <li class="nav-item">
+                <button
+                  type="button"
+                  class="nav-link active"
+                  role="tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#navs-tabs-line-card-income"
+                  aria-controls="navs-tabs-line-card-income"
+                  aria-selected="true">
+                  Income
+                </button>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="nav-link" role="tab">Expenses</button>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="nav-link" role="tab">Profit</button>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content p-0">
+              <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
+                <div class="d-flex mb-6">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" />
+                  </div>
+                  <div>
+                    <p class="mb-0">Total Balance</p>
+                    <div class="d-flex align-items-center">
+                      <h6 class="mb-0 me-1">$459.10</h6>
+                      <small class="text-success fw-medium">
+                        <i class="bx bx-chevron-up bx-lg"></i>
+                        42.9%
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div id="incomeChart"></div>
+                <div class="d-flex align-items-center justify-content-center mt-6 gap-3">
+                  <div class="flex-shrink-0">
+                    <div id="expensesOfWeek"></div>
+                  </div>
+                  <div>
+                    <h6 class="mb-0">Income this week</h6>
+                    <small>$39k less than last week</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Expense Overview -->
+
+      <!-- Transactions -->
+      <div class="col-md-6 col-lg-4 order-2 mb-6">
+        <div class="card h-100">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Transactions</h5>
+            <div class="dropdown">
+              <button
+                class="btn text-muted p-0"
+                type="button"
+                id="transactionID"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded bx-lg"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-4">
+            <ul class="p-0 m-0">
+              <li class="d-flex align-items-center mb-6">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="d-block">Paypal</small>
+                    <h6 class="fw-normal mb-0">Send money</h6>
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-2">
+                    <h6 class="fw-normal mb-0">+82.6</h6>
+                    <span class="text-muted">USD</span>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center mb-6">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="d-block">Wallet</small>
+                    <h6 class="fw-normal mb-0">Mac'D</h6>
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-2">
+                    <h6 class="fw-normal mb-0">+270.69</h6>
+                    <span class="text-muted">USD</span>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center mb-6">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="../assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="d-block">Transfer</small>
+                    <h6 class="fw-normal mb-0">Refund</h6>
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-2">
+                    <h6 class="fw-normal mb-0">+637.91</h6>
+                    <span class="text-muted">USD</span>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center mb-6">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="../assets/img/icons/unicons/cc-primary.png" alt="User" class="rounded" />
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="d-block">Credit Card</small>
+                    <h6 class="fw-normal mb-0">Ordered Food</h6>
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-2">
+                    <h6 class="fw-normal mb-0">-838.71</h6>
+                    <span class="text-muted">USD</span>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center mb-6">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="d-block">Wallet</small>
+                    <h6 class="fw-normal mb-0">Starbucks</h6>
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-2">
+                    <h6 class="fw-normal mb-0">+203.33</h6>
+                    <span class="text-muted">USD</span>
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="../assets/img/icons/unicons/cc-warning.png" alt="User" class="rounded" />
+                </div>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="d-block">Mastercard</small>
+                    <h6 class="fw-normal mb-0">Ordered Food</h6>
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-2">
+                    <h6 class="fw-normal mb-0">-92.45</h6>
+                    <span class="text-muted">USD</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ Transactions -->
+    </div>
+  </div>
+    <!-- Customer Ratings -->
+  <div class=" col-md-6 col-lg-4 mb-6 ms-6 ">
+    <div class="card h-100">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h5 class="card-title m-0 me-2">Customer Ratings</h5>
+        <div class="dropdown">
+          <button class="btn p-0" type="button" id="customerRatings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-base bx bx-dots-vertical-rounded icon-lg text-body-secondary"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="customerRatings" style="">
+            <a class="dropdown-item" href="javascript:void(0);">Featured Ratings</a>
+            <a class="dropdown-item" href="javascript:void(0);">Based on Task</a>
+            <a class="dropdown-item" href="javascript:void(0);">See All</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body pb-0">
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <h2 class="mb-0">4.0</h2>
+          <div class="ratings">
+            <i class="icon-base bx bxs-star icon-lg text-warning"></i>
+            <i class="icon-base bx bxs-star icon-lg text-warning"></i>
+            <i class="icon-base bx bxs-star icon-lg text-warning"></i>
+            <i class="icon-base bx bxs-star icon-lg text-warning"></i>
+            <i class="icon-base bx bxs-star icon-lg text-lighter"></i>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <span class="badge bg-label-primary me-2">+5.0</span>
+          <span>Points from last month</span>
+        </div>
+      </div>
+      <div id="customerRatingsChart" class="" style="min-height: 227px;"><div id="apexcharts87t9l5wk" class="apexcharts-canvas apexcharts87t9l5wk apexcharts-theme-" style="width: 385px; height: 212px;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" width="385" height="212"><foreignObject x="0" y="0" width="385" height="212"><div class="apexcharts-legend" xmlns="http://www.w3.org/1999/xhtml" style="max-height: 106px;"></div><style type="text/css">
+    .apexcharts-flip-y {
+      transform: scaleY(-1) translateY(-100%);
+      transform-origin: top;
+      transform-box: fill-box;
+    }
+    .apexcharts-flip-x {
+      transform: scaleX(-1);
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+    .apexcharts-legend {
+      display: flex;
+      overflow: auto;
+      padding: 0 10px;
+    }
+    .apexcharts-legend.apexcharts-legend-group-horizontal {
+      flex-direction: column;
+    }
+    .apexcharts-legend-group {
+      display: flex;
+    }
+    .apexcharts-legend-group-vertical {
+      flex-direction: column-reverse;
+    }
+    .apexcharts-legend.apx-legend-position-bottom, .apexcharts-legend.apx-legend-position-top {
+      flex-wrap: wrap
+    }
+    .apexcharts-legend.apx-legend-position-right, .apexcharts-legend.apx-legend-position-left {
+      flex-direction: column;
+      bottom: 0;
+    }
+    .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-left, .apexcharts-legend.apx-legend-position-top.apexcharts-align-left, .apexcharts-legend.apx-legend-position-right, .apexcharts-legend.apx-legend-position-left {
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-center, .apexcharts-legend.apx-legend-position-top.apexcharts-align-center {
+      justify-content: center;
+      align-items: center;
+    }
+    .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right, .apexcharts-legend.apx-legend-position-top.apexcharts-align-right {
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+    .apexcharts-legend-series {
+      cursor: pointer;
+      line-height: normal;
+      display: flex;
+      align-items: center;
+    }
+    .apexcharts-legend-text {
+      position: relative;
+      font-size: 14px;
+    }
+    .apexcharts-legend-text *, .apexcharts-legend-marker * {
+      pointer-events: none;
+    }
+    .apexcharts-legend-marker {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-right: 1px;
+    }
+
+    .apexcharts-legend-series.apexcharts-no-click {
+      cursor: auto;
+    }
+    .apexcharts-legend .apexcharts-hidden-zero-series, .apexcharts-legend .apexcharts-hidden-null-series {
+      display: none !important;
+    }
+    .apexcharts-inactive-legend {
+      opacity: 0.45;
+    }
+
+  </style></foreignObject><rect width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g class="apexcharts-datalabels-group" transform="translate(0, 0) scale(1)"></g><g class="apexcharts-datalabels-group" transform="translate(0, 0) scale(1)"></g><g class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g class="apexcharts-inner apexcharts-graphical" transform="translate(0, 10)"><defs><clipPath id="gridRectMask87t9l5wk"><rect width="375" height="173.70079907417298" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectBarMask87t9l5wk"><rect width="383" height="181.70079907417298" x="-4" y="-4" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMask87t9l5wk"><rect width="387" height="185.70079907417298" x="-6" y="-6" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMask87t9l5wk"></clipPath><clipPath id="nonForecastMask87t9l5wk"></clipPath><filter id="SvgjsFilter1007" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%" y="-50%"><feOffset id="SvgjsFeOffset1000" result="offset" in="SourceGraphic" dx="4" dy="13"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1001" result="blur" in="offset" stdDeviation="3"></feGaussianBlur><feFlood id="SvgjsFeFlood1002" result="flood" in="SourceGraphic" flood-color="var(--bs-primary)" flood-opacity="0.09"></feFlood><feComposite id="SvgjsFeComposite1003" result="shadow" in="flood" in2="blur" operator="in"></feComposite><feMerge id="SvgjsFeMerge1004" result="SvgjsFeMerge1004" in="SourceGraphic"><feMergeNode id="SvgjsFeMergeNode1005" result="SvgjsFeMergeNode1005" in="shadow"></feMergeNode><feMergeNode id="SvgjsFeMergeNode1006" result="SvgjsFeMergeNode1006" in="SourceGraphic"></feMergeNode></feMerge></filter></defs><line x1="230.875" y1="0" x2="230.875" y2="173.70079907417298" stroke="#b6b6b6" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-xcrosshairs" x="230.875" y="0" width="1" height="173.70079907417298" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g class="apexcharts-grid"><g class="apexcharts-gridlines-horizontal" style="display: none;"><line x1="0" y1="0" x2="375" y2="0" stroke="var(--bs-border-color)" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line x1="0" y1="43.425199768543244" x2="375" y2="43.425199768543244" stroke="var(--bs-border-color)" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line x1="0" y1="86.85039953708649" x2="375" y2="86.85039953708649" stroke="var(--bs-border-color)" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line x1="0" y1="130.27559930562973" x2="375" y2="130.27559930562973" stroke="var(--bs-border-color)" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line x1="0" y1="173.70079907417298" x2="375" y2="173.70079907417298" stroke="var(--bs-border-color)" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line></g><g class="apexcharts-gridlines-vertical" style="display: none;"></g><line x1="0" y1="173.70079907417298" x2="375" y2="173.70079907417298" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line><line x1="0" y1="1" x2="0" y2="173.70079907417298" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line></g><g class="apexcharts-grid-borders" style="display: none;"></g><g class="apexcharts-line-series apexcharts-plot-series"><g class="apexcharts-series" zIndex="0" seriesName="LastxMonth" data:longestSeries="true" rel="1" data:realIndex="0"><path d="M0 130.27559930562973C16.40625 130.27559930562973 30.46875 56.452759699106224 46.875 56.452759699106224C63.28125 56.452759699106224 77.34375 130.27559930562973 93.75 130.27559930562973C110.15625 130.27559930562973 124.21875 91.19291951394082 140.625 91.19291951394082C157.03125 91.19291951394082 171.09375 125.93307932877542 187.5 125.93307932877542C203.90625 125.93307932877542 217.96875 112.90551939821245 234.375 112.90551939821245C250.78125 112.90551939821245 264.84375 138.9606392593384 281.25 138.9606392593384C297.65625 138.9606392593384 311.71875 132.4468592940569 328.125 132.4468592940569C344.53125 132.4468592940569 358.59375 149.81693920147418 375 149.81693920147418C375 149.81693920147418 375 149.81693920147418 375 149.81693920147418 " fill="none" fill-opacity="1" stroke="var(--bs-border-color)" stroke-opacity="1" stroke-linecap="butt" stroke-width="3" stroke-dasharray="8" class="apexcharts-line" index="0" clip-path="url(#gridRectMask87t9l5wk)" pathTo="M 0 130.27559930562973C 16.40625 130.27559930562973 30.46875 56.452759699106224 46.875 56.452759699106224C 63.28125 56.452759699106224 77.34375 130.27559930562973 93.75 130.27559930562973C 110.15625 130.27559930562973 124.21875 91.19291951394082 140.625 91.19291951394082C 157.03125 91.19291951394082 171.09375 125.93307932877542 187.5 125.93307932877542C 203.90625 125.93307932877542 217.96875 112.90551939821245 234.375 112.90551939821245C 250.78125 112.90551939821245 264.84375 138.9606392593384 281.25 138.9606392593384C 297.65625 138.9606392593384 311.71875 132.4468592940569 328.125 132.4468592940569C 344.53125 132.4468592940569 358.59375 149.81693920147418 375 149.81693920147418" pathFrom="M 0 173.70079907417298 L 0 173.70079907417298 L 46.875 173.70079907417298 L 93.75 173.70079907417298 L 140.625 173.70079907417298 L 187.5 173.70079907417298 L 234.375 173.70079907417298 L 281.25 173.70079907417298 L 328.125 173.70079907417298 L 375 173.70079907417298" fill-rule="evenodd"></path><g class="apexcharts-series-markers-wrap apexcharts-hidden-element-shown" data:realIndex="0"><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M -3, 130.27559930562973 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="-3" cy="130.27559930562973" shape="circle" class="apexcharts-marker no-pointer-events w91dqqmfh" rel="0" j="0" index="0" default-marker-size="6"></path><path d="M 43.875, 56.452759699106224 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="43.875" cy="56.452759699106224" shape="circle" class="apexcharts-marker no-pointer-events wx5maqkk6" rel="1" j="1" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 90.75, 130.27559930562973 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="90.75" cy="130.27559930562973" shape="circle" class="apexcharts-marker no-pointer-events wf94k83id" rel="2" j="2" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 137.625, 91.19291951394082 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="137.625" cy="91.19291951394082" shape="circle" class="apexcharts-marker no-pointer-events wzt5ijiih" rel="3" j="3" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 184.5, 125.93307932877542 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="184.5" cy="125.93307932877542" shape="circle" class="apexcharts-marker no-pointer-events wnl0i89b8" rel="4" j="4" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 231.375, 112.90551939821245 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="231.375" cy="112.90551939821245" shape="circle" class="apexcharts-marker no-pointer-events wno71w7un" rel="5" j="5" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 278.25, 138.9606392593384 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="278.25" cy="138.9606392593384" shape="circle" class="apexcharts-marker no-pointer-events w70r09l37" rel="6" j="6" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 325.125, 132.4468592940569 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="325.125" cy="132.4468592940569" shape="circle" class="apexcharts-marker no-pointer-events wptjqt2g" rel="7" j="7" index="0" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 372, 149.81693920147418 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="372" cy="149.81693920147418" shape="circle" class="apexcharts-marker no-pointer-events w8qkpe3x" rel="8" j="8" index="0" default-marker-size="6"></path></g></g></g><g class="apexcharts-series" zIndex="1" seriesName="ThisxMonth" data:longestSeries="true" rel="2" data:realIndex="1"><path d="M0 130.27559930562973C16.40625 130.27559930562973 30.46875 104.2204794445038 46.875 104.2204794445038C63.28125 104.2204794445038 77.34375 125.93307932877542 93.75 125.93307932877542C110.15625 125.93307932877542 124.21875 32.56889982640743 140.625 32.56889982640743C157.03125 32.56889982640743 171.09375 86.85039953708649 187.5 86.85039953708649C203.90625 86.85039953708649 217.96875 73.82283960652352 234.375 73.82283960652352C250.78125 73.82283960652352 264.84375 99.87795946764946 281.25 99.87795946764946C297.65625 99.87795946764946 311.71875 21.71259988427164 328.125 21.71259988427164C344.53125 21.71259988427164 358.59375 10.85629994213582 375 10.85629994213582C375 10.85629994213582 375 10.85629994213582 375 10.85629994213582 " fill="none" fill-opacity="1" stroke="var(--bs-primary)" stroke-opacity="1" stroke-linecap="butt" stroke-width="4" stroke-dasharray="0" class="apexcharts-line" index="1" clip-path="url(#gridRectMask87t9l5wk)" filter="url(#SvgjsFilter1007)" pathTo="M 0 130.27559930562973C 16.40625 130.27559930562973 30.46875 104.2204794445038 46.875 104.2204794445038C 63.28125 104.2204794445038 77.34375 125.93307932877542 93.75 125.93307932877542C 110.15625 125.93307932877542 124.21875 32.56889982640743 140.625 32.56889982640743C 157.03125 32.56889982640743 171.09375 86.85039953708649 187.5 86.85039953708649C 203.90625 86.85039953708649 217.96875 73.82283960652352 234.375 73.82283960652352C 250.78125 73.82283960652352 264.84375 99.87795946764946 281.25 99.87795946764946C 297.65625 99.87795946764946 311.71875 21.71259988427164 328.125 21.71259988427164C 344.53125 21.71259988427164 358.59375 10.85629994213582 375 10.85629994213582" pathFrom="M 0 173.70079907417298 L 0 173.70079907417298 L 46.875 173.70079907417298 L 93.75 173.70079907417298 L 140.625 173.70079907417298 L 187.5 173.70079907417298 L 234.375 173.70079907417298 L 281.25 173.70079907417298 L 328.125 173.70079907417298 L 375 173.70079907417298" fill-rule="evenodd"></path><g class="apexcharts-series-markers-wrap apexcharts-hidden-element-shown" data:realIndex="1"><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M -3, 130.27559930562973 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="-3" cy="130.27559930562973" shape="circle" class="apexcharts-marker no-pointer-events wlsfuib91" rel="0" j="0" index="1" default-marker-size="6"></path><path d="M 43.875, 104.2204794445038 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="43.875" cy="104.2204794445038" shape="circle" class="apexcharts-marker no-pointer-events wyg4liq87" rel="1" j="1" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 90.75, 125.93307932877542 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="90.75" cy="125.93307932877542" shape="circle" class="apexcharts-marker no-pointer-events wqpit2ov1" rel="2" j="2" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 137.625, 32.56889982640743 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="var(--bs-white)" fill-opacity="1" stroke="var(--bs-pure-black)" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="137.625" cy="32.56889982640743" shape="circle" class="apexcharts-marker no-pointer-events ww8wd3tfq" rel="3" j="3" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 184.5, 86.85039953708649 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="184.5" cy="86.85039953708649" shape="circle" class="apexcharts-marker no-pointer-events wwh4u3rn" rel="4" j="4" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 231.375, 73.82283960652352 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="231.375" cy="73.82283960652352" shape="circle" class="apexcharts-marker no-pointer-events wb9r4yglc" rel="5" j="5" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 278.25, 99.87795946764946 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="278.25" cy="99.87795946764946" shape="circle" class="apexcharts-marker no-pointer-events wnrggic7y" rel="6" j="6" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 325.125, 21.71259988427164 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="transparent" fill-opacity="1" stroke="transparent" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="325.125" cy="21.71259988427164" shape="circle" class="apexcharts-marker no-pointer-events wa63sr0sjj" rel="7" j="7" index="1" default-marker-size="6"></path></g><g class="" clip-path="url(#gridRectMarkerMask87t9l5wk)"><path d="M 372, 10.85629994213582 
+         m -6, 0 
+         a 6,6 0 1,0 12,0 
+         a 6,6 0 1,0 -12,0" fill="var(--bs-white)" fill-opacity="1" stroke="var(--bs-primary)" stroke-opacity="0.9" stroke-linecap="butt" stroke-width="5" stroke-dasharray="0" cx="372" cy="10.85629994213582" shape="circle" class="apexcharts-marker no-pointer-events wexk9uvv0j" rel="8" j="8" index="1" default-marker-size="6"></path></g></g></g><g class="apexcharts-datalabels" data:realIndex="0"></g><g class="apexcharts-datalabels" data:realIndex="1"></g></g><line x1="0" y1="0" x2="375" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line x1="0" y1="0" x2="375" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line><g class="apexcharts-xaxis" transform="translate(0, 0)"><g class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"><text x="0" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan> </tspan><title> </title></text><text x="46.875" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>Jan</tspan><title>Jan</title></text><text x="93.75" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>Feb</tspan><title>Feb</title></text><text x="140.625" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>Mar</tspan><title>Mar</title></text><text x="187.5" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>Apr</tspan><title>Apr</title></text><text x="234.375" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>May</tspan><title>May</title></text><text x="281.25" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>Jun</tspan><title>Jun</title></text><text x="328.125" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan>Jul</tspan><title>Jul</title></text><text x="375" y="201.70079907417298" text-anchor="middle" dominant-baseline="auto" font-size="13px" font-family="Helvetica, Arial, sans-serif" font-weight="400" fill="var(--bs-secondary-color)" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan> </tspan><title> </title></text></g></g><g class="apexcharts-yaxis-annotations apexcharts-hidden-element-shown"></g><g class="apexcharts-xaxis-annotations apexcharts-hidden-element-shown"></g><g class="apexcharts-point-annotations apexcharts-hidden-element-shown"></g></g></svg><div class="apexcharts-tooltip apexcharts-theme-light" style="left: 94.975px; top: 76.8228px;"><div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">May</div><div class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-0 apexcharts-active" style="order: 1; display: flex;"><span class="apexcharts-tooltip-marker" style="background-color: var(--bs-border-color);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">Last Month: </span><span class="apexcharts-tooltip-text-y-value">28</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-1 apexcharts-active" style="order: 2; display: flex;"><span class="apexcharts-tooltip-marker" style="background-color: var(--bs-primary);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label">This Month: </span><span class="apexcharts-tooltip-text-y-value">46</span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-xaxistooltip apexcharts-xaxistooltip-bottom apexcharts-theme-light" style="left: 209.675px; top: 185.701px;"><div class="apexcharts-xaxistooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; min-width: 20.8px;">May</div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+    </div>
+</div>
+{%endblock%}
+
+{%block footer%}
+    {% include '../includes/footer.html' %}
+{%endblock%}
+
+{%block left-menu%}
+    {% include '../includes/left-menu.html' %}
+{%endblock%}
+
