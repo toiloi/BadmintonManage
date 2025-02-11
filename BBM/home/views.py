@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from B_Court.models import Court
-from B_User.models import CourtManager, CourtStaff, Customer
+from BCourt.models import Court
+from BUser.models import CourtStaff, User
 
 def home(request):
     return render(request, 'home/home.html')
@@ -19,15 +19,18 @@ def user_login(request):
         
         if user is not None:
             login(request, user)
-            if Customer.objects.filter(account=user).exists():
-                return redirect("role1")
-            elif CourtManager.objects.filter(account=user).exists():
-                return redirect("role3")
-            elif CourtStaff.objects.filter(account=user).exists():
-                return redirect("role2")
+
+            # Kiểm tra role và chuyển hướng phù hợp
+            if hasattr(user, "customer"):
+                return redirect("role1")  # Đường dẫn cho Customer
+            elif hasattr(user, "courtstaff"):
+                return redirect("role2")  # Đường dẫn cho CourtStaff
+            elif hasattr(user, "courtmanager"):
+                return redirect("role3")  # Đường dẫn cho CourtManager
         else:
             return render(request, "home/login.html", {"error": "Tên đăng nhập hoặc mật khẩu không đúng"})
-    return render(request, "home/login.html", {"user":request.user})
+    
+    return render(request, "home/login.html", {"user": request.user})
 
 def user_logout(request):
     logout(request)
