@@ -86,6 +86,12 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, .08);
 } */
 
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Điều chỉnh khoảng cách giữa các mục */
+}
+
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
@@ -120,13 +126,16 @@
         padding: 0;
     }
 
+    .navbar-light .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 1px solid #EEEEEE;
+    }
+
     .navbar-light .navbar-nav .nav-link  {
         margin-right: 0;
         padding: 10px 0;
-    }
-
-    .navbar-light .navbar-nav {
-        border-top: 1px solid #EEEEEE;
     }
 }
 
@@ -164,6 +173,7 @@
 .navbar {
     display: flex;
     align-items: center;
+    white-space: nowrap;
     justify-content: space-between;
     padding: 10px 20px;
     background-color: #fff;
@@ -172,37 +182,6 @@
 /* Logo */
 .logo img {
     height: 40px;
-}
-
-/* Thanh tìm kiếm nằm chính giữa */
-.search-bar {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-grow: 1; /* Để chiếm khoảng trống giữa logo và menu */
-    justify-content: center; /* Căn giữa */
-}
-
-.search-input {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 00px; /* Chiều rộng cố định */
-}
-
-.search-button {
-    padding: 8px 12px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #1c391a;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #34495e;
 }
 
 /* Menu bên phải */
@@ -241,27 +220,18 @@
     /* Chuyển menu sang hàng dọc */
     .navbar {
         flex-direction: column;
-        align-items: stretch;
-    }
-
-    .search-bar {
-        margin: 10px 0; /* Thêm khoảng cách giữa thanh tìm kiếm và các phần tử khác */
+        align-items: center;
     }
 
     .menu {
+        flex-direction: column;
+        gap: 10px;
         justify-content: center; /* Căn giữa các mục menu */
     }
 }
 
 @media (max-width: 480px) {
     /* Giảm kích thước cho màn hình nhỏ */
-    .search-input {
-        width: 100%; /* Đầy đủ chiều rộng */
-    }
-
-    .search-button {
-        font-size: 12px;
-    }
 
     .menu-item {
         font-size: 14px;

@@ -1,9 +1,5 @@
 {% extends "master_page.html" %}
 
-{%block search%}
-    {%include '../search.html' %}
-{%endblock%}
-
 {%block navbar%}
     {%include '../navbar.html' %}
 {%endblock%}
@@ -12,12 +8,10 @@
     {%include '../header.html' %}
 {%endblock%}
 
-{%block category%}
+{%block content%}
     {%include '../category.html' %}
-{%endblock%}
-
-{%block about%}
     {%include '../about.html' %}
+    {%include '../testimonial.html' %}
 {%endblock%}
 
 {%block footer%}

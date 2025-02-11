@@ -8,5 +8,4 @@ urlpatterns = [
     path('role1', views.role1, name='role1'),
     path('role2', views.role2, name='role2'),
     path('role3', views.role3, name='role3'),
-    path('search/', views.search, name='search'),
 ]
