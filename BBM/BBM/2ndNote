@@ -1,0 +1,42 @@
+SÂN CẦU LÔNG
+Thêm sân mới: Nhập tên sân, địa chỉ, hình ảnh, mô tả.
+Quản lý danh sách sân: Xem danh sách các sân đã đăng ký, chỉnh sửa, xóa.
+ở phần đặt sân
+Đặt khung giờ hoạt động (time slot).
+Cài đặt giá theo từng khung giờ (giờ cao điểm, thấp điểm).
+Quản lý hình thức đặt sân (theo giờ, theo ngày, theo tháng).
+Quản lý chính sách sân: Chính sách đặt sân, hủy sân, dời lịch.
+PHẦN NHÂN VIÊN
+Xét duyệt nhân viên: Kiểm tra & duyệt đơn đăng ký làm việc của nhân viên.
+Danh sách nhân viên: Xem danh sách nhân viên hiện tại, tìm kiếm theo tên/chức vụ.
+Chấm công nhân viên: Tính giờ làm việc, ca trực, tự động tính lương.
+QUẢN LÝ ĐẶT SÂN
+Duyệt & xác nhận đặt sân: Quản lý danh sách các đơn đặt sân.
+Xem lịch thi đấu: Quản lý các trận đấu đã lên lịch, tạo sự kiện thi đấu.
+DOANH THU
+Thống kê doanh thu: Báo cáo theo ngày/tuần/tháng.
+Quản lý thanh toán: Liên kết tài khoản ngân hàng, ví điện tử.
+KHUYẾN MÃI 
+Thêm khuyến mãi: Giảm giá theo giờ, theo ngày lễ.
+Quản lý ưu đãi cho khách hàng thân thiết.
+
+ Hệ thống đánh giá & phản hồi:
+
+Khách hàng có thể đánh giá sân (sao, bình luận).
+Chủ sân trả lời phản hồi, nâng cao chất lượng dịch vụ.
+Quản lý khách hàng & thành viên VIP:
+
+Xem danh sách khách hàng thường xuyên.
+Tạo gói thành viên (VIP, ưu đãi cho người chơi thường xuyên).
+ Tích hợp thông báo tự động:
+
+Gửi email / SMS nhắc nhở khách trước giờ đặt sân.
+Thông báo chương trình khuyến mãi đặc biệt.
+Hệ thống báo cáo nâng cao:
+
+Xem tỷ lệ đặt sân theo khung giờ (giờ nào đông khách nhất).
+Phân tích hiệu suất nhân viên (ai làm việc nhiều nhất).
+Tích hợp thanh toán trực tuyến:
+
+Hỗ trợ MoMo, ZaloPay, VNPay, thẻ ngân hàng.
+Quản lý hóa đơn, lịch sử giao dịch.

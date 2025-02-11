@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sân</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Danh Sách Sân</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Tên Sân</th>
+                    <th>Địa Chỉ</th>
+                    <th>Giờ Hoạt Động</th>
+                    <th>Giá</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="court-list"></tbody>
+        </table>
+        <a href="add-court.html" class="btn btn-success">Thêm Sân</a>
+    </div>
+    <script>
+        function loadCourts() {
+            let courts = JSON.parse(localStorage.getItem("courts")) || [];
+            let table = document.getElementById("court-list");
+            table.innerHTML = "";
+
+            courts.forEach((court, index) => {
+                let row = table.insertRow();
+                row.innerHTML = `
+                    <td><img src="${court.image}" alt="Sân" width="100" height="80"></td>
+                    <td>${court.name}</td>
+                    <td>${court.address}</td>
+                    <td>${court.time}</td>
+                    <td>${court.price}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editCourt(${index})">Sửa</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteCourt(${index})">Xóa</button>
+                    </td>
+                `;
+            });
+        }
+        
+        function deleteCourt(index) {
+            let courts = JSON.parse(localStorage.getItem("courts")) || [];
+            courts.splice(index, 1);
+            localStorage.setItem("courts", JSON.stringify(courts));
+            loadCourts();
+        }
+        
+        function editCourt(index) {
+            let courts = JSON.parse(localStorage.getItem("courts")) || [];
+            let court = courts[index];
+            
+            localStorage.setItem("editCourtIndex", index);
+            localStorage.setItem("editCourtData", JSON.stringify(court));       
+        }
+        <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href='CourtManager.html'">Quay về trang chủ</button>
+        document.addEventListener("DOMContentLoaded", loadCourts);
+    </script>
+</body>
+</html>
