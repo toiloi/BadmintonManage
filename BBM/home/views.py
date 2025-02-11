@@ -36,7 +36,7 @@ def user_logout(request):
     logout(request)
     return redirect("home")
 
-@login_required (login_url="login")
+# @login_required (login_url="login")
 def role1(request):
     lc = Court.objects.all()
     return render(request, 'home/role1.html', {"lc":lc})
