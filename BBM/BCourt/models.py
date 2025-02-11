@@ -15,11 +15,12 @@ class Address(models.Model):
         return f"{self.soNha} {self.huyen} {self.tinh} {self.quocGia}"
 
 class Court(models.Model):
-    courtManager = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role':'Court Manager'})
+    courtManager = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role':'courtmanager'})
     maCourt = models.CharField(default='',max_length=10, primary_key=True)
     name = models.CharField(default='',max_length=255)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
-    descreption = models.CharField(default='',max_length=255)
+    descreption = models.CharField(default='',max_length=255, null=True, blank= True)
+    img=models.ImageField(upload_to="images/")
     def __str__(self):
         return f"{self.maCourt} {self.name} {self.address}"
 
