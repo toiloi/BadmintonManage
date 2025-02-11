@@ -16,7 +16,7 @@
         .container {
             display: flex;
             width: 900px;
-            height: 600px;
+            height: 800px;
             background: white;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border-radius: 20px;
@@ -32,8 +32,8 @@
             background: white;
         }
         .image-section {
-            width: 50%;
-            background: url('register_bg.png') no-repeat center center/cover;
+            width: 70%;
+            background: url('trangdau.png') no-repeat center center/cover;
         }
         .form-group {
             width: 100%;
@@ -78,6 +78,14 @@
                     <input type="text" placeholder="Nhập họ và tên">
                 </div>
                 <div class="form-group">
+                    <label>Chọn vai trò</label>
+                    <select>
+                        <option value="Court Manager">Court Manager</option>
+                        <option value="Court Staff">Court Manager</option>
+                        <option value="Customer">Court Manager</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Ngày tháng năm sinh</label>
                     <input type="date">
                 </div>
@@ -102,8 +110,9 @@
                     <input type="password" placeholder="Nhập lại mật khẩu">
                 </div>
                 <button type="submit" class="button">Đăng Ký</button>
+
             </form>
-            <p class="switch-text">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+            <p class="switch-text">Đã có tài khoản? <a href="Login.html">Đăng nhập</a></p>
             <p class="switch-text"><a href="court_manager.html">Trở thành Court Manager</a></p>
             <p class="switch-text"><a href="court_staff.html">Trở thành Court Staff</a></p>
         </div>

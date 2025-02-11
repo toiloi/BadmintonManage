@@ -16,7 +16,7 @@
         .container {
             display: flex;
             width: 900px;
-            height: 800px;
+            height: 700px;
             background: white;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border-radius: 20px;
@@ -32,7 +32,7 @@
             background: white;
         }
         .image-section {
-            width: 70%;
+            width: 50%;
             background: url('trangdau.png') no-repeat center center/cover;
         }
         .form-group {
@@ -62,9 +62,13 @@
             font-weight: bold;
             cursor: pointer;
             color: white;
+            margin-top: 10px;
         }
         .button:hover {
             background: linear-gradient(135deg, #78ffd6, #00a67d);
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -72,42 +76,99 @@
     <div class="container">
         <div class="form-section">
             <h2>Đăng Ký</h2>
-            <form>
-                <div class="form-group">
-                    <label>Họ và tên</label>
-                    <input type="text" placeholder="Nhập họ và tên">
+            <form id="registrationForm">
+                <!-- Bước 1: Thông tin tài khoản -->
+                <div id="step1">
+                    <div class="form-group">
+                        <label>Tên tài khoản</label>
+                        <input type="text" placeholder="Nhập tên tài khoản" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Chọn vai trò</label>
+                        <select required>
+                            <option value="Court Manager">Court Manager</option>
+                            <option value="Court Staff">Court Staff</option>
+                            <option value="Customer">Customer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Nhập email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nhập lại mật khẩu</label>
+                        <input type="password" placeholder="Nhập lại mật khẩu" required>
+                    </div>
+                    <button type="button" class="button" onclick="nextStep(1)">Tiếp theo</button>
                 </div>
-                <div class="form-group">
-                    <label>Ngày tháng năm sinh</label>
-                    <input type="date">
+
+                <!-- Bước 2: Thông tin cá nhân -->
+                <div id="step2" class="hidden">
+                    <div class="form-group">
+                        <label>Họ và Tên</label>
+                        <input type="text" placeholder="Nhập họ và tên" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tuổi</label>
+                        <input type="number" placeholder="Nhập tuổi" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <select required>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <button type="button" class="button" onclick="prevStep(2)">Quay lại</button>
+                    <button type="button" class="button" onclick="nextStep(2)">Tiếp theo</button>
                 </div>
-                <div class="form-group">
-                    <label>Giới tính</label>
-                    <select>
-                        <option value="male">Nam</option>
-                        <option value="female">Nữ</option>
-                        <option value="other">Khác</option>
-                    </select>
+
+                <!-- Bước 3: Địa chỉ -->
+                <div id="step3" class="hidden">
+                    <div class="form-group">
+                        <label>Số nhà</label>
+                        <input type="text" placeholder="Nhập số nhà" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Xã</label>
+                        <input type="text" placeholder="Nhập xã" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Huyện</label>
+                        <input type="text" placeholder="Nhập huyện" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tỉnh</label>
+                        <input type="text" placeholder="Nhập tỉnh" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Quốc gia</label>
+                        <input type="text" placeholder="Nhập quốc gia" required>
+                    </div>
+                    <button type="button" class="button" onclick="prevStep(3)">Quay lại</button>
+                    <button type="submit" class="button">Đăng Ký</button>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="Nhập email">
-                </div>
-                <div class="form-group">
-                    <label>Mật khẩu</label>
-                    <input type="password" placeholder="Nhập mật khẩu">
-                </div>
-                <div class="form-group">
-                    <label>Nhập lại mật khẩu</label>
-                    <input type="password" placeholder="Nhập lại mật khẩu">
-                </div>
-                <button type="submit" class="button">Đăng Ký</button>
             </form>
             <p class="switch-text">Đã có tài khoản? <a href="Login.html">Đăng nhập</a></p>
-            <p class="switch-text"><a href="court_manager.html">Trở thành Court Manager</a></p>
-            <p class="switch-text"><a href="court_staff.html">Trở thành Court Staff</a></p>
         </div>
         <div class="image-section"></div>
     </div>
+
+    <script>
+        function nextStep(step) {
+            document.getElementById("step" + step).classList.add("hidden");
+            document.getElementById("step" + (step + 1)).classList.remove("hidden");
+        }
+
+        function prevStep(step) {
+            document.getElementById("step" + step).classList.add("hidden");
+            document.getElementById("step" + (step - 1)).classList.remove("hidden");
+        }
+    </script>
 </body>
 </html>
