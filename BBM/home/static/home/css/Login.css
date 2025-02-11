@@ -9,7 +9,7 @@ body {
 .container {
     display: flex;
     width: 900px;
-    height: 650px;
+    height: 700px;
     background: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
@@ -24,27 +24,17 @@ body {
     padding: 40px;
     background: white;
 }
-.form-section h2 {
-    margin-bottom: 20px;
-    font-size: 26px;
-    font-weight: bold;
-    color: #333;
-}
-.tabs {
+.image-section {
     display: flex;
+    justify-content: center; /* Căn giữa ngang */
+    align-items: center; /* Căn giữa dọc */
+    height: 100vh; /* Chiều cao 100% màn hình */
+}
+.form-wrapper {
     width: 100%;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-.tab {
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 10px;
-    border-bottom: 2px solid transparent;
-}
-.tab.active {
-    border-bottom: 2px solid #00c896;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .form-group {
     width: 100%;
@@ -56,7 +46,7 @@ body {
     font-weight: bold;
     color: #555;
 }
-.form-group input, .form-group select {
+.form-group input {
     width: 100%;
     padding: 12px;
     border: 2px solid #ddd;
@@ -77,22 +67,8 @@ body {
 .button:hover {
     background: linear-gradient(135deg, #78ffd6, #00a67d);
 }
-.forgot-password {
-    margin-top: 10px;
-    text-align: center;
-}
-.forgot-password a {
-    color: #00a67d;
-    text-decoration: none;
-    font-weight: bold;
-}
-.forgot-password a:hover {
-    text-decoration: underline;
-}
-.image-section {
-    width: 50%;
-    background: url('/mnt/data/image.png') no-repeat center center/cover;
-}
-.hidden {
-    display: none;
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
 }

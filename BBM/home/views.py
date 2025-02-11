@@ -9,7 +9,7 @@ def home(request):
     return render(request, 'home/home.html')
 
 def user_register(request):
-    return render(request, "register.html")
+    return render(request, "home/register.html")
 
 def user_login(request):
     if request.method == "POST":

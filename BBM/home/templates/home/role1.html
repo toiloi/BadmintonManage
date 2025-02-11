@@ -1,6 +1,10 @@
 {% extends "master_page.html" %}
 {% load static %}
 
+{%block header%}
+    {%include '../header.html' %}
+{%endblock%}
+
 {%block search%}
     {%include '../search.html' %}
 {%endblock%}
@@ -20,7 +24,7 @@
                 <div class="p-4 pb-0">
                     <h5 class="text-primary mb-3">$12,345</h5>
                     <a class="d-block h5 mb-2" href="">{{item.name}}</a>
-                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{item.address}}</p>
                 </div>
                 <div class="d-flex border-top">
                     <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
