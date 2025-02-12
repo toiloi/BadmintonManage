@@ -31,8 +31,10 @@ body {
 
 /* Khu vực ảnh */
 .image-section {
-    width: 50%;
-    background: url('/static/images/trangdau.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center; /* Căn giữa ngang */
+    align-items: center; /* Căn giữa dọc */
+    height: 100vh; /* Chiều cao 100% màn hình */
 }
 
 /* Nhóm form */
