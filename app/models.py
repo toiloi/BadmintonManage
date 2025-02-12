@@ -23,3 +23,15 @@ class Manager(models.Model):
     account=models.CharField(max_length=255)
     def __str__(self):
         return f"{self.fullName} {self.account}"
+    
+class Staff(models.Model):
+    def __str__(self):
+        return super().__str__(self)
+        
+class Court(models.Model):
+    def __str__(self):
+        return super().__str__(self)
+    
+class ListAccount(models.Model):
+    def __str__(self):
+        return super().__str__(self)
