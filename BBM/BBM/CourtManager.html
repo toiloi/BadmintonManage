@@ -18,68 +18,72 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            loadPage('manage-staff.html'); // Mặc định hiển thị trang danh sách nhân viên
+            loadPage('manage-staff.html'); // Trang mặc định
         });
     </script>
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #f8f9fa; }
-        #sidebar-wrapper { width: 250px; height: 100vh; background-color: #2c3e50; }
-        .sidebar-heading { padding: 15px; font-size: 1.2rem; font-weight: bold; }
-        .list-group-item { color: #ffffff; border: none; position: relative; cursor: pointer; }
-        .list-group-item:hover { background-color: #1abc9c; }
-        .submenu { display: none; background: #34495e; padding: 10px; border-radius: 5px; }
-        .list-group-item:hover .submenu { display: block; position: absolute; left: 100%; top: 0; min-width: 200px; z-index: 1000; }
-        .main-content { padding: 20px; }
+        .sidebar-wrapper { width: 250px; height: 100vh; background-color: #00B98E; position: fixed; }
+        .sidebar-heading { padding: 15px; font-size: 1.2rem; font-weight: bold; color: white; text-align: center; }
+        .list-group-item { color: white; border: none; cursor: pointer; background-color: transparent; }
+        .list-group-item i { margin-right: 10px; }
+        .list-group-item:hover { background-color: #00FFB2; }
+        
+        /* Submenu styles */
+        .submenu { display: none; padding-left: 20px; }
+        .list-group-item.active .submenu { display: block; }
+
+        .main-content { margin-left: 260px; padding: 20px; }
         .card { box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px; }
         .stats { font-size: 1.5rem; font-weight: bold; }
-        footer { background: #2c3e50; color: white; padding: 10px; text-align: center; }
+        footer { position: fixed; bottom: 0; width: 100%; color: rgb(0, 0, 0);  padding: 10px; text-align: center; }
     </style>
 </head>
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-dark" id="sidebar-wrapper">
-            <div class="sidebar-heading text-white text-center">BBM Quản Lý</div>
+        <div class="sidebar-wrapper">
+            <div class="sidebar-heading">BBM Quản Lý</div>
             <div class="list-group list-group-flush">
-                <div class="list-group-item bg-dark">
-                    <i class="fas fa-basketball-ball me-2"></i> Sân Cầu Lông
+                <div class="list-group-item" onclick="this.classList.toggle('active')">
+                    <i class="fas fa-basketball-ball"></i> Sân Cầu Lông
                     <div class="submenu">
                         <a href="#" class="text-white d-block" onclick="loadPage('add-court.html')">Thêm Sân</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('manage-court.html')">Quản Lý Sân</a>
                     </div>
                 </div>
-                <div class="list-group-item bg-dark">
-                    <i class="fas fa-calendar-alt me-2"></i> Đặt Sân
+                <div class="list-group-item" onclick="this.classList.toggle('active')">
+                    <i class="fas fa-calendar"></i> Đặt Sân
                     <div class="submenu">
                         <a href="#" class="text-white d-block" onclick="loadPage('time-slot.html')">Đặt Khung Giờ</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('pricing.html')">Cài Đặt Giá</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('policy.html')">Chính Sách</a>
                     </div>
                 </div>
-                <div class="list-group-item bg-dark">
-                    <i class="fas fa-users me-2"></i> Nhân Viên
+                <div class="list-group-item" onclick="this.classList.toggle('active')">
+                    <i class="fas fa-user"></i> Nhân Viên
                     <div class="submenu">
                         <a href="#" class="text-white d-block" onclick="loadPage('approve-staff.html')">Xét Duyệt</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('manage-staff.html')">Danh Sách</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('pay-roll.html')">Chấm Công</a>
                     </div>
                 </div>
-                <div class="list-group-item bg-dark">
-                    <i class="fas fa-trophy me-2"></i> Lịch Thi Đấu
+                <div class="list-group-item" onclick="this.classList.toggle('active')">
+                    <i class="fas fa-trophy"></i> Lịch Thi Đấu
                     <div class="submenu">
                         <a href="#" class="text-white d-block" onclick="loadPage('confirm-booking.html')">Xác Nhận Đặt Sân</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('tournament.html')">Tạo Giải Đấu</a>
                     </div>
                 </div>
-                <div class="list-group-item bg-dark">
-                    <i class="fas fa-chart-line me-2"></i> Doanh Thu
+                <div class="list-group-item" onclick="this.classList.toggle('active')">
+                    <i class="fas fa-chart-bar"></i> Doanh Thu
                     <div class="submenu">
                         <a href="#" class="text-white d-block" onclick="loadPage('report.html')">Thống Kê</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('payment.html')">Thanh Toán</a>
                     </div>
                 </div>
-                <div class="list-group-item bg-dark">
-                    <i class="fas fa-gift me-2"></i> Khuyến Mãi
+                <div class="list-group-item" onclick="this.classList.toggle('active')">
+                    <i class="fas fa-gift"></i> Khuyến Mãi
                     <div class="submenu">
                         <a href="#" class="text-white d-block" onclick="loadPage('add-promo.html')">Thêm Khuyến Mãi</a>
                         <a href="#" class="text-white d-block" onclick="loadPage('vip.html')">Khách Hàng VIP</a>
@@ -87,6 +91,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- Page Content -->
         <div id="page-content-wrapper" class="container-fluid main-content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm p-3 mb-4">
