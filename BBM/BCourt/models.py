@@ -19,6 +19,7 @@ class Court(models.Model):
     maCourt = models.CharField(default='',max_length=10, primary_key=True)
     name = models.CharField(default='',max_length=255)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
+    price = models.IntegerField()
     descreption = models.CharField(default='',max_length=255, null=True, blank= True)
     img=models.ImageField(upload_to="images/")
     def __str__(self):
@@ -26,6 +27,7 @@ class Court(models.Model):
 
 class San(models.Model):
     maSan = models.CharField(default='',max_length=10, primary_key=True)
+    numSan = models.IntegerField()
     tinhTrang = models.BooleanField(default=True)
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):

@@ -24,7 +24,6 @@ urlpatterns = [
     path('booking/', include('BBooking.urls')),
     path('court/', include('BCourt.urls')),
     path('user/', include('BUser.urls')),
-    path('vip/', include('BVIP.urls')),
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
