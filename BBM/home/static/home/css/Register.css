@@ -9,7 +9,7 @@ body {
 .container {
     display: flex;
     width: 900px;
-    height: 700px;
+    height: auto;
     background: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
@@ -26,7 +26,7 @@ body {
 }
 .image-section {
     width: 50%;
-    background: no-repeat center center/cover;
+    background: url('/static/images/trangdau.png') no-repeat center center/cover;
 }
 .form-group {
     width: 100%;
@@ -60,6 +60,6 @@ body {
 .button:hover {
     background: linear-gradient(135deg, #78ffd6, #00a67d);
 }
-.hidden {
-    display: none;
+.switch-text {
+    margin-top: 10px;
 }

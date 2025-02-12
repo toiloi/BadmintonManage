@@ -11,49 +11,23 @@
     <div class="container">
         <div class="form-section">
             <h2>Đăng Ký</h2>
-            
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li class="{{ message.tags }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            
-            <form id="registrationForm" method="POST" action="{% url 'register' %}">
+            <form method="POST" action="">
                 {% csrf_token %}
-                
-                <div class="form-group">
-                    <label>Tên tài khoản</label>
-                    <input type="text" name="username" placeholder="Nhập tên tài khoản" required>
-                </div>
-                <div class="form-group">
-                    <label>Chọn vai trò</label>
-                    <select name="role" required>
-                        <option value="Court Manager">Court Manager</option>
-                        <option value="Court Staff">Court Staff</option>
-                        <option value="Customer">Customer</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="Nhập email" required>
-                </div>
-                <div class="form-group">
-                    <label>Mật khẩu</label>
-                    <input type="password" name="password" placeholder="Nhập mật khẩu" required>
-                </div>
-                <div class="form-group">
-                    <label>Nhập lại mật khẩu</label>
-                    <input type="password" name="confirm_password" placeholder="Nhập lại mật khẩu" required>
-                </div>
+                <div class="form-group">{{ form.username.label_tag }} {{ form.username }}</div>
+                <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
+                <div class="form-group">{{ form.password1.label_tag }} {{ form.password1 }}</div>
+                <div class="form-group">{{ form.password2.label_tag }} {{ form.password2 }}</div>
+                <div class="form-group">{{ form.role.label_tag }} {{ form.role }}</div>
+                <div class="form-group">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
+                <div class="form-group">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
+                <div class="form-group">{{ form.gender.label_tag }} {{ form.gender }}</div>
+                <div class="form-group">{{ form.sdt.label_tag }} {{ form.sdt }}</div>
                 <button type="submit" class="button">Đăng Ký</button>
             </form>
-            <p class="switch-text">Đã có tài khoản? <a href="{% url 'login' %}">Đăng nhập</a></p>
+            <p class="switch-text">Đã có tài khoản? <a href="Login.html">Đăng nhập</a></p>
         </div>
-        <div class="image-section">
-            <img src="{% static 'home/img/trangdau.png' %}" alt="Hình nền" width="100%" height="100%">
-        </div>
+        <div class="image-section"></div>
     </div>
 </body>
 </html>
+

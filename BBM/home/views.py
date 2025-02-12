@@ -4,33 +4,43 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from BCourt.models import Court
 from BUser.models import CourtStaff, User
+from django.contrib.auth.forms import UserCreationForm
+from .models import RegisterForm
 
 def home(request):
     return render(request, 'home/home.html')
 
 def user_register(request):
-    return render(request, "home/register.html")
+    form = RegisterForm()
+    if request.method=='POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return render(request, "home/register.html", {'form':form})
 
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password) 
-        
+        user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
+            role = getattr(user, "role", None)  # Lấy role an toàn
 
             # Kiểm tra role và chuyển hướng phù hợp
-            if hasattr(user, "customer"):
+            if role == "customer":
                 return redirect("role1")  # Đường dẫn cho Customer
-            elif hasattr(user, "courtstaff"):
+            elif role == "courtstaff":
                 return redirect("role2")  # Đường dẫn cho CourtStaff
-            elif hasattr(user, "courtmanager"):
+            elif role == "courtmanager":
                 return redirect("role3")  # Đường dẫn cho CourtManager
-        else:
-            return render(request, "home/login.html", {"error": "Tên đăng nhập hoặc mật khẩu không đúng"})
-    
-    return render(request, "home/login.html", {"user": request.user})
+            else:
+                return render(request, "home/login.html", {"error": "Không xác định được vai trò của bạn."})
+
+        return render(request, "home/login.html", {"error": "Tên đăng nhập hoặc mật khẩu không đúng."})
+
+    return render(request, "home/login.html")
 
 def user_logout(request):
     logout(request)
