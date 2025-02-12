@@ -1,4 +1,4 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -11,23 +11,94 @@
     <div class="container">
         <div class="form-section">
             <h2>Đăng Ký</h2>
-            <form method="POST" action="">
+            <form id="registrationForm" method="POST" action="{% url 'register' %}">
                 {% csrf_token %}
-                <div class="form-group">{{ form.username.label_tag }} {{ form.username }}</div>
-                <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
-                <div class="form-group">{{ form.password1.label_tag }} {{ form.password1 }}</div>
-                <div class="form-group">{{ form.password2.label_tag }} {{ form.password2 }}</div>
-                <div class="form-group">{{ form.role.label_tag }} {{ form.role }}</div>
-                <div class="form-group">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
-                <div class="form-group">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
-                <div class="form-group">{{ form.gender.label_tag }} {{ form.gender }}</div>
-                <div class="form-group">{{ form.sdt.label_tag }} {{ form.sdt }}</div>
-                <button type="submit" class="button">Đăng Ký</button>
+                <!-- Hiển thị lỗi nếu có -->
+                {% if form.errors %}
+                    <div class="error-message">
+                        <p>Đã có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.</p>
+                    </div>
+                {% endif %}
+
+                <!-- Bước 1: Thông tin tài khoản -->
+                <div id="step1">
+                    <div class="form-group">
+                        <label>Tên tài khoản</label>
+                        <!-- <input type="text" name="username" placeholder="Nhập tên tài khoản" required> -->
+                        {{form.username}}
+                    </div>
+                    <div class="form-group">
+                        <label>Chọn vai trò</label>
+                        <!-- <select name="role" required>
+                            <option value="Customer">Customer</option>
+                            <option value="Court Manager">Court Manager</option>
+                            <option value="Court Staff">Court Staff</option>
+                        </select> -->
+                        {{form.role}}
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <!-- <input type="email" name="email" placeholder="Nhập email" required> -->
+                        {{form.email}}
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <!-- <input type="password" name="password1" placeholder="Nhập mật khẩu" required> -->
+                        {{form.password1}}
+                    </div>
+                    <div class="form-group">
+                        <label>Nhập lại mật khẩu</label>
+                        <!-- <input type="password" name="password2" placeholder="Nhập lại mật khẩu" required> -->
+                        {{form.password2}}
+                    </div>
+                    <button type="button" class="button" onclick="nextStep(1)">Tiếp theo</button>
+                </div>
+
+                <!-- Bước 2: Thông tin cá nhân -->
+                <div id="step2" class="hidden">
+                    <div class="form-group">
+                        <label>Họ</label>
+                        <!-- <input type="text" name="last_name" placeholder="Nhập họ của bạn" required> -->
+                        {{form.last_name}}
+                    </div>
+                    <div class="form-group">
+                        <label>Tên</label>
+                        <!-- <input type="text" name="first_name" placeholder="Nhập tên của bạn" required> -->
+                        {{form.first_name}}
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <!-- <select name="gender" required>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select> -->
+                        {{form.gender}}
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <!-- <input type="text" name="sdt" placeholder="Nhập số điện thoại của bạn" required> -->
+                        {{form.sdt}}
+                    </div>
+                    <button type="button" class="button" onclick="prevStep(2)">Quay lại</button>
+                    <button type="submit" class="button">Đăng Ký</button>
+                </div>
             </form>
-            <p class="switch-text">Đã có tài khoản? <a href="Login.html">Đăng nhập</a></p>
+            <p class="switch-text">Đã có tài khoản? <a href="{% url 'login' %}">Đăng nhập</a></p>
         </div>
         <div class="image-section"></div>
     </div>
+
+    <script>
+        function nextStep(step) {
+            document.getElementById("step" + step).classList.add("hidden");
+            document.getElementById("step" + (step + 1)).classList.remove("hidden");
+        }
+
+        function prevStep(step) {
+            document.getElementById("step" + step).classList.add("hidden");
+            document.getElementById("step" + (step - 1)).classList.remove("hidden");
+        }
+    </script>
 </body>
 </html>
-

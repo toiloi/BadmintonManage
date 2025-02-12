@@ -11,12 +11,15 @@ def home(request):
     return render(request, 'home/home.html')
 
 def user_register(request):
-    form = RegisterForm()
-    if request.method=='POST':
+    if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-    return render(request, "home/register.html", {'form':form})
+            return redirect('login')  # Chuyển hướng sau khi đăng ký thành công
+    else:
+        form = RegisterForm()
+    
+    return render(request, "home/register.html", {'form': form})
 
 def user_login(request):
     if request.method == "POST":
