@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from B_Court.models import Court
 from B_User.models import CourtManager, CourtStaff, Customer
-from models import Staff 
+
 def home(request):
     return render(request, 'home/home.html')
 
