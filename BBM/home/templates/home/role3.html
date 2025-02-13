@@ -1,0 +1,72 @@
+<!-- filepath: /D:/html/BadmintonManage/BBM/home/templates/home/court_manager.html -->
+{% extends "master_page.html" %}
+{% load static %}
+
+{% block search %}
+    {% include '../search.html' %}
+{% endblock %}
+
+{% block navbar %}
+    {% include '../navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center my-4">Court Manager</h1>
+    
+    <!-- Quản lý Sân -->
+    <div class="section">
+        <h2 class="text-primary mb-4">Quản Lý Sân</h2>
+        <div class="row g-4">
+            {% for court in courts %}
+                <div class="col-lg-4 col-md-6 wow fadeInUp">
+                    <div class="property-item rounded overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <a href=""><img class="img-fluid" src="{% static 'home/img/court.jpg' %}" alt=""></a>
+                            <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">Available</div>
+                        </div>
+                        <div class="p-4 pb-0">
+                            <h5 class="text-primary mb-3">{{ court.price }}</h5>
+                            <a class="d-block h5 mb-2" href="">{{ court.name }}</a>
+                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ court.location }}</p>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ court.size }}</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-users text-primary me-2"></i>{{ court.capacity }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Quản lý Nhân Viên -->
+    <div class="section mt-5">
+        <h2 class="text-primary mb-4">Quản Lý Nhân Viên</h2>
+        <div class="row g-4">
+            {% for employee in employees %}
+                <div class="col-lg-4 col-md-6 wow fadeInUp">
+                    <div class="property-item rounded overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <a href=""><img class="img-fluid" src="{% static 'home/img/employee.jpg' %}" alt=""></a>
+                        </div>
+                        <div class="p-4 pb-0">
+                            <h5 class="text-primary mb-3">{{ employee.position }}</h5>
+                            <a class="d-block h5 mb-2" href="">{{ employee.name }}</a>
+                            <p><i class="fa fa-envelope text-primary me-2"></i>{{ employee.email }}</p>
+                            <p><i class="fa fa-phone text-primary me-2"></i>{{ employee.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+    {% include '../footer.html' %}
+{% endblock %}
+
+<!-- Liên kết file JavaScript -->
+{% comment %} <script src="{% static 'home/js/role3.js' %}"></script> {% endcomment %}
