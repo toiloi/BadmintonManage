@@ -20,3 +20,11 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+from django.urls import path
+from .views import get_promotions, add_promotion
+
+urlpatterns = [
+    path("api/promotions", get_promotions, name="get_promotions"),
+    path("api/promotions/add", add_promotion, name="add_promotion"),
+]

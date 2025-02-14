@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Chính Sách Đặt Sân</h2>
+
+    <form action="/update-policy" method="post">
+        <div class="mb-3">
+            <label for="policy-text" class="form-label">Nội Dung Chính Sách</label>
+            <textarea class="form-control" id="policy-text" name="policy_text" rows="6">
+                - Đặt sân trước ít nhất 24h.
+                - Huỷ đặt sân trước 12h để được hoàn tiền.
+                - Trễ quá 15 phút coi như huỷ.
+            </textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">📜 Cập Nhật Chính Sách</button>
+    </form>
+
+    <h3 class="mt-4">Chính Sách Hiện Tại</h3>
+    <div class="border p-3 bg-light">
+        <p>- Đặt sân trước ít nhất 24h.</p>
+        <p>- Huỷ đặt sân trước 12h để được hoàn tiền.</p>
+        <p>- Trễ quá 15 phút coi như huỷ.</p>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Cài Đặt Giá Sân</h2>
+
+    <form action="/update-pricing" method="post">
+        <div class="mb-3">
+            <label for="court" class="form-label">Chọn Sân</label>
+            <select class="form-control" id="court" name="court">
+                <option value="1">Sân 1</option>
+                <option value="2">Sân 2</option>
+                <option value="3">Sân 3</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="time" class="form-label">Chọn Khung Giờ</label>
+            <select class="form-control" id="time" name="time">
+                <option value="06:00-07:00">06:00 - 07:00</option>
+                <option value="07:00-08:00">07:00 - 08:00</option>
+                <option value="18:00-19:00">18:00 - 19:00</option>
+                <option value="19:00-20:00">19:00 - 20:00</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Giá (VNĐ)</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <button type="submit" class="btn btn-success">💰 Cập Nhật Giá</button>
+    </form>
+
+    <h3 class="mt-4">Bảng Giá Hiện Tại</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Sân</th>
+                <th>Khung Giờ</th>
+                <th>Giá (VNĐ)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sân 1</td>
+                <td>18:00 - 19:00</td>
+                <td>150,000</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

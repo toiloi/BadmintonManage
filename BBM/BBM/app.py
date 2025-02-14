@@ -1,48 +1,37 @@
-from flask import Flask, render_template
-import mysql.connector
+from django.db import models
 
-app = Flask(__name__)
+class VIPCustomer(models.Model):
+    name = models.CharField(max_length=255)
+    booked_hours = models.IntegerField()
+    discount = models.FloatField()
 
-# Kết nối MySQL
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="yourpassword",
-    database="yourdatabase"
-)
+    def __str__(self):
+        return self.name
 
-@app.route('/')
-def index():
-    cursor = db.cursor(dictionary=True)
+class Payment(models.Model):
+    customer = models.CharField(max_length=255)
+    date = models.DateField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=50)
 
-    # Lấy danh sách giao dịch thanh toán
-    cursor.execute("SELECT * FROM transactions ORDER BY date DESC")
-    transactions = cursor.fetchall()
+    def __str__(self):
+        return f"{self.customer} - {self.amount} VNĐ"
 
-    # Lấy danh sách khách hàng VIP
-    cursor.execute("SELECT * FROM vip_customers ORDER BY booked_hours DESC")
-    vip_customers = cursor.fetchall()
+class Revenue(models.Model):
+    date = models.DateField()
+    total_revenue = models.DecimalField(max_digits=15, decimal_places=2)
+    total_bookings = models.IntegerField()
 
-    # Lấy tổng doanh thu và số lượt đặt sân trong tháng này
-    cursor.execute("""
-        SELECT SUM(revenue) AS total_revenue, SUM(bookings) AS total_bookings
-        FROM revenue_stats
-        WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())
-    """)
-    monthly_stats = cursor.fetchone()
+    def __str__(self):
+        return f"{self.date} - {self.total_revenue} VNĐ"
 
-    # Lấy dữ liệu doanh thu theo ngày
-    cursor.execute("SELECT * FROM revenue_stats ORDER BY date DESC")
-    daily_stats = cursor.fetchall()
+class Court(models.Model):
+    name = models.CharField(max_length=255)
+    address = models.TextField()
+    open_time = models.TimeField()
+    close_time = models.TimeField()
+    price_per_hour = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='court_images/')
 
-    cursor.close()
-    
-    return render_template('index.html', 
-                           transactions=transactions,
-                           vip_customers=vip_customers,
-                           total_revenue=monthly_stats["total_revenue"] or 0,
-                           total_bookings=monthly_stats["total_bookings"] or 0,
-                           daily_stats=daily_stats)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    def __str__(self):
+        return self.name

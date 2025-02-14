@@ -28,26 +28,27 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetchPromotions();
+    document.getElementById("promoForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let promoCode = document.getElementById("promoCode").value;
+        let discount = document.getElementById("discount").value;
+        
+        fetch("/api/promotions/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                promo_code: promoCode,
+                discount: discount
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            fetchPromotions(); // Cập nhật lại danh sách khuyến mãi
+        })
+        .catch(error => console.error("Lỗi gửi dữ liệu:", error));
     });
-
-    function fetchPromotions() {
-        fetch("/api/promotions")
-            .then(response => response.json())
-            .then(data => {
-                let promoTable = document.getElementById("promoTable");
-                promoTable.innerHTML = "";
-                data.forEach((promo, index) => {
-                    promoTable.innerHTML += `
-                        <tr>
-                            <td>${promo.id}</td>
-                            <td>${promo.promo_code}</td>
-                            <td>${promo.discount}%</td>
-                        </tr>
-                    `;
-                });
-            })
-            .catch(error => console.error("Lỗi tải dữ liệu:", error));
-    }
 </script>
