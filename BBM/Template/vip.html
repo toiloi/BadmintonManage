@@ -16,16 +16,20 @@
                 <th>#</th>
                 <th>Họ Tên</th>
                 <th>Số Giờ Đặt</th>
-                <th>Ưu Đãi</th>
+                <th>Ưu Đãi (%)</th>
             </tr>
         </thead>
         <tbody>
             {% for customer in vip_customers %}
             <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ customer.full_name }}</td>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ customer.name }}</td>
                 <td>{{ customer.booked_hours }}</td>
-                <td class="text-success">{{ customer.discount }}</td>
+                <td class="text-success">{{ customer.discount }}%</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">Không có khách hàng VIP nào.</td>
             </tr>
             {% endfor %}
         </tbody>
