@@ -1,6 +1,15 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Thanh Toán</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
 <div class="container mt-4">
     <h2 class="mb-4">Quản Lý Thanh Toán</h2>
-    
+
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
@@ -12,20 +21,23 @@
             </tr>
         </thead>
         <tbody>
+            {% for txn in transactions %}
             <tr>
-                <td>TXN1001</td>
-                <td>Nguyễn Văn A</td>
-                <td>10/02/2025</td>
-                <td>200,000</td>
-                <td class="text-success">✔ Đã Thanh Toán</td>
+                <td>{{ txn.transaction_id }}</td>
+                <td>{{ txn.customer_name }}</td>
+                <td>{{ txn.date }}</td>
+                <td>{{ "{:,.0f}".format(txn.amount) }} VNĐ</td>
+                <td class="{% if txn.status == 'Đã Thanh Toán' %}text-success{% else %}text-danger{% endif %}">
+                    {% if txn.status == 'Đã Thanh Toán' %}
+                        ✔ {{ txn.status }}
+                    {% else %}
+                        ❌ {{ txn.status }}
+                    {% endif %}
+                </td>
             </tr>
-            <tr>
-                <td>TXN1002</td>
-                <td>Trần Thị B</td>
-                <td>09/02/2025</td>
-                <td>180,000</td>
-                <td class="text-danger">❌ Chưa Thanh Toán</td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
+</body>
+</html>

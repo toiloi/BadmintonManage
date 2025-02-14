@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <h2 class="mb-4">Thêm Khuyến Mãi</h2>
-    <form>
+    <form id="promoForm">
         <div class="mb-3">
             <label for="promoCode" class="form-label">Mã Khuyến Mãi</label>
             <input type="text" class="form-control" id="promoCode" placeholder="Nhập mã khuyến mãi">
@@ -11,4 +11,43 @@
         </div>
         <button type="submit" class="btn btn-success">✅ Thêm Khuyến Mãi</button>
     </form>
+
+    <h3 class="mt-4">Danh Sách Khuyến Mãi</h3>
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Mã Khuyến Mãi</th>
+                <th>Giảm Giá (%)</th>
+            </tr>
+        </thead>
+        <tbody id="promoTable">
+            <!-- Dữ liệu sẽ được load từ MySQL -->
+        </tbody>
+    </table>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetchPromotions();
+    });
+
+    function fetchPromotions() {
+        fetch("/api/promotions")
+            .then(response => response.json())
+            .then(data => {
+                let promoTable = document.getElementById("promoTable");
+                promoTable.innerHTML = "";
+                data.forEach((promo, index) => {
+                    promoTable.innerHTML += `
+                        <tr>
+                            <td>${promo.id}</td>
+                            <td>${promo.promo_code}</td>
+                            <td>${promo.discount}%</td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(error => console.error("Lỗi tải dữ liệu:", error));
+    }
+</script>

@@ -10,33 +10,46 @@
     <script>
         function loadPage(page) {
             fetch(page)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) throw new Error("Lỗi tải trang: " + response.statusText);
+                    return response.text();
+                })
                 .then(data => {
                     document.getElementById("page-content").innerHTML = data;
                 })
-                .catch(error => console.log("Lỗi tải trang:", error));
+                .catch(error => {
+                    console.log(error);
+                    document.getElementById("page-content").innerHTML = "<p class='text-danger'>Không thể tải trang.</p>";
+                });
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            loadPage('manage-staff.html'); // Trang mặc định
+            loadPage('manage-staff.html');
+
+            document.querySelectorAll(".list-group-item").forEach(item => {
+                item.addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    let submenu = this.querySelector(".submenu");
+                    if (submenu) submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+                });
+            });
+
+            document.getElementById("menu-toggle").addEventListener("click", function() {
+                document.querySelector(".sidebar-wrapper").classList.toggle("d-none");
+                document.querySelector(".main-content").classList.toggle("ml-0");
+            });
         });
     </script>
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #f8f9fa; }
-        .sidebar-wrapper { width: 250px; height: 100vh; background-color: #00B98E; position: fixed; }
+        .sidebar-wrapper { width: 250px; height: 100vh; background-color: #00B98E; position: fixed; transition: 0.3s; }
         .sidebar-heading { padding: 15px; font-size: 1.2rem; font-weight: bold; color: white; text-align: center; }
-        .list-group-item { color: white; border: none; cursor: pointer; background-color: transparent; }
-        .list-group-item i { margin-right: 10px; }
-        .list-group-item:hover { background-color: #00FFB2; }
-        
-        /* Submenu styles */
+        .list-group-item { color: white; border: none; cursor: pointer; background-color: transparent; transition: 0.3s; }
+        .list-group-item:hover, .list-group-item.active { background-color: #00FFB2; }
         .submenu { display: none; padding-left: 20px; }
-        .list-group-item.active .submenu { display: block; }
-
-        .main-content { margin-left: 260px; padding: 20px; }
-        .card { box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px; }
-        .stats { font-size: 1.5rem; font-weight: bold; }
-        footer { position: fixed; bottom: 0; width: 100%; color: rgb(0, 0, 0);  padding: 10px; text-align: center; }
+        .main-content { margin-left: 260px; padding: 20px; transition: 0.3s; }
+        .main-content.ml-0 { margin-left: 0; }
+        footer { position: fixed; bottom: 0; width: 100%; color: rgb(0, 0, 0); padding: 10px; text-align: center; }
     </style>
 </head>
 <body>
