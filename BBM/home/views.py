@@ -30,33 +30,31 @@ def user_login(request):
         if user is not None:
             login(request, user)
             role = getattr(user, "role", None)  # Lấy role an toàn
-
-            # Kiểm tra role và chuyển hướng phù hợp
-            if role == "customer":
-                return redirect("role1")  # Đường dẫn cho Customer
-            elif role == "courtstaff":
-                return redirect("role2")  # Đường dẫn cho CourtStaff
-            elif role == "courtmanager":
-                return redirect("role3")  # Đường dẫn cho CourtManager
+            if role == "customer" or role == "courtstaff" or role == "courtmanager":
+                return redirect("role")
             else:
+                logout(request)
                 return render(request, "home/login.html", {"error": "Không xác định được vai trò của bạn."})
-
         return render(request, "home/login.html", {"error": "Tên đăng nhập hoặc mật khẩu không đúng."})
-
     return render(request, "home/login.html")
 
 def user_logout(request):
     logout(request)
     return redirect("home")
 
-# @login_required (login_url="login")
-def role1(request):
-    lc = Court.objects.all()
-    return render(request, 'home/role1.html', {"lc":lc})
-
-def role2(request):
-    return render(request, 'home/role2.html')
-
-def role3(request):
-    return render(request, 'home/role3.html')
+@login_required (login_url="login")
+def role(request):
+    user = request.user
+    role = getattr(user, "role", None)
+     # Kiểm tra role và chuyển hướng phù hợp
+    if role == "customer":
+        lc = Court.objects.all()
+        return render(request, "home/role1.html", {"lc":lc})  # Đường dẫn cho Customer
+    elif role == "courtstaff":
+        return render(request, "home/role2.html")  # Đường dẫn cho CourtStaff
+    elif role == "courtmanager":
+        return render(request, "home/role3.html")  # Đường dẫn cho CourtManager
+    
+def datSan(request):
+    return render(request, "home/datsan.html")
 
