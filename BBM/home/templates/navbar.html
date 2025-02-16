@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="navbar-nav ms-auto">
-                <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
+                <a href="{% url 'role' %}" class="nav-item nav-link active">Trang chủ</a>
             </div>
             {% if user.is_authenticated %} 
                 <div class="navbar-nav ms-auto"><div class="navbar-nav ms-auto">
