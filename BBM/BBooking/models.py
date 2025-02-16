@@ -21,7 +21,7 @@ class VeDatSan(models.Model):
     thanhToan = models.BooleanField(default=True)
     san = models.ManyToManyField(San)
     timeslot = models.ManyToManyField(TimeSlot)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role':'Customer'})
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role':'customer'})
     def __str__(self):
         return f"{self.maVe}"
 

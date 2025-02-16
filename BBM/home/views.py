@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -57,4 +57,8 @@ def role(request):
     
 def datSan(request):
     return render(request, "home/datsan.html")
+
+def chiTiet(request, maCourt):
+    court = get_object_or_404(Court, maCourt = maCourt)
+    return render(request, "home/detail.html", {"court":court})
 

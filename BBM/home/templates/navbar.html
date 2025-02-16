@@ -30,7 +30,7 @@
                     <a href="index.html" class="nav-item nav-link active">Lịch sử đặt sân</a>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{user.username}}</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{user.first_name}} {{user.last_name}}</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         <a href="{% url 'logout' %}" class="dropdown-item">Chi tiết thông tin</a>
                         <a href="{% url 'logout' %}" class="dropdown-item">Đăng xuất</a>
