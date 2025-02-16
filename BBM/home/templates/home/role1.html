@@ -19,11 +19,11 @@
         <div class="col-lg-4 col-md-6 wow fadeInUp">
             <div class="property-item rounded overflow-hidden">
                 <div class="position-relative overflow-hidden">
-                    <a href=""><img class="img-fluid" style="height: 450px;" src="{{item.img}}" alt=""></a>
+                    <a href="{% url 'datsan' %}"><img class="img-fluid" style="height: 450px;" src="{{item.img}}" alt=""></a>
                 </div>
                 <div class="p-4 pb-0">
                     <h5 class="text-primary mb-3">{{item.price}}đ/h</h5>
-                    <a class="d-block h5 mb-2" href="">{{item.name}}</a>
+                    <a class="d-block h5 mb-2" href="{% url 'datsan' %}">{{item.name}}</a>
                     <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{item.address}}</p>
                 </div>
                 <div class="d-flex border-top">

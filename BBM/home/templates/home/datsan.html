@@ -1,0 +1,175 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Đăng Ký Đặt Sân Cầu Lông</title>
+    <link href="{% static 'home/css/datsan.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
+                </div>
+                <div class="card-body">
+                    <form id="bookingForm" method="POST">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="text" name="username" placeholder="Nhập họ và tên" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="email" placeholder="abc@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" name="tel" placeholder="0000-000-000" required>
+                        </div>
+
+                        <!-- Chọn loại lịch -->
+                        <div class="form-group">
+                            <label for="bookingType">Chọn loại hình đặt sân</label>
+                            <select id="bookingType" name="bookingType" required>
+                                <option value="">--Chọn--</option>
+                                <option value="fixed">Đặt lịch cố định</option>
+                                <option value="daily">Đặt theo ngày</option>
+                                <option value="flexible">Đặt lịch linh hoạt</option>
+                            </select>
+                        </div><br><br>
+
+                        <!-- Đặt lịch cố định -->
+                        <div id="fixedBooking" class="hidden">
+                            <div class="form-group">
+                                <label for="fixedDay">Thứ</label>
+                                <select id="fixedDay" name="fixedDay">
+                                    <option value="Monday">Thứ Hai</option>
+                                    <option value="Tuesday">Thứ Ba</option>
+                                    <option value="Wednesday">Thứ Tư</option>
+                                    <option value="Thursday">Thứ Năm</option>
+                                    <option value="Friday">Thứ Sáu</option>
+                                    <option value="Saturday">Thứ Bảy</option>
+                                    <option value="Sunday">Chủ Nhật</option>
+                                </select><br><br>
+                                
+                                <label for="fixedTime">Giờ cố định</label>
+                                <input type="time" id="fixedTime" name="fixedTime" required><br><br>
+                        
+                                <label for="fixedDuration">Thời gian đặt (tháng)</label>
+                                <input type="number" id="fixedDuration" name="fixedDuration" min="1" required><br><br>
+                            </div>
+                        </div>
+                
+                        <!-- Đặt lịch theo ngày -->
+                        <div id="dailyBooking" class="hidden">
+                            <div class="form-group">
+                                <label for="playDate">Ngày, tháng, năm:</label>
+                                <input type="date" id="playDate" name="playDate" required><br><br>
+                        
+                                <label for="startTime">Giờ bắt đầu chơi:</label>
+                                <input type="time" id="startTime" name="startTime" required><br><br>
+                        
+                                <label for="endTime">Giờ kết thúc:</label>
+                                <input type="time" id="endTime" name="endTime" required><br><br>
+                            </div>
+                        </div>
+                    
+                        <!-- Đặt lịch linh hoạt -->
+                        <div id="flexibleBooking" class="hidden">
+                            <div class="form-group">
+                                <label for="totalHours">Tổng số giờ chơi trong 1 tháng:</label>
+                                <input type="number" id="totalHours" name="totalHours" min="1" required><br><br>
+                                
+                                <label for="month">Chọn tháng:</label>
+                                <input type="month" id="month" name="month" required onchange="generateCalendar()"><br><br>
+                                
+                                <div id="calendar" class="hidden"></div>
+                            </div>  
+                        </div>
+                    
+                        <!-- Thanh toán -->
+                        <div class="form-group">
+                            <label for="paymentMethod">Thanh toán:</label>
+                            <select id="paymentMethod" name="paymentMethod" required>
+                                <option value="">--Chọn--</option>
+                                <option value="cash">Tiền mặt</option>
+                                <option value="transfer">Chuyển khoản</option>
+                            </select><br><br>  
+                        </div>                  
+
+                        <div>
+                            <button class="btn btn--radius-2 btn--gradient" type="submit">Đặt sân</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bookingType').addEventListener('change', function() {
+            document.getElementById('fixedBooking').classList.add('hidden');
+            document.getElementById('dailyBooking').classList.add('hidden');
+            document.getElementById('flexibleBooking').classList.add('hidden');
+    
+            if (this.value === 'fixed') {
+                document.getElementById('fixedBooking').classList.remove('hidden');
+            } else if (this.value === 'daily') {
+                document.getElementById('dailyBooking').classList.remove('hidden');
+            } else if (this.value === 'flexible') {
+                document.getElementById('flexibleBooking').classList.remove('hidden');
+            }
+        });
+    
+        function generateCalendar() {
+            const monthInput = document.getElementById('month').value;
+            const [year, month] = monthInput.split('-');
+            const calendarDiv = document.getElementById('calendar');
+            calendarDiv.innerHTML = ''; // Clear previous calendar
+            calendarDiv.classList.remove('hidden');
+    
+            const firstDay = new Date(year, month - 1, 1);
+            const lastDay = new Date(year, month, 0);
+            const daysInMonth = lastDay.getDate();
+    
+            let table = '<table><tr>';
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                table += '<td></td>'; // Empty cells for days before the first day of the month
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                table += `<td onclick="selectDate(this)">${day}</td>`;
+                if ((day + firstDay.getDay()) % 7 === 0) {
+                    table += '</tr><tr>'; // New row for each week
+                }
+            }
+            table += '</tr></table>';
+            calendarDiv.innerHTML = table;
+        }
+    
+        function selectDate(cell) {
+            cell.classList.toggle('selected'); // Toggle selection on click
+        }
+    
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const paymentMethod = document.getElementById('paymentMethod').value;
+    
+            if (paymentMethod === 'cash') {
+                alert('Hoàn thành đặt lịch thành công!');
+            } else if (paymentMethod === 'transfer') {
+                window.location.href = 'transfer_page.html'; // Chuyển đến trang chuyển khoản
+            }
+        });
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
