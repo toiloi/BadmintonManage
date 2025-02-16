@@ -62,3 +62,8 @@ def chiTiet(request, maCourt):
     court = get_object_or_404(Court, maCourt = maCourt)
     return render(request, "home/detail.html", {"court":court})
 
+def search(request):
+    query = request.GET.get('q')  
+    results = Court.objects.filter(name__icontains=query) if query else []  
+    return render(request, "home/search.html", {'results': results, 'query': query})
+

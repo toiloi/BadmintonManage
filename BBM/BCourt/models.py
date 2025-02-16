@@ -6,32 +6,41 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Sonha (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
+    class Meta:
+        unique_together = ['name']
     def __str__(self):
         return f"{self.name}"
 
 class Duong (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
     sonha = models.ForeignKey(Sonha, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ['name', 'sonha']
     def __str__(self):
         return f"{self.name}"
 
 class Phuong (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
     duong = models.ForeignKey(Duong, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ['name', 'duong']
     def __str__(self):
         return f"{self.name}"
 
 class Quan (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
     phuong = models.ForeignKey(Phuong, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ['name', 'phuong']
     def __str__(self):
         return f"{self.name}"
 
 class Tinh(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
     quan = models.ForeignKey(Quan, on_delete=models.CASCADE)
-
+    class Meta:
+        unique_together = ['name', 'quan']
     def __str__(self):
         return f"{self.quan.phuong.duong.sonha.name} {self.quan.phuong.duong.name} P.{self.quan.phuong.name} Q.{self.quan.name} {self.name}"
 

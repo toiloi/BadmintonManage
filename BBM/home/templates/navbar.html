@@ -12,15 +12,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="container">
-                <div class="row g-2 align-items-center justify-content-center">
-                    <div class="col-md-8 col-lg-6">
-                        <input type="text" class="form-control border-0 py-2" placeholder="Search" 
-                            style="outline: none; box-shadow: none; background-color: rgb(244, 253, 245);">
+                <form action="{% url 'search' %}" method="GET">
+                    <div class="row g-2 align-items-center justify-content-center">
+                        <div class="col-md-8 col-lg-6">
+                            <input type="text" name="q" class="form-control border-0 py-2" placeholder="Search" 
+                                style="outline: none; box-shadow: none; background-color: rgb(244, 253, 245);" required>
+                        </div>
+                        <div class="col-md-4 col-lg-2">
+                            <button type="submit" class="btn btn-dark border-0 w-100 py-2">Search</button>
+                        </div>
                     </div>
-                    <div class="col-md-4 col-lg-2">
-                        <button class="btn btn-dark border-0 w-100 py-2">Search</button>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="navbar-nav ms-auto">
                 <a href="{% url 'role' %}" class="nav-item nav-link active">Trang chủ</a>
