@@ -2,6 +2,7 @@ from django.db import models
 from BCourt.models import Court, San
 from BUser.models import User, CourtStaff
 
+
 # Create your models here.
 class TimeSlot(models.Model):
     timeslot = models.DateTimeField()
