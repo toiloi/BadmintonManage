@@ -1,0 +1,90 @@
+<!-- booking-management.html -->
+<div class="container mt-4">
+    <h2 class="mb-4">📅 Quản Lý Lịch Đặt Sân</h2>
+    
+    <!-- Bộ lọc ngày/tuần/tháng -->
+    <div class="mb-3">
+        <label for="filter" class="form-label">Xem theo:</label>
+        <select id="filter" class="form-select" onchange="filterBookings()">
+            <option value="day">Hôm nay</option>
+            <option value="week">Tuần này</option>
+            <option value="month">Tháng này</option>
+        </select>
+    </div>
+    
+    <!-- Hiển thị danh sách đặt sân và khoảng trống -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Khách Hàng</th>
+                <th>Thời Gian</th>
+                <th>Sân</th>
+                <th>Giá</th>
+                <th>Trạng Thái</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody id="booking-list">
+            <tr>
+                <td>1</td>
+                <td>Nguyễn Văn A</td>
+                <td>09:00 - 10:00</td>
+                <td>Sân 1</td>
+                <td>150,000đ</td>
+                <td><span class="badge bg-warning">Chờ Xác Nhận</span></td>
+                <td>
+                    <button class="btn btn-success btn-sm" onclick="confirmBooking(1)">✅ Xác Nhận</button>
+                    <button class="btn btn-danger btn-sm" onclick="cancelBooking(1)">❌ Hủy</button>
+                    <button class="btn btn-info btn-sm" onclick="sendReminder(1)">📩 Nhắc Nhở</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Hiển thị khoảng thời gian sân còn trống -->
+    <h3 class="mt-4">⏳ Khoảng Thời Gian Sân Còn Trống</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Sân</th>
+                <th>Thời Gian Trống</th>
+            </tr>
+        </thead>
+        <tbody id="available-slots">
+            <tr>
+                <td>Sân 1</td>
+                <td>10:00 - 12:00</td>
+            </tr>
+            <tr>
+                <td>Sân 2</td>
+                <td>08:00 - 09:30</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+function filterBookings() {
+    let filter = document.getElementById("filter").value;
+    console.log("Lọc lịch đặt sân theo: ", filter);
+    // Gọi API backend để lấy dữ liệu lịch theo ngày/tuần/tháng
+}
+
+function confirmBooking(id) {
+    alert("Đã xác nhận đặt sân #" + id);
+    // Gửi request cập nhật trạng thái đặt sân
+}
+
+function cancelBooking(id) {
+    if (confirm("Bạn có chắc chắn muốn hủy đặt sân này?")) {
+        alert("Đã hủy đặt sân #" + id);
+        // Gửi request hủy đặt sân
+    }
+}
+
+function sendReminder(id) {
+    alert("Đã gửi tin nhắn nhắc nhở cho khách hàng #" + id);
+    // Gọi API gửi thông báo nhắc nhở khách trước giờ đặt
+}
+</script>

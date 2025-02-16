@@ -45,7 +45,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function() {
-            loadPage('manage-staff.html');
+            loadPage('Dashboard.html');
 
             document.querySelectorAll(".list-group-item").forEach(item => {
                 item.addEventListener("click", function() {
@@ -77,7 +77,7 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="sidebar-wrapper">
-            <div class="sidebar-heading">BBM Quản Lý</div>
+            <div class="sidebar-heading" onclick="loadPage('dashboard.html')" style="cursor: pointer;">BBM Quản Lý</div>
             <div class="list-group list-group-flush">
                 <div class="list-group-item" onclick="this.classList.toggle('active')">
                     <i class="fas fa-basketball-ball"></i> Sân Cầu Lông
@@ -103,10 +103,9 @@
                     </div>
                 </div>
                 <div class="list-group-item" onclick="this.classList.toggle('active')">
-                    <i class="fas fa-trophy"></i> Lịch Thi Đấu
+                    <i class="fas fa-calendar"></i> Quản Lý Lịch Đặt Sân
                     <div class="submenu">
-                        <a href="#" class="text-white d-block" onclick="loadPage('confirm-booking.html')">Xác Nhận Đặt Sân</a>
-                        <a href="#" class="text-white d-block" onclick="loadPage('tournament.html')">Tạo Giải Đấu</a>
+                        <a href="#" class="text-white d-block" onclick="loadPage('booking-management.html')">Bảng Lịch Đặt Sân</a>
                     </div>
                 </div>
                 <div class="list-group-item" onclick="this.classList.toggle('active')">
@@ -141,6 +140,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="#" onclick="logout()">
                                 <i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                                
                         </ul>
                     </div>
                 </nav>
