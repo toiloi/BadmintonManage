@@ -1,0 +1,35 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Số Điện Thoại</th>
+            <th>Ngày Đăng Ký</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody id="staff-requests">
+        <!-- Dữ liệu sẽ được load từ localStorage -->
+    </tbody>
+</table>
+<script>
+function loadStaffRequests() {
+    let requests = JSON.parse(localStorage.getItem("staffRequests")) || [];
+    let table = document.getElementById("staff-requests");
+    table.innerHTML = "";
+
+    requests.forEach((staff, index) => {
+        let row = table.insertRow();
+        row.innerHTML = `
+            <td>${staff.name}</td>
+            <td>${staff.email}</td>
+            <td>${staff.phone}</td>
+            <td>${staff.date}</td>
+            <td>
+                <button class="btn btn-success" onclick="approveStaff(${index})">Duyệt</button>
+                <button class="btn btn-danger" onclick="rejectStaff(${index})">Từ Chối</button>
+            </td>
+        `;
+    });
+}
+</script>

@@ -1,4 +1,10 @@
 from django.db import models
+from django.http import JsonResponse 
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers import serialize
+import json 
+
 
 # Create your models here.
 class Address(models.Model):
@@ -32,3 +38,7 @@ class San(models.Model):
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.maSan} {self.tinhTrang}"
+
+
+
+
