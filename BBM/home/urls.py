@@ -19,6 +19,7 @@ urlpatterns = [
     path('chamcong/', views.ChamCong, name='chamCong'),
     path('payment/', views.payment, name='payment'),
     path('revenue/', views.Revenue, name='Revenue'),
+    
 
 
 
