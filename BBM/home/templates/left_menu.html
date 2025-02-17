@@ -1,0 +1,60 @@
+<div class="sidebar-wrapper">
+    <div class="sidebar-heading">BBM Quản Lý</div>
+    <div class="list-group list-group-flush">
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-basketball-ball"></i> Sân Cầu Lông
+            <div class="submenu">
+                <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_add_court' %}')">Thêm Sân</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_manage_court' %}')">Quản Lý Sân</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-calendar"></i> Đặt Sân
+            <div class="submenu">
+                <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_time_slot' %}')">Đặt Khung Giờ</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_pricing' %}')">Cài Đặt Giá</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_policy' %}')">Chính Sách</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-user"></i> Nhân Viên
+            <div class="submenu">
+                <a href="#" class="text-white d-block" onclick="loadPage('approve-staff.html')">Xét Duyệt</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('manage-staff.html')">Danh Sách</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('pay-roll.html')">Chấm Công</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-trophy"></i> Lịch Thi Đấu
+            <div class="submenu">
+                <a href="#" class="text-white d-block" onclick="loadPage('confirm-booking.html')">Xác Nhận Đặt Sân</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('tournament.html')">Tạo Giải Đấu</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-chart-bar"></i> Doanh Thu
+            <div class="submenu">
+                <a href="#" class="text-white d-block" onclick="loadPage('report.html')">Thống Kê</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('payment.html')">Thanh Toán</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-gift"></i> Khuyến Mãi
+            <div class="submenu">
+                <a href="#" class="text-white d-block" onclick="loadPage('add-promo.html')">Thêm Khuyến Mãi</a>
+                <a href="#" class="text-white d-block" onclick="loadPage('vip.html')">Khách Hàng VIP</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function loadPage(url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('content').innerHTML = html;
+        })
+        .catch(error => console.warn('Something went wrong.', error));
+}
+</script>

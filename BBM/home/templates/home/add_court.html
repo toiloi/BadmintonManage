@@ -1,0 +1,98 @@
+{% comment %} {% extends "haimp.html"%}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Thêm Sân</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Tên Sân</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Địa Chỉ</label>
+            <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Số Điện Thoại</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Giá Sân</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+    </form>
+</div>
+{% endblock %} {% endcomment %}
+
+
+<h2>Thêm Sân Mới</h2>
+        <form id="court-form">
+            <label for="court-name">Tên Sân:</label>
+            <input type="text" id="court-name" class="form-control" required>
+
+            <label for="court-address">Địa Chỉ:</label>
+            <input type="text" id="court-address" class="form-control" required>
+
+            <label for="court-time">Khung Giờ Hoạt Động:</label>
+            <input type="time" id="court-time" class="form-control" required>
+
+            <label for="court-close-time">Giờ Đóng Cửa:</label>
+            <input type="time" id="court-close-time" class="form-control" required>
+
+            <label for="court-price">Cài Đặt Giá Theo Tiếng:</label>
+            <input type="text" id="court-price" class="form-control" required>
+
+            <label for="court-image">Hình Ảnh Sân:</label>
+            <input type="file" id="court-image" class="form-control" accept="image/*" required>
+            <img id="preview-image" src="#" alt="Xem trước hình ảnh" style="display: none; width: 100%; max-height: 200px; margin-top: 10px;">
+
+            <button type="button" class="btn btn-primary mt-3" onclick="addCourt()">Thêm Sân</button>
+            <a href="CourtManager.html" class="btn btn-secondary mt-3">Quay Về Trang Chủ</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("court-image").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("preview-image").src = e.target.result;
+                    document.getElementById("preview-image").style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        function addCourt() {
+            let name = document.getElementById("court-name").value;
+            let address = document.getElementById("court-address").value;
+            let time = document.getElementById("court-time").value;
+            let closeTime = document.getElementById("court-close-time").value;
+            let price = document.getElementById("court-price").value;
+            let imageInput = document.getElementById("court-image");
+
+            if (!name || !address || !time || !closeTime || !price || !imageInput.files.length) {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                let imageUrl = event.target.result;
+                let courts = JSON.parse(localStorage.getItem("courts")) || [];
+                let newCourt = { name, address, time, closeTime, price, image: imageUrl };
+                courts.push(newCourt);
+                localStorage.setItem("courts", JSON.stringify(courts));
+                window.location.href = "manage-court.html";
+            };
+
+            reader.readAsDataURL(imageInput.files[0]);
+        }
+
+    </script>
+    
+</body>
+</html>

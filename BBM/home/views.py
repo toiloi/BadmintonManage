@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -42,7 +42,7 @@ def user_logout(request):
     logout(request)
     return redirect("home")
 
-@login_required (login_url="login")
+@login_required(login_url="login")
 def role(request):
     user = request.user
     role = getattr(user, "role", None)
@@ -57,4 +57,62 @@ def role(request):
     
 def datSan(request):
     return render(request, "home/datsan.html")
+
+@login_required(login_url="login")
+def add_court(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        price = request.POST.get('price')
+        Court.objects.create(name=name, address=address, phone=phone, price=price)
+        return redirect('manage_court')
+    return render(request, "home/add_court.html")
+
+
+@login_required(login_url="login")
+def manage_court(request):
+    courts = Court.objects.all()
+    return render(request, "home/manage-courts.html", {'courts': courts})
+
+@login_required(login_url="login")
+def delete_court(request, court_id):
+    court = get_object_or_404(Court, id=court_id)
+    if request.method == 'POST':
+        court.delete()
+        return redirect('manage_court')
+    return render(request, "home/manage_courts.html", {'courts': Court.objects.all()})
+
+@login_required(login_url="login")
+def time_slot(request):
+    return render(request, "home/time_slot.html")
+
+@login_required(login_url="login")
+def pricing(request):
+    return render(request, "home/pricing.html")
+
+@login_required(login_url="login")
+def policy(request):
+    return render(request, "home/policy.html")
+
+@login_required(login_url="login")
+def load_add_court(request):
+    return render(request, "home/add_court.html")
+
+@login_required(login_url="login")
+def load_manage_court(request):
+    courts = Court.objects.all()
+    return render(request, "home/manage_courts.html", {'courts': courts})
+
+@login_required(login_url="login")
+def load_time_slot(request):
+    return render(request, "home/time_slot.html")
+
+@login_required(login_url="login")
+def load_pricing(request):
+    return render(request, "home/pricing.html")
+
+@login_required(login_url="login")
+def load_policy(request):
+    return render(request, "home/policy.html")
 
