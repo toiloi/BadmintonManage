@@ -1,17 +1,20 @@
-{% extends "CourtM.html%}
+{% extends "CourtM.html" %}
 
-{%block navbarM%} 
-    {include '../'}
-{%endblock}
+{% block navbarM %} 
+    {% include '../navbarM.html' %}
+{% endblock %}
 
-{%block footerM%} 
-    {include '../'}
-{%endblock}
+{% block footerM %} 
+    {% include '../footerM.html' %}    
+{% endblock %}
 
-{%block sidebarM%} 
-    {include '../'}
-{%endblock}
+{% block sidebarM %} 
+    {% include '../sidebar.html' %}
+{% endblock %}
 
- <div id="page-content">
-    
- </div>
+{% block content %} 
+<div id="content" class="container mt-4">
+    <!-- Nội dung sẽ được tải động vào đây -->
+     
+</div>
+{% endblock %}

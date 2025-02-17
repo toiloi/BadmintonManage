@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load humanize %}
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +27,7 @@
                 <td>{{ txn.transaction_id }}</td>
                 <td>{{ txn.customer_name }}</td>
                 <td>{{ txn.date }}</td>
-                <td>{{ "{:,.0f}".format(txn.amount) }} VNĐ</td>
+                <td>{{ txn.amount|intcomma }} VNĐ</td>
                 <td class="{% if txn.status == 'Đã Thanh Toán' %}text-success{% else %}text-danger{% endif %}">
                     {% if txn.status == 'Đã Thanh Toán' %}
                         ✔ {{ txn.status }}

@@ -1,4 +1,5 @@
 from django.db import models
+# <<<<<<< HEAD
 from django.http import JsonResponse 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -6,30 +7,49 @@ from django.core.serializers import serialize
 import json 
 
 
+
 # Create your models here.
-class Address(models.Model):
-    soNha = models.CharField(max_length=255,default='')
-    xa = models.CharField(max_length=255,default='')
-    huyen = models.CharField(max_length=255,default='')
-    tinh = models.CharField(max_length=255,default='')
-    quocGia = models.CharField(max_length=255,default='')
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=["soNha", "xa", "huyen", "tinh", "quocGia"], name="unique_address")
-        ]
+
+class Sonha (models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
     def __str__(self):
-        return f"{self.soNha} {self.huyen} {self.tinh} {self.quocGia}"
+        return f"{self.name}"
+
+class Duong (models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    sonha = models.ForeignKey(Sonha, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.name}"
+
+class Phuong (models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    duong = models.ForeignKey(Duong, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.name}"
+
+class Quan (models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    phuong = models.ForeignKey(Phuong, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.name}"
+
+class Tinh(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    quan = models.ForeignKey(Quan, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.quan.phuong.duong.sonha.name} {self.quan.phuong.duong.name} P.{self.quan.phuong.name} Q.{self.quan.name} {self.name}"
 
 class Court(models.Model):
     courtManager = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role':'courtmanager'})
     maCourt = models.CharField(default='',max_length=10, primary_key=True)
-    name = models.CharField(default='',max_length=255)
-    address = models.OneToOneField(Address, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    address = models.OneToOneField(Tinh, on_delete=models.CASCADE, null=True, blank=True)
     price = models.IntegerField()
-    descreption = models.CharField(default='',max_length=255, null=True, blank= True)
-    img=models.ImageField(upload_to="images/")
+    description = models.CharField(default='',max_length=255, null=True, blank= True)
+    img = models.ImageField(upload_to="images/", verbose_name="Hình ảnh sân")
     def __str__(self):
-        return f"{self.maCourt} {self.name} {self.address}"
+        return f"{self.maCourt} {self.name}"
 
 class San(models.Model):
     maSan = models.CharField(default='',max_length=10, primary_key=True)

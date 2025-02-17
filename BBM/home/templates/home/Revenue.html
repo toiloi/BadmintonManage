@@ -1,4 +1,7 @@
+
 <!DOCTYPE html>
+{% comment %} Có sửa thêm intcomma {% endcomment %}
+{% load humanize %}
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +16,7 @@
     <div class="row">
         <div class="col-md-6">
             <h4>Doanh Thu Tháng Này</h4>
-            <p class="stats text-success">💰 {{ "{:,.0f}".format(total_revenue) }} VNĐ</p>
+            <p class="stats text-success">💰 {{ total_revenue|intcomma }} VNĐ</p>
         </div>
         <div class="col-md-6">
             <h4>Đơn Đặt Sân Tháng Này</h4>
@@ -32,8 +35,8 @@
         <tbody>
             {% for stat in daily_stats %}
             <tr>
-                <td>{{ stat.date.strftime('%d/%m/%Y') }}</td>
-                <td>{{ "{:,.0f}".format(stat.revenue) }}</td>
+                <td>{{ stat.date|date:"d/m/Y" }}</td>
+                <td>{{ stat.revenue|intcomma }}</td>
                 <td>{{ stat.bookings }}</td>
             </tr>
             {% endfor %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'BCourt',
     'BUser',
     'BBooking',
@@ -78,16 +79,6 @@ WSGI_APPLICATION = 'BBM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "mssql",
-#         "NAME": "zz",
-#         "USER": "SA",
-#         "PASSWORD": "Admin123@",
-#         "HOST": "127.0.0.1",
-#         "PORT": "1444",
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

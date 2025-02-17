@@ -2,9 +2,9 @@
 <div class="container-fluid nav-bar bg-transparent">
     <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
         <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-            <!-- <div class="icon p-2 me-2">
+             <div class="icon p-2 me-2">
                 <img class="img-fluid" src="{%static 'home/img/logo-1.png' %}" alt="Icon" style="width: 30px; height: 30px;">
-            </div> -->
+            </div> 
             <h1 class="m-0 text-primary">BBM</h1>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -30,7 +30,7 @@
                     <a href="index.html" class="nav-item nav-link active">Lịch sử đặt sân</a>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{user.username}}</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{user.first_name}} {{user.last_name}}</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         <a href="{% url 'logout' %}" class="dropdown-item">Chi tiết thông tin</a>
                         <a href="{% url 'logout' %}" class="dropdown-item">Đăng xuất</a>
