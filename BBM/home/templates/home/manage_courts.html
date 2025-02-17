@@ -1,58 +1,13 @@
-{% comment %} <!-- filepath: /d:/code/BadmintonManage/BBM/home/templates/home/manage_courts.html -->
-{% extends "haimp.html"%}
-
-{% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4">Quản Lý Sân Cầu Lông</h2>
-    <a href="{% url 'add_court' %}" class="btn btn-primary mb-3">+ Thêm Sân</a>
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th><input type="checkbox"></th>
-                <th>MACOURT</th>
-                <th>NAME</th>
-                <th>ADDRESS</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for court in courts %}
-            <tr>
-                <td><input type="checkbox"></td>
-                <td><a href="#">{{ court.maCourt }}</a></td>
-                <td>{{ court.name }}</td>
-                <td>{{ court.address }}</td>
-                <td>
-                    <form method="post" action="{% url 'delete_court' court.id %}" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5" class="text-center">Không có sân nào.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <p>{{ courts|length }} courts</p>
-</div>
-
-{% endblock %} {% endcomment %}
-
-
 
 <h2>Danh Sách Sân</h2>
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Hình ảnh</th>
+            {% comment %} <th>Hình ảnh</th> {% endcomment %}
             <th>Tên Sân</th>
             <th>Địa Chỉ</th>
-            <th>Giờ Mở Cửa</th>
-            <th>Giờ Đóng Cửa</th>
+            {% comment %} <th>Giờ Mở Cửa</th>
+            <th>Giờ Đóng Cửa</th> {% endcomment %}
             <th>Giá</th>
             <th>Hành Động</th>
         </tr>
@@ -68,10 +23,10 @@ function loadCourtsFromStorage() {
     let table = document.getElementById("court-list");
     table.innerHTML = "";
 
-    courts.forEach((court, index) => {
+     courts.forEach((court, index) => {
         let row = table.insertRow();
         row.innerHTML = `
-            <td><img src="${court.image}" alt="Hình sân" width="80"></td>
+           
             <td>${court.name}</td>
             <td>${court.address}</td>
             <td>${court.time}</td>

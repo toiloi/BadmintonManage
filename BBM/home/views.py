@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from BCourt.models import Court
+from BCourt.models import Court, Sonha, Duong, Phuong, Quan, Tinh
 from BUser.models import CourtStaff, User
 from django.contrib.auth.forms import UserCreationForm
+from .forms import CourtForm, AddressForm
 from .models import RegisterForm
 
 def home(request):
@@ -58,23 +59,27 @@ def role(request):
 def datSan(request):
     return render(request, "home/datsan.html")
 
-<<<<<<< HEAD
 @login_required(login_url="login")
 def add_court(request):
+    managers = User.objects.filter(role='courtmanager')
     if request.method == 'POST':
-        name = request.POST.get('name')
-        address = request.POST.get('address')
-        phone = request.POST.get('phone')
-        price = request.POST.get('price')
-        Court.objects.create(name=name, address=address, phone=phone, price=price)
-        return redirect('manage_court')
-    return render(request, "home/add_court.html")
-
+        court_form = CourtForm(request.POST, request.FILES)
+        address_form = AddressForm(request.POST)
+        if court_form.is_valid() and address_form.is_valid():
+            court = court_form.save(commit=False)
+            address = address_form.cleaned_data['tinh']
+            court.address = address
+            court.save()
+            return redirect('manage_court')
+    else:
+        court_form = CourtForm()
+        address_form = AddressForm()
+    return render(request, "home/add_court.html", {'court_form': court_form, 'address_form': address_form, 'managers': managers})
 
 @login_required(login_url="login")
 def manage_court(request):
     courts = Court.objects.all()
-    return render(request, "home/manage-courts.html", {'courts': courts})
+    return render(request, "home/manage_courts.html", {'courts': courts})
 
 @login_required(login_url="login")
 def delete_court(request, court_id):
@@ -116,9 +121,4 @@ def load_pricing(request):
 @login_required(login_url="login")
 def load_policy(request):
     return render(request, "home/policy.html")
-=======
-def chiTiet(request, maCourt):
-    court = get_object_or_404(Court, maCourt = maCourt)
-    return render(request, "home/detail.html", {"court":court})
->>>>>>> 586c29379e3ae85b33648e396a5a0ac61249bb93
 

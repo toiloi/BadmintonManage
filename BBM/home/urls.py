@@ -6,9 +6,8 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('register/', views.user_register, name='register'),
     path('logout/', views.user_logout, name='logout'),
-<<<<<<< HEAD
-    path('role', views.role, name='role'),
-    path('datsan', views.datSan, name='datsan'),
+    path('role/', views.role, name='role'),
+    path('datsan/', views.datSan, name='datsan'),
     path('add-court/', views.add_court, name='add_court'),
     path('manage-court/', views.manage_court, name='manage_court'),
     path('time-slot/', views.time_slot, name='time_slot'),
@@ -20,10 +19,7 @@ urlpatterns = [
     path('load-time-slot/', views.load_time_slot, name='load_time_slot'),
     path('load-pricing/', views.load_pricing, name='load_pricing'),
     path('load-policy/', views.load_policy, name='load_policy'),
+
+    # path('detail/<str:maCourt>/', views.chiTiet, name='detail'),
 ]
-=======
-    path('role/', views.role, name='role'),
-    path('datsan/', views.datSan, name='datsan'),
-    path('detail/<str:maCourt>/', views.chiTiet, name='detail'),
-]
->>>>>>> 586c29379e3ae85b33648e396a5a0ac61249bb93
+
