@@ -1,0 +1,248 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Đăng Ký Đặt Sân Cầu Lông</title>
+    <link rel="stylesheet" href="{% static 'home/css/datsan.css' %}">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
+                </div>
+                <div class="card-body">
+                    <form id="bookingForm" method="POST">
+
+                        <!-- Chọn loại lịch -->
+                        <div class="form-group">
+                            <label for="bookingType">Chọn loại hình đặt sân</label>
+                            <select id="bookingType" name="bookingType" required>
+                                <option value="">--Chọn--</option>
+                                <option value="fixed">Đặt lịch cố định</option>
+                                <option value="daily">Đặt theo ngày</option>
+                                <option value="flexible">Đặt lịch linh hoạt</option>
+                            </select>
+                        </div>
+
+                        <!-- Đặt lịch cố định -->
+                        <div id="fixedBooking" class="hidden">
+                            <div class="form-group">
+                                <label for="starDate">Ngày bắt đầu:</label>
+                                <input type="date" id="starDate" name="starDate" required>
+                                <p id="startDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
+                                <br>
+
+                                <label for="endDate">Ngày kết thúc:</label>
+                                <input type="date" id="endDate" name="endDate" required>
+                                <p id="endDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
+                                <br>
+                                
+                                <label for="time-slot">Time-slot:</label>
+                                <div class = "select-container">
+                                    <div class="select-gird">
+                                        <div class="select-slot">05:00</div>
+                                        <div class="select-slot">06:00</div>
+                                        <div class="select-slot">07:00</div>
+                                        <div class="select-slot">08:00</div>
+                                        <div class="select-slot">09:00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Đặt lịch theo ngày -->
+                        <div id="dailyBooking" class="hidden">
+                            <div class="form-group">
+                                <label for="playDate">Ngày, tháng, năm:</label>
+                                <input type="date" id="playDate" name="playDate" required> 
+                                
+                                <label for="San">Sân:</label>
+                                <select id="fixedDay" name="fixedDay">
+                                    <option value="1">Số 1</option>
+                                    <option value="2">Số 2</option>
+                                    <option value="3">Số 3</option>
+                                    <option value="4">Số 4</option>
+                                    <option value="5">Số 5</option>
+                                </select> 
+
+                                <label for="time-slot">Time-slot:</label>
+                                <div class = "select-container">
+                                    <div class="select-gird">
+                                        <div class="select-slot">05:00</div>
+                                        <div class="select-slot">06:00</div>
+                                        <div class="select-slot">07:00</div>
+                                        <div class="select-slot">08:00</div>
+                                        <div class="select-slot">09:00</div>
+                                        <div class="select-slot">10:00</div>
+                                        <div class="select-slot">11:00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Đặt lịch linh hoạt -->
+                        <div id="flexibleBooking" class="hidden">
+                            <div class="form-group">
+                                <label for="flexibleBookingType">Đặt:</label>
+                                <select id="flexibleBookingType" name="flexibleBookingType">
+                                    <option value="">--Chọn--</option>
+                                    <option value="hour">Đặt thêm giờ</option>
+                                    <option value="calendar">Đặt lịch</option>
+                                </select> 
+                                
+                                <div id="hourType" class="hidden">
+                                    <label for="addHour">Thêm giờ:</label>
+                                    <input type="number" id="addHour" name="addHour" required> 
+                                </div>
+
+                                <div id="calendarType" class="hidden">
+                                    <label for="playDate">Ngày, tháng, năm:</label>
+                                    <input type="date" id="playDate" name="playDate" required> 
+                                    
+                                    <label for="San">Sân:</label>
+                                    <select id="fixedDay" name="fixedDay">
+                                        <option value="1">Số 1</option>
+                                        <option value="2">Số 2</option>
+                                        <option value="3">Số 3</option>
+                                        <option value="4">Số 4</option>
+                                        <option value="5">Số 5</option>
+                                    </select> 
+
+                                    <label for="time-slot">Time-slot:</label>
+                                    <div class = "select-container">
+                                        <div class="select-gird">
+                                            <div class="select-slot">05:00</div>
+                                            <div class="select-slot">06:00</div>
+                                            <div class="select-slot">07:00</div>
+                                            <div class="select-slot">08:00</div>
+                                            <div class="select-slot">09:00</div>
+                                            <div class="select-slot">10:00</div>
+                                            <div class="select-slot">11:00</div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Kết thúc chọn loại lịch -->
+
+                        <div class = "form-group">
+                            <label value = "discountCode">Áp mã giảm giá</label>
+                            <input type="text" id="discountCode" name="discountCode" required>
+                            <h3 style="display: inline-block; margin-top: 10px;">Tổng thanh toán: </h3>
+                            <p style="display: inline-block; margin-top: 10px;">400.000đ</p>
+                        </div>
+
+                        <div>
+                            <button class="btn btn--radius-2 btn--gradient" type="submit">Đặt sân</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bookingType').addEventListener('change', function() {
+            document.getElementById('fixedBooking').classList.add('hidden');
+            document.getElementById('dailyBooking').classList.add('hidden');
+            document.getElementById('flexibleBooking').classList.add('hidden');
+    
+            if (this.value === 'fixed') {
+                document.getElementById('fixedBooking').classList.remove('hidden');
+            } else if (this.value === 'daily') {
+                document.getElementById('dailyBooking').classList.remove('hidden');
+            } else if (this.value === 'flexible') {
+                document.getElementById('flexibleBooking').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('flexibleBookingType').addEventListener('change', function() {
+            document.getElementById('hourType').classList.add('hidden');
+            document.getElementById('calendarType').classList.add('hidden');
+
+            if (this.value === 'hour') {
+                document.getElementById('hourType').classList.remove('hidden');
+            } else if (this.value === 'calendar') {
+                document.getElementById('calendarType').classList.remove('hidden'); // SỬA ĐÚNG ID
+            }
+        });
+    
+        document.querySelectorAll('.select-slot').forEach(slot => {
+            slot.addEventListener('click', () => {
+                slot.classList.toggle('selected');
+            });
+        });
+
+           // Danh sách Time Slot theo từng ngày
+           const timeSlots = {
+            Monday: ["08:00 - 10:00", "14:00 - 16:00", "18:00 - 20:00"],
+            Tuesday: ["09:00 - 11:00", "15:00 - 17:00", "19:00 - 21:00"],
+            Wednesday: ["07:00 - 09:00", "13:00 - 15:00", "17:00 - 19:00"],
+            Thursday: ["10:00 - 12:00", "16:00 - 18:00", "20:00 - 22:00"],
+            Friday: ["08:30 - 10:30", "14:30 - 16:30", "18:30 - 20:30"],
+            Saturday: ["09:30 - 11:30", "15:30 - 17:30", "19:30 - 21:30"],
+            Sunday: ["10:00 - 12:00", "16:00 - 18:00", "20:00 - 22:00"]
+        };
+
+        function formatDateString(dateString) {
+            const daysOfWeek = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+            const date = new Date(dateString);
+            if (isNaN(date)) return ""; // Kiểm tra nếu giá trị không hợp lệ
+
+            const dayOfWeek = daysOfWeek[date.getDay()];
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // Tháng bắt đầu từ 0 nên +1
+            const year = date.getFullYear();
+
+            return `${dayOfWeek}, ${day}/${month}/${year}`;
+        }
+
+        // Hiển thị thứ khi chọn ngày bắt đầu và kết thúc
+        document.getElementById("starDate").addEventListener("change", function() {
+            document.getElementById("startDateDisplay").innerText = formatDateString(this.value);
+        });
+
+        document.getElementById("endDate").addEventListener("change", function() {
+            document.getElementById("endDateDisplay").innerText = formatDateString(this.value);
+        });
+
+        // Xử lý thay đổi Time Slot khi chọn Thứ
+        document.getElementById("fixedDay").addEventListener("change", function() {
+            const selectedDay = this.value; // Lấy giá trị của ngày đã chọn
+            const timeSlotSelect = document.getElementById("timeSlot");
+            
+            // Xóa các option cũ
+            timeSlotSelect.innerHTML = "";
+
+            // Nếu có Time Slot cho ngày đã chọn
+            if (timeSlots[selectedDay]) {
+                timeSlots[selectedDay].forEach(slot => {
+                    const option = document.createElement("option");
+                    option.value = slot;
+                    option.textContent = slot;
+                    timeSlotSelect.appendChild(option);
+                });
+            } else {
+                const option = document.createElement("option");
+                option.value = "";
+                option.textContent = "Không có Time Slot";
+                timeSlotSelect.appendChild(option);
+            }
+        });
+
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
