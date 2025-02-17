@@ -1,4 +1,5 @@
 {%load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +32,7 @@
                                 <option value="daily">Đặt theo ngày</option>
                                 <option value="flexible">Đặt lịch linh hoạt</option>
                             </select>
-                        </div><br><br>
+                        </div>
 
                         <!-- Đặt lịch cố định -->
                         <div id="fixedBooking" class="hidden">
@@ -45,53 +46,48 @@
                                 <input type="date" id="endDate" name="endDate" required>
                                 <p id="endDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
                                 <br>
-                               
+                                
                                 <label for="time-slot">Time-slot:</label>
                                 <div class = "select-container">
                                     <div class="select-gird">
                                         <div class="select-slot">05:00</div>
                                         <div class="select-slot">06:00</div>
+                                        <div class="select-slot">07:00</div>
+                                        <div class="select-slot">08:00</div>
+                                        <div class="select-slot">09:00</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="paymentMethod">Thanh toán:</label>
-                                <select id="paymentMethod" name="paymentMethod" required>
-                                    <option value="">--Chọn--</option>
-                                    <option value="transfer">Chuyển khoản</option>
-                                </select><br><br>  
-                            </div> 
                         </div>
                 
                         <!-- Đặt lịch theo ngày -->
                         <div id="dailyBooking" class="hidden">
                             <div class="form-group">
                                 <label for="playDate">Ngày, tháng, năm:</label>
-                                <input type="date" id="playDate" name="playDate" required><br><br>
+                                <input type="date" id="playDate" name="playDate" required> 
                                 
                                 <label for="San">Sân:</label>
                                 <select id="fixedDay" name="fixedDay">
                                     <option value="1">Số 1</option>
                                     <option value="2">Số 2</option>
-                                </select><br><br>
+                                    <option value="3">Số 3</option>
+                                    <option value="4">Số 4</option>
+                                    <option value="5">Số 5</option>
+                                </select> 
 
                                 <label for="time-slot">Time-slot:</label>
                                 <div class = "select-container">
                                     <div class="select-gird">
                                         <div class="select-slot">05:00</div>
                                         <div class="select-slot">06:00</div>
+                                        <div class="select-slot">07:00</div>
+                                        <div class="select-slot">08:00</div>
+                                        <div class="select-slot">09:00</div>
+                                        <div class="select-slot">10:00</div>
+                                        <div class="select-slot">11:00</div>
                                     </div>
                                 </div>
                             </div>
-                                <!-- Thanh toán -->
-                            <div class="form-group">
-                                <label for="paymentMethod">Thanh toán:</label>
-                                <select id="paymentMethod" name="paymentMethod" required>
-                                    <option value="">--Chọn--</option>
-                                    <option value="cash">Tiền mặt</option>
-                                    <option value="transfer">Chuyển khoản</option>
-                                </select><br><br>  
-                            </div>   
                         </div>
                     
                         <!-- Đặt lịch linh hoạt -->
@@ -99,44 +95,52 @@
                             <div class="form-group">
                                 <label for="flexibleBookingType">Đặt:</label>
                                 <select id="flexibleBookingType" name="flexibleBookingType">
+                                    <option value="">--Chọn--</option>
                                     <option value="hour">Đặt thêm giờ</option>
                                     <option value="calendar">Đặt lịch</option>
-                                </select><br><br>
+                                </select> 
                                 
                                 <div id="hourType" class="hidden">
                                     <label for="addHour">Thêm giờ:</label>
-                                    <input type="number" id="addHour" name="addHour" required><br><br>
+                                    <input type="number" id="addHour" name="addHour" required> 
                                 </div>
 
                                 <div id="calendarType" class="hidden">
                                     <label for="playDate">Ngày, tháng, năm:</label>
-                                    <input type="date" id="playDate" name="playDate" required><br><br>
+                                    <input type="date" id="playDate" name="playDate" required> 
                                     
                                     <label for="San">Sân:</label>
                                     <select id="fixedDay" name="fixedDay">
                                         <option value="1">Số 1</option>
                                         <option value="2">Số 2</option>
-                                    </select><br><br>
+                                        <option value="3">Số 3</option>
+                                        <option value="4">Số 4</option>
+                                        <option value="5">Số 5</option>
+                                    </select> 
 
                                     <label for="time-slot">Time-slot:</label>
                                     <div class = "select-container">
                                         <div class="select-gird">
                                             <div class="select-slot">05:00</div>
                                             <div class="select-slot">06:00</div>
+                                            <div class="select-slot">07:00</div>
+                                            <div class="select-slot">08:00</div>
+                                            <div class="select-slot">09:00</div>
+                                            <div class="select-slot">10:00</div>
+                                            <div class="select-slot">11:00</div>
                                         </div>
                                     </div>    
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="paymentMethod">Thanh toán:</label>
-                                <select id="paymentMethod" name="paymentMethod" required>
-                                    <option value="">--Chọn--</option>
-                                    <option value="transfer">Chuyển khoản</option>
-                                </select><br><br>  
-                            </div> 
                         </div>
-                    
-                                       
+                        <!-- Kết thúc chọn loại lịch -->
+
+                        <div class = "form-group">
+                            <label value = "discountCode">Áp mã giảm giá</label>
+                            <input type="text" id="discountCode" name="discountCode" required>
+                            <p style="display: inline-block; margin-top: 10px;">Tổng thanh toán: <p>
+                            <p style="display: inline-block; margin-top: 10px;">400.000đ</p>
+                        </div>
 
                         <div>
                             <button class="btn btn--radius-2 btn--gradient" type="submit">Đặt sân</button>
@@ -173,21 +177,6 @@
             }
         });
     
-        function selectDate(cell) {
-            cell.classList.toggle('selected'); // Toggle selection on click
-        }
-    
-        document.getElementById('bookingForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const paymentMethod = document.getElementById('paymentMethod').value;
-    
-            if (paymentMethod === 'cash') {
-                alert('Hoàn thành đặt lịch thành công!');
-            } else if (paymentMethod === 'transfer') {
-                window.location.href = 'transfer_page.html'; // Chuyển đến trang chuyển khoản
-            }
-        });
-
         document.querySelectorAll('.select-slot').forEach(slot => {
             slot.addEventListener('click', () => {
                 slot.classList.toggle('selected');
@@ -239,7 +228,7 @@
                 timeSlotSelect.appendChild(option);
             }
         });
-    
+
     </script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

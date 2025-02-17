@@ -81,7 +81,6 @@ def update_court_rating(sender, instance, **kwargs):
 class San(models.Model):
     maSan = models.CharField(default='',max_length=10, primary_key=True)
     numSan = models.IntegerField()
-    tinhTrang = models.BooleanField(default=True)
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):
-        return f"{self.maSan} {self.tinhTrang}"
+        return f"{self.maSan} {self.numSan}"

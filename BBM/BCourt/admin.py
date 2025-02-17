@@ -7,7 +7,7 @@ class CourtAd(admin.ModelAdmin):
   list_display = ("maCourt", "name",)
 
 class SanAd(admin.ModelAdmin):
-  list_display = ("maSan", "tinhTrang",)
+  list_display = ("maSan", "numSan",)
 
 class SonhaAd(admin.ModelAdmin):
   list_display = ("name",)
