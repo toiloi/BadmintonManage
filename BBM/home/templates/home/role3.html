@@ -13,8 +13,85 @@
 {%endblock%}
 
 {% block content %}
-<div id="content" class="container mt-4">
-    <!-- Nội dung sẽ được tải động vào đây -->
+<div class="list-group-item" onclick="this.classList.toggle('active')">
+    <i class="fas fa-basketball-ball"></i> Sân Cầu Lông
+    <div class="submenu">
+        <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_add_court' %}')">Thêm Sân</a>
+        <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_manage_court' %}')">Quản Lý Sân</a>
+    </div>
 </div>
-{% endblock %}
+<div class="list-group-item" onclick="this.classList.toggle('active')">
+    <i class="fas fa-calendar"></i> Đặt Sân
+    <div class="submenu">
+        <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_time_slot' %}')">Đặt Khung Giờ</a>
+        <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_pricing' %}')">Cài Đặt Giá</a>
+        <a href="#" class="text-white d-block" onclick="loadPage('{% url 'load_policy' %}')">Chính Sách</a>
+    </div>
+</div>
 
+<div class="container mt-4">
+    <h2>Danh Sách Sân</h2>
+    <div class="row g-4">
+        {% for court in courts %}
+        <div class="col-lg-4 col-md-6 wow fadeInUp">
+            <div class="property-court rounded overflow-hidden">
+                {% comment %} <div class="position-relative overflow-hidden">
+                    <a href="{% url 'detail' court.maCourt %}"><img class="img-fluid" style="height: 450px;" src="{{court.img.url}}" alt=""></a>
+                </div> {% endcomment %}
+                <div class="p-4 pb-0">
+                    <h5 class="text-primary mb-3">{{court.price}}đ/h</h5>
+                    <a class="d-block h5 mb-2" href="{% url 'detail' court.maCourt %}">{{court.name}}</a>
+                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{court.address}}</p>
+                </div>
+                <div class="d-flex border-top">
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
+                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% comment %} <a href="{% url 'add_court' %}" class="btn btn-success mt-4">Thêm Sân</a> {% endcomment %}
+</div>
+
+
+{% endblock %}
+<script>
+    function loadPage(page) {
+        fetch(page)
+            .then(response => {
+                if (!response.ok) throw new Error("Lỗi tải trang: " + response.statusText);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("page-content").innerHTML = data;
+            })
+            .catch(error => {
+                console.log(error);
+                document.getElementById("page-content").innerHTML = "<p class='text-danger'>Không thể tải trang.</p>";
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".submenu a").forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                loadPage(this.getAttribute("onclick").match(/'([^']+)'/)[1]);
+            });
+        });
+
+        document.querySelectorAll(".list-group-item").forEach(item => {
+            item.addEventListener("click", function() {
+                this.classList.toggle("active");
+                let submenu = this.querySelector(".submenu");
+                if (submenu) submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+            });
+        });
+
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            document.querySelector(".sidebar-wrapper").classList.toggle("d-none");
+            document.querySelector(".main-content").classList.toggle("ml-0");
+        });
+    });
+</script>

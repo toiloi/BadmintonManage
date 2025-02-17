@@ -54,7 +54,8 @@ def role(request):
     elif role == "courtstaff":
         return render(request, "home/role2.html")  # Đường dẫn cho CourtStaff
     elif role == "courtmanager":
-        return render(request, "home/role3.html")  # Đường dẫn cho CourtManager
+        courts = Court.objects.all()  # Lấy danh sách sân từ database
+        return render(request, "home/role3.html", {"courts": courts})
     
 def datSan(request):
     return render(request, "home/datsan.html")
@@ -122,3 +123,6 @@ def load_pricing(request):
 def load_policy(request):
     return render(request, "home/policy.html")
 
+def chiTiet(request, maCourt):
+    court = get_object_or_404(Court, maCourt = maCourt)
+    return render(request, "home/detail.html", {"court":court})
