@@ -49,7 +49,7 @@ class Court(models.Model):
     courtManager = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role':'courtmanager'})
     maCourt = models.CharField(default='',max_length=10, primary_key=True)
     name = models.CharField(max_length=100)
-    address = models.OneToOneField(Tinh, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.OneToOneField(Tinh, on_delete=models.CASCADE)
     price = models.IntegerField()
     description = models.CharField(default='',max_length=255, null=True, blank= True)
     img = models.ImageField(upload_to="images/", verbose_name="Hình ảnh sân")

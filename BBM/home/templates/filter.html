@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Bộ Lọc</title>
+    <link href="{% static 'home/css/filter.css' %}" rel="stylesheet">
+</head>
+    
+<body>
+    <div class="filter-container">
+        <form method="GET" action="{% url 'filter' %}">
+            <div class="filters">
+                <label for="price">Chọn mức giá:</label>
+                <select name="price" id="price">
+                    <option value="">Tất cả mức giá</option>
+                    <option value="low" {% if request.GET.price == "low" %}selected{% endif %}>Dưới 50.000đ</option>
+                    <option value="medium" {% if request.GET.price == "medium" %}selected{% endif %}>Từ 50.000đ - 100.000đ</option>
+                    <option value="high" {% if request.GET.price == "high" %}selected{% endif %}>Trên 100.000đ</option>
+                </select>
+
+                <label for="tinh"></label>
+                <input type="text" id="tinh" name="tinh" placeholder="Nhập tỉnh/thành phố..." value="{{ request.GET.tinh }}">
+
+                <label for="quan"></label>
+                <input type="text" id="quan" name="quan" placeholder="Nhập quận/huyện..." value="{{ request.GET.quan }}">
+
+                <label for="phuong"></label>
+                <input type="text" id="phuong" name="phuong" placeholder="Nhập phường/xã..." value="{{ request.GET.phuong }}">
+
+                <label for="duong"></label>
+                <input type="text" id="duong" name="duong" placeholder="Nhập đường..." value="{{ request.GET.duong }}">
+
+                <button type="submit">Lọc</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

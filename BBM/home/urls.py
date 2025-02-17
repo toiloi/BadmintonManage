@@ -9,5 +9,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('role/', views.role, name='role'),
     path('datsan/', views.datSan, name='datsan'),
+    path('filter/', views.courtFilter, name='filter'),
     path('detail/<str:maCourt>/', views.chiTiet, name='detail'),
 ]

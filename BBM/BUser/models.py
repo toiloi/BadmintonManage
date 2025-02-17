@@ -1,7 +1,6 @@
 from django.db import models
 from BCourt.models import Court
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MaxValueValidator
 
 # Create your models here.
 
@@ -20,9 +19,9 @@ class User(AbstractUser):
     ]
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     GENDER_CHOICES = [
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Other')
+        ('M', 'Nam'),
+        ('F', 'Nữ'),
+        ('O', 'Khác')
     ]
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
     sdt= models.IntegerField(default=0, null=True, blank=True)
@@ -34,8 +33,4 @@ class CourtStaff(User):
     court1 = models.ForeignKey(Court, on_delete=models.CASCADE,  null=True, blank=True)
     def __str__(self):
         return f"{self.first_name} {self.username} {self.court1}"
-    
-class VIP(models.Model):
-    soGio = models.IntegerField(default=0)
-    lvVIP = models.IntegerField(default=0, validators=[MaxValueValidator(10)])
-    customer = models.OneToOneField(User, on_delete=models.CASCADE, limit_choices_to={'role':'customer'})
+

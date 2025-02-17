@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TimeSlot, VeDatSan, HoaDon
+from .models import TimeSlot, VeDatSan, CheckIn
 
 # Register your models here.
 # admin.site.register(TimeSlot)
@@ -7,14 +7,14 @@ from .models import TimeSlot, VeDatSan, HoaDon
 # admin.site.register(HoaDon)
 
 class TimeSlotAdmin(admin.ModelAdmin):
-  list_display = ("timeslot",)
+  list_display = ("timeslot", "san")
 
 class VeDatSanAdmin(admin.ModelAdmin):
-  list_display = ("san", "date", "timeslot",)
+  list_display = ("date", "timeslot", "checkin")
 
-class HoaDonAdmin(admin.ModelAdmin):
-  list_display = ("maHoaDon", "ngayTao",)
+class CheckInAdmin(admin.ModelAdmin):
+  list_display = ("vedatsan", "courtstaff",)
   
 admin.site.register(TimeSlot, TimeSlotAdmin)
 admin.site.register(VeDatSan, VeDatSanAdmin)
-admin.site.register(HoaDon, HoaDonAdmin)
+admin.site.register(CheckIn, CheckInAdmin)
