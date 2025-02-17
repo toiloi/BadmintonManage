@@ -58,6 +58,7 @@ def role(request):
 def datSan(request):
     return render(request, "home/datsan.html")
 
+<<<<<<< HEAD
 @login_required(login_url="login")
 def add_court(request):
     if request.method == 'POST':
@@ -115,4 +116,9 @@ def load_pricing(request):
 @login_required(login_url="login")
 def load_policy(request):
     return render(request, "home/policy.html")
+=======
+def chiTiet(request, maCourt):
+    court = get_object_or_404(Court, maCourt = maCourt)
+    return render(request, "home/detail.html", {"court":court})
+>>>>>>> 586c29379e3ae85b33648e396a5a0ac61249bb93
 
