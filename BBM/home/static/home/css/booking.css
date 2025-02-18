@@ -1,5 +1,3 @@
-/* datsan.css - Cleaned Up */
-
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -57,7 +55,7 @@ select, input {
   box-sizing: border-box;
 }
 
-.select-gird {
+.select-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
@@ -79,36 +77,59 @@ select, input {
   color: #fff;
 }
 
-.btn {
-  display: block;
+.btn-custom {
   width: 100%;
-  max-width: 450px; /* Giới hạn chiều rộng nút */
-  margin: 0 auto; /* Căn giữa theo chiều ngang */
-  margin-bottom: 20px;
   padding: 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #00b98e;
-  cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease;
   text-align: center;
-  text-transform: uppercase;
-  transition: opacity 0.3s;
 }
 
-.btn:hover {
-  opacity: 0.85;
+.btn-custom:nth-child(1) {
+  background: #00B98E;
+}
+
+.btn-custom:nth-child(2) {
+  background: #00B98E;
+}
+
+.btn-custom:nth-child(3) {
+  background: #00B98E;
+}
+
+.btn-custom:hover {
+  opacity: 0.8;
 }
 
 .button-container {
   display: flex;
-  justify-content: space-between; /* Đẩy 2 nút ra 2 bên */
-  margin-top: 20px;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .btn-left, .btn-right {
-  width: 300px; /* Làm nút nhỏ lại */
-  padding: 10px; /* Giảm padding */
-  font-size: 14px; /* Giảm kích thước chữ */
+  width: 48%; /* Mỗi nút chiếm 48% chiều rộng */
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
+
+.btn-left {
+  background-color: #007bff;
+}
+
+.btn-right {
+  background-color: #00B98E;
+}
+
+.btn-left:hover, .btn-right:hover {
+  opacity: 0.8;
+}
+
 

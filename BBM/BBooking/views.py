@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Court, VeDatSan, San, TimeSlot
-from .forms import VeDatSanForm
+from .models import Court, VeDatSan, San, TimeSlot, Flag
+from .forms import VeDatSanForm, FlagForm
 from django.contrib import messages
+from django.urls import reverse
 
 @login_required(login_url='login')
 def booking(request, maCourt):
@@ -24,26 +25,25 @@ def booking(request, maCourt):
         'selected_san_id': selected_san_id
     })
 
-def dailyBooking(request, maCourt):
+def dateBooking(request, maCourt):
     court = get_object_or_404(Court, maCourt=maCourt)
-    sans = San.objects.filter(court=court)
-
-    # Lấy sân được chọn từ request (nếu có)
-    selected_san_id = request.GET.get('san')
-    print(request)
-    if selected_san_id:
-        selected_san = get_object_or_404(San, maSan=selected_san_id, court=court)
-        timeslots = TimeSlot.objects.filter(san=selected_san, flag=True)
-    else:
-        timeslots = TimeSlot.objects.none()  # Không hiển thị timeslot nếu chưa chọn sân
-
+    timeslots = TimeSlot.objects.filter(court=court)
+    sans=San.objects.filter(court=court)
     if request.method == "POST":
-        form = VeDatSanForm(request.POST)
+        form = FlagForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Đặt sân thành công!")
-            return redirect("booking")
+            ts = form.cleaned_data.get("timeslot")
+            d = form.cleaned_data.get("date")
+            s = form.cleaned_data.get("san")
+            flag=Flag.objects.filter(san=s,timeslot=ts,date=d).first()
+            url = reverse("tongtien", kwargs={"maCourt": maCourt, "flagid":flag.id})
+            return redirect(url)
+        else:
+            messages.error(request, "Thời gian này sân đã được đặt trước đó!")
     else:
-        form = VeDatSanForm()
+        form = FlagForm()
+    return render(request, 'home/dateBooking.html', {"form": form, "timeslots": timeslots, 'court':court, 'sans':sans})
 
-    return render(request, 'home/dailyBooking.html', {"form": form, "sans": sans, "timeslots": timeslots, 'court':court})
+def tongTien(request, maCourt, flagid):
+    return render(request, "home/Tongtien.html", {"maCourt":maCourt, "flagid":flagid})

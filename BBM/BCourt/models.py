@@ -53,7 +53,7 @@ class Court(models.Model):
     price = models.IntegerField()
     description = models.CharField(default='',max_length=255, null=True, blank= True)
     img = models.ImageField(upload_to="images/", verbose_name="Hình ảnh sân")
-    courtStaff=models.ManyToManyField("BUser.User", limit_choices_to={'role':'courtstaff'}, related_name="staffed_courts")
+    courtStaff=models.ManyToManyField("BUser.User", limit_choices_to={'role':'courtstaff'}, related_name="staffed_courts", blank=True)
     rateAvr = models.FloatField(default=0.0)  # Trung bình rating
 
     def update_rating(self):
@@ -84,4 +84,4 @@ class San(models.Model):
     numSan = models.IntegerField()
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):
-        return f"{self.maSan} {self.numSan}"
+        return f"Sân {self.numSan}"
