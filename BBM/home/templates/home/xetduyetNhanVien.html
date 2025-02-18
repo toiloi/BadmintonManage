@@ -1,25 +1,56 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th>Tên</th>
-            <th>Email</th>
-            <th>Số Điện Thoại</th>
-            <th>Ngày Đăng Ký</th>
-            <th>Hành Động</th>
-        </tr>
-    </thead>
-    <tbody id="staff-requests">
-        {% for request in requests %}
-        <tr>
-            <td>{{ request.name }}</td>
-            <td>{{ request.email }}</td>
-            <td>{{ request.phone }}</td>
-            <td>{{ request.date }}</td>
-            <td>
-                <button class="btn btn-success" onclick="approveStaff({{ request.id }})">Duyệt</button>
-                <button class="btn btn-danger" onclick="rejectStaff({{ request.id }})">Từ Chối</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xét Duyệt Nhân Viên</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .table th, .table td {
+            vertical-align: right;
+        }
+        .btn-action {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Xét Duyệt Nhân Viên</h2>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+                <th>Ngày Đăng Ký</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody id="staff-requests">
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.name }}</td>
+                <td>{{ request.email }}</td>
+                <td>{{ request.phone }}</td>
+                <td>{{ request.date|date:"d/m/Y H:i:s" }}</td>
+                <td>
+                    <button class="btn btn-success btn-action" onclick="approveStaff({{ request.id }})">
+                        <i class="fas fa-check"></i> Duyệt
+                    </button>
+                    <button class="btn btn-danger btn-action" onclick="rejectStaff({{ request.id }})">
+                        <i class="fas fa-times"></i> Từ Chối
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+
+</script>
+</body>
+</html>

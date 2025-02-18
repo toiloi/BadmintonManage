@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from BCourt.models import Court,CourtStaff,DailyStat,Transaction
+from BCourt.models import Court,CourtStaff,DailyStat,Transaction,StaffRequest
 from BUser.models import  User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
@@ -97,3 +97,7 @@ def Revenue(request):
         "total_revenue": total_revenue,
         "total_bookings": total_bookings
     })
+
+def xetduyetNhanVien(request):
+    requests = StaffRequest.objects.all()
+    return render(request, "home/xetduyetNhanVien.html", {"requests": requests})

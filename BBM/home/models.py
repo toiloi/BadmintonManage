@@ -37,3 +37,4 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Chưa Thanh Toán')
     # Thêm các trường khác nếu cần
+

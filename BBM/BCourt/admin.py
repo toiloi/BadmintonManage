@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Court, San, Sonha, Duong, Phuong, Quan, Tinh, CourtStaff, DailyStat, Transaction
+from .models import Court, San, Sonha, Duong, Phuong, Quan, Tinh, CourtStaff, DailyStat, Transaction,StaffRequest
 
 # Register your models here.
 
@@ -37,6 +37,12 @@ class TransactionAdmin(admin.ModelAdmin):
     list_display = ('transaction_id', 'customer_name', 'date', 'amount', 'status')
     search_fields = ('transaction_id', 'customer_name', 'date', 'status')
 
+
+class StaffRequestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'date', 'status')
+    search_fields = ('name', 'email', 'phone', 'status')
+
+  
 admin.site.register(Court, CourtAd)
 admin.site.register(San, SanAd)
 admin.site.register(Sonha, SonhaAd)
@@ -47,3 +53,4 @@ admin.site.register(Tinh, TinhAd)
 admin.site.register(CourtStaff, CourtStaffAdmin)
 admin.site.register(DailyStat, DailyStatAdmin)
 admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(StaffRequest, StaffRequestAdmin)
