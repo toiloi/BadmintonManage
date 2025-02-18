@@ -1,0 +1,114 @@
+/* datsan.css - Cleaned Up */
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #effdf5;
+}
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card-heading {
+  background-color: #00b98e;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.select-gird {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.select-slot {
+  text-align: center;
+  padding: 10px;
+  background: #eee;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+.select-slot.selected {
+  background: #32e0a0;
+  color: #fff;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  max-width: 450px; /* Giới hạn chiều rộng nút */
+  margin: 0 auto; /* Căn giữa theo chiều ngang */
+  margin-bottom: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00b98e;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Đẩy 2 nút ra 2 bên */
+  margin-top: 20px;
+}
+
+.btn-left, .btn-right {
+  width: 300px; /* Làm nút nhỏ lại */
+  padding: 10px; /* Giảm padding */
+  font-size: 14px; /* Giảm kích thước chữ */
+}
+

@@ -6,6 +6,7 @@ from BUser.models import CourtStaff, User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
 from BCourt.models import Court, Tinh, Quan, Phuong, Duong
+from BBooking.models import VeDatSan
 
 
 def home(request):
@@ -61,6 +62,14 @@ def role(request):
         return render(request, "home/role2.html")  # Đường dẫn cho CourtStaff
     elif role == "courtmanager":
         return render(request, "home/role3.html")  # Đường dẫn cho CourtManager
+    
+def history(request):
+    user=request.user
+    lb = VeDatSan.objects.filter(customer=user)
+    return render(request, 'home/history.html', {"lb":lb})
+
+def deleteHistory(request, ve):
+    return render(request, 'home/deleteHistory', {"ve":ve})
 
 def chiTiet(request, maCourt):
     court = get_object_or_404(Court, maCourt = maCourt)

@@ -1,0 +1,75 @@
+
+{% extends "master_page.html" %}
+{% load static %}
+
+{% block navbar %}
+    {% include '../navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    {%for ve in lb%}
+    <div class="col-lg-4 col-md-6 wow fadeInUp">
+        <div class="property-court rounded overflow-hidden" style="max-width: 350px; margin: 50px;">
+            <div class="position-relative overflow-hidden">
+                <img class="img-fluid" style="height: 350px;" src="{{ve.timeslot.san.court.img.url}}" alt="">
+            </div>
+            <div class="p-2 pb-0">
+                <h5 class="text-primary mb-2">{{ve.tongTien}}đ</h5>
+                <div class="d-block h5 mb-1">{{ve.timeslot.san.court.nameCourt}}</div>
+                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ve.timeslot.san.court.address}}</p>
+                <p><strong>Sân: </strong>{{ve.timeslot.san.numSan}}</p>
+                <p><strong>Time-slot: </strong>{{ve.timeslot}}</p>
+                <p><strong>Ngày chơi: </strong>{{ve.date}}</p>
+                <p><strong>Ngày đặt lịch: </strong>{{ve.ngayTao}}</p>
+                <p><strong>Loại: </strong>
+                    {% if ve.type == 'codinh' %}
+                        Cố định
+                    {% elif ve.type == 'linhhoat' %}
+                        Linh hoạt
+                    {% elif ve.type == 'theongay' %}
+                        Theo ngày
+                    {% endif %}
+                </p>
+                <p><strong>Trạng thái: </strong>
+                    {% if ve.checkin == 'dacheckin' %}
+                        Đã check-in
+                    {% elif ve.checkin == 'chuacheckin' %}
+                        Chưa check-in
+                    {% endif %}
+                </p>
+                <div class="text-center">
+                    <!-- Nút Huỷ vé -->
+                    <a href="{% url 'deleteHis' ve %}">
+                        <button class="btn btn-primary py-2 px-4 animated fadeIn" data-bs-toggle="modal" data-bs-target="#cancelModal">Huỷ vé</button>
+                    </a>
+                </div>  
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+<!-- Modal Huỷ vé -->
+<!-- <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Xác nhận huỷ vé</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn huỷ vé không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+{% endblock %}
+
+{% block footer %}
+    {% include '../footer.html' %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import VeDatSan
+from .models import VeDatSan, TimeSlot
 
 class VeDatSanForm(forms.ModelForm):
     class Meta:

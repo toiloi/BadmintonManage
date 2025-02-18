@@ -3,6 +3,7 @@ from BCourt.models import Court, San
 from BUser.models import User, CourtStaff
 from django.utils.timezone import now
 from django.core.validators import MaxValueValidator, MinValueValidator
+import uuid
 
 # Create your models here.
 class TimeSlot(models.Model):
@@ -24,6 +25,12 @@ class VeDatSan(models.Model):
         ("chuacheckin", "Chưa check-in"),
         ("dacheckin", "Đã check-in"),
     ]
+    TYPE_CHOICES = [
+        ("codinh", "Cố định"),
+        ("theongay", "Theo ngày"),
+        ("linhhoat", "Linh hoạt"),
+    ]
+    maVe=models.AutoField(primary_key=True)
     timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     date = models.DateField()
     customer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'customer'})
@@ -32,7 +39,8 @@ class VeDatSan(models.Model):
     voucher=models.ForeignKey(Voucher, on_delete=models.CASCADE, blank=True, null=True)
     checkin = models.CharField(
         max_length=20, choices=CHECKIN_CHOICES, default="chua_checkin"
-    )  # Trạng thái check-in
+    )
+    type = models.CharField(max_length=8,choices=TYPE_CHOICES, default="codinh")
 
     class Meta:
         unique_together = ('date', 'timeslot')

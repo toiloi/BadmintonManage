@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Đăng Ký Đặt Sân Cầu Lông</title>
+    <link rel="stylesheet" href="booking.css">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
+                </div>
+                <div class="card-body">
+                    <form id="bookingForm" method="POST">
+                        <label for="playDate">Ngày, tháng, năm:</label>
+                        <input type="date" id="playDate" name="playDate" required> 
+                        
+                        <label for="San">Sân:</label>
+                        <select id="fixedDay" name="fixedDay">
+                            <option value="1">Số 1</option>
+                            <option value="2">Số 2</option>
+                            <option value="3">Số 3</option>
+                            <option value="4">Số 4</option>
+                            <option value="5">Số 5</option>
+                        </select> 
+
+                        <label for="time-slot">Time-slot:</label>
+                        <div class = "select-container">
+                            <div class="select-gird">
+                                <div class="select-slot">05:00</div>
+                                <div class="select-slot">06:00</div>
+                                <div class="select-slot">07:00</div>
+                                <div class="select-slot">08:00</div>
+                                <div class="select-slot">09:00</div>
+                                <div class="select-slot">10:00</div>
+                                <div class="select-slot">11:00</div>
+                            </div>
+                        </div>    
+
+                        <div class="button-container">
+                            <a href="flexibleBooking.html" class="btn btn-left">Quay lui</a>
+                            <a href="calendarType.html" class="btn btn-right">Tiến tới</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

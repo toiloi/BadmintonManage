@@ -36,7 +36,7 @@
                             <span class="list-inline-item text-dark">Rating: {{court.rateAvr}} <i class="fa fa-star text-warning"></i></span>
                         </p>
 
-                        <form action="{% url 'datsan' court.maCourt %}" method="GET">
+                        <form action="{% url 'booking' court.maCourt %}" method="GET">
                             <input type="hidden" name="product-title" value="Activewear">
                             <div class="row pb-3">
                                 <div class="col d-grid">
