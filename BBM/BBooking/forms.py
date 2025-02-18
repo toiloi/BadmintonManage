@@ -4,4 +4,4 @@ from .models import VeDatSan, TimeSlot
 class VeDatSanForm(forms.ModelForm):
     class Meta:
         model = VeDatSan
-        fields = ['date', 'timeslot', 'customer', 'tongTien', 'checkin', 'voucher']
+        fields = ['customer', 'tongTien', 'checkin', 'voucher']

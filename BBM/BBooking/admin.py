@@ -1,20 +1,19 @@
 from django.contrib import admin
-from .models import TimeSlot, VeDatSan, CheckIn
-
-# Register your models here.
-# admin.site.register(TimeSlot)
-# admin.site.register(VeDatSan)
-# admin.site.register(HoaDon)
+from .models import TimeSlot, VeDatSan, CheckIn, Flag
 
 class TimeSlotAdmin(admin.ModelAdmin):
-  list_display = ("timeslot", "san")
+  list_display = ("timeslot", "court")
 
 class VeDatSanAdmin(admin.ModelAdmin):
-  list_display = ("date", "timeslot", "checkin")
+  list_display = ("maVe", "checkin")
 
 class CheckInAdmin(admin.ModelAdmin):
   list_display = ("vedatsan", "courtstaff",)
+
+class FlagAdmin(admin.ModelAdmin):
+  list_display = ("timeslot", "date", "san")
   
 admin.site.register(TimeSlot, TimeSlotAdmin)
 admin.site.register(VeDatSan, VeDatSanAdmin)
 admin.site.register(CheckIn, CheckInAdmin)
+admin.site.register(Flag, FlagAdmin)

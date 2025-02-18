@@ -28,9 +28,3 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.first_name} {self.username}"
 
-
-class CourtStaff(User):
-    court1 = models.ForeignKey(Court, on_delete=models.CASCADE,  null=True, blank=True)
-    def __str__(self):
-        return f"{self.first_name} {self.username} {self.court1}"
-

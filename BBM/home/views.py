@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from BUser.models import CourtStaff, User
+from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
 from BCourt.models import Court, Tinh, Quan, Phuong, Duong

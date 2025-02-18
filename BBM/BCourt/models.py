@@ -53,6 +53,7 @@ class Court(models.Model):
     price = models.IntegerField()
     description = models.CharField(default='',max_length=255, null=True, blank= True)
     img = models.ImageField(upload_to="images/", verbose_name="Hình ảnh sân")
+    courtStaff=models.ManyToManyField("BUser.User", limit_choices_to={'role':'courtstaff'}, related_name="staffed_courts")
     rateAvr = models.FloatField(default=0.0)  # Trung bình rating
 
     def update_rating(self):
