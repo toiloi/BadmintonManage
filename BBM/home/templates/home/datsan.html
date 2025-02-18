@@ -46,49 +46,53 @@
                                 <input type="date" id="endDate" name="endDate" required>
                                 <p id="endDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
                                 <br>
-                                
+                                <label for="San">Sân:</label>
+                                <select id="fixedDay" name="fixedDay">
+                                    {% for san in available_san %}
+                                    <option value="{{ san.maSan }}">Sân {{ san.numSan }}</option>
+                                    {% endfor %}
+                                </select> 
                                 <label for="time-slot">Time-slot:</label>
                                 <div class = "select-container">
                                     <div class="select-gird">
-                                        <div class="select-slot">05:00</div>
-                                        <div class="select-slot">06:00</div>
-                                        <div class="select-slot">07:00</div>
-                                        <div class="select-slot">08:00</div>
-                                        <div class="select-slot">09:00</div>
+                                        {% for timeslot in available_timeslots %}
+                                        <option value="{{ timeslot.timeslot }}">{{ timeslot.timeslot }}</option>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                 
                         <!-- Đặt lịch theo ngày -->
-                        <div id="dailyBooking" class="hidden">
-                            <div class="form-group">
-                                <label for="playDate">Ngày, tháng, năm:</label>
-                                <input type="date" id="playDate" name="playDate" required> 
-                                
-                                <label for="San">Sân:</label>
-                                <select id="fixedDay" name="fixedDay">
-                                    <option value="1">Số 1</option>
-                                    <option value="2">Số 2</option>
-                                    <option value="3">Số 3</option>
-                                    <option value="4">Số 4</option>
-                                    <option value="5">Số 5</option>
-                                </select> 
-
-                                <label for="time-slot">Time-slot:</label>
-                                <div class = "select-container">
-                                    <div class="select-gird">
-                                        <div class="select-slot">05:00</div>
-                                        <div class="select-slot">06:00</div>
-                                        <div class="select-slot">07:00</div>
-                                        <div class="select-slot">08:00</div>
-                                        <div class="select-slot">09:00</div>
-                                        <div class="select-slot">10:00</div>
-                                        <div class="select-slot">11:00</div>
-                                    </div>
+                        <form method="GET" action="{% url 'datsan' court.maCourt %}">
+                            {% csrf_token %}
+                            <div id="dailyBooking" class="hidden">
+                                <div class="form-group">
+                                    <label for="playDate">Ngày, tháng, năm:</label>
+                                    <input type="date" id="playDate" name="playDate" required> 
+                                    
+                                    <label for="San">Sân:</label>
+                                    <select id="san" name="san" onchange="this.form.submit()">
+                                        <option value="">-- Chọn sân --</option>
+                                        {% for san in available_san %}
+                                            <option value="{{ san.maSan }}" {% if san.maSan == selected_san_id %}selected{% endif %}>
+                                                Sân {{ san.numSan }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    {% if selected_san_id %}
+                                    <label for="time-slot">Time-slot:</label>
+                                    <select id="time-slot" name="timeslot">
+                                        {% for timeslot in available_timeslots %}
+                                            <option value="{{ timeslot.timeslot }}">{{ timeslot.timeslot }}</option>
+                                        {% empty %}
+                                            <option value="">Không có time-slot khả dụng</option>
+                                        {% endfor %}
+                                    </select>
+                                    {% endif %}
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     
                         <!-- Đặt lịch linh hoạt -->
                         <div id="flexibleBooking" class="hidden">
@@ -111,23 +115,17 @@
                                     
                                     <label for="San">Sân:</label>
                                     <select id="fixedDay" name="fixedDay">
-                                        <option value="1">Số 1</option>
-                                        <option value="2">Số 2</option>
-                                        <option value="3">Số 3</option>
-                                        <option value="4">Số 4</option>
-                                        <option value="5">Số 5</option>
+                                        {% for san in available_san %}
+                                        <option value="{{ san.maSan }}">Sân {{ san.numSan }}</option>
+                                        {% endfor %}
                                     </select> 
 
                                     <label for="time-slot">Time-slot:</label>
                                     <div class = "select-container">
                                         <div class="select-gird">
-                                            <div class="select-slot">05:00</div>
-                                            <div class="select-slot">06:00</div>
-                                            <div class="select-slot">07:00</div>
-                                            <div class="select-slot">08:00</div>
-                                            <div class="select-slot">09:00</div>
-                                            <div class="select-slot">10:00</div>
-                                            <div class="select-slot">11:00</div>
+                                            {% for timeslot in available_timeslots %}
+                                            <option value="{{ timeslot.timeslot }}">{{ timeslot.timeslot }}</option>
+                                            {% endfor %}
                                         </div>
                                     </div>    
                                 </div>

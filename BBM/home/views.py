@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from BUser.models import CourtStaff, User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
@@ -10,6 +10,11 @@ from BCourt.models import Court, Tinh, Quan, Phuong, Duong
 
 def home(request):
     return render(request, 'home/home.html')
+
+def role_required(role):
+    def check_role(user):
+        return user.is_authenticated and user.role == role
+    return user_passes_test(check_role, login_url="login")
 
 def user_register(request):
     if request.method == 'POST':
@@ -44,6 +49,7 @@ def user_logout(request):
     return redirect("home")
 
 @login_required (login_url="login")
+@role_required("customer")
 def role(request):
     user = request.user
     role = getattr(user, "role", None)
@@ -55,9 +61,6 @@ def role(request):
         return render(request, "home/role2.html")  # Đường dẫn cho CourtStaff
     elif role == "courtmanager":
         return render(request, "home/role3.html")  # Đường dẫn cho CourtManager
-    
-def datSan(request):
-    return render(request, "home/datsan.html")
 
 def chiTiet(request, maCourt):
     court = get_object_or_404(Court, maCourt = maCourt)

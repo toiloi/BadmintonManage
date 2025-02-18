@@ -1,18 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UserForm
 
-def CourtStaff(request):
-    return HttpResponse("Hello world!")
-
-def User(request):
-    return HttpResponse("Hello world!")
+def userDetail(request):
+    user=request.user
+    return render(request, "home/userdetail.html", {'user':user})
 
 def ChangeInf(request):
     user = request.user
+    form=UserForm(request.POST, instance=user)
     if request.method == "POST":
-        form=UserForm(request.POST, instance=user)
         if form.is_valid():
-            form.save()    
-    return render(request, "")
-
+            form.save()
+            return redirect('userdetail')    
+    return render(request, "home/useredit.html", {'form':form})

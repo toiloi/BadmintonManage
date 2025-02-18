@@ -29,7 +29,7 @@ class VeDatSan(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'customer'})
     tongTien = models.IntegerField(default=0)
     ngayTao = models.DateTimeField(auto_now_add=True)
-    voucher=models.ForeignKey(Voucher, on_delete=models.CASCADE)
+    voucher=models.ForeignKey(Voucher, on_delete=models.CASCADE, blank=True, null=True)
     checkin = models.CharField(
         max_length=20, choices=CHECKIN_CHOICES, default="chua_checkin"
     )  # Trạng thái check-in
