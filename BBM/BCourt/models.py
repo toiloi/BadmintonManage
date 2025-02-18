@@ -64,5 +64,23 @@ class CourtStaff(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     role = models.CharField(max_length=50)
+    days_worked = models.IntegerField(default=0)
+    salary_per_day = models.DecimalField(max_digits=10, decimal_places=2)
 
+class DailyStat(models.Model):
+    date = models.DateField()
+    revenue = models.DecimalField(max_digits=10, decimal_places=2)
+    bookings = models.IntegerField()
 
+class Transaction(models.Model):
+    STATUS_CHOICES = [
+        ('Đã Thanh Toán', 'Đã Thanh Toán'),
+        ('Chưa Thanh Toán', 'Chưa Thanh Toán'),
+    ]
+
+    transaction_id = models.CharField(max_length=100)
+    customer_name = models.CharField(max_length=100)
+    date = models.DateTimeField()  # Sử dụng DateTimeField để lưu cả ngày và giờ
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Chưa Thanh Toán')
+    # Thêm các trường khác nếu cần

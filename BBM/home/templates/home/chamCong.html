@@ -1,3 +1,4 @@
+{% load humanize %}
 <table class="table">
     <thead>
         <tr>
@@ -9,35 +10,20 @@
         </tr>
     </thead>
     <tbody id="payroll-list">
-        <!-- Dữ liệu sẽ được load từ localStorage -->
+        {% for staff in staff_list %}
+        <tr>
+            <td>{{ staff.name }}</td>
+            <td>{{ staff.email }}</td>
+            <td>{{ staff.days_worked }}</td>
+            <td>{{ staff.total_salary|intcomma }} VNĐ</td>
+            <td>
+                <form method="post" action="{% url 'chamCong' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="staff_id" value="{{ staff.id }}">
+                    <button type="submit" class="btn btn-primary">Chấm Công</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
-<script>
-function loadPayroll() {
-    let staffList = JSON.parse(localStorage.getItem("staffList")) || [];
-    let table = document.getElementById("payroll-list");
-    table.innerHTML = "";
-
-    staffList.forEach((staff, index) => {
-        let row = table.insertRow();
-        row.innerHTML = `
-            <td>${staff.name}</td>
-            <td>${staff.email}</td>
-            <td><input type="number" id="days-${index}" value="${staff.days || 0}" min="0"></td>
-            <td>${(staff.days || 0) * staff.salaryPerDay} VNĐ</td>
-            <td>
-                <button class="btn btn-primary" onclick="updatePayroll(${index})">Lưu</button>
-            </td>
-        `;
-    });
-}
-
-function updatePayroll(index) {
-    let staffList = JSON.parse(localStorage.getItem("staffList")) || [];
-    let daysWorked = document.getElementById(`days-${index}`).value;
-    
-    staffList[index].days = daysWorked;
-    localStorage.setItem("staffList", JSON.stringify(staffList));
-    loadPayroll();
-}
-</script>

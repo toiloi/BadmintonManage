@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from BCourt.models import Court,CourtStaff
+from BCourt.models import Court,CourtStaff,DailyStat,Transaction
 from BUser.models import  User
 from django.contrib.auth.forms import UserCreationForm
-from .models import RegisterForm, Transaction, staffRequest, DailyStat
+from .models import RegisterForm
 
 def home(request):
     return render(request, 'home/home.html')
@@ -72,21 +72,28 @@ def staffList(request):
     return render(request, "home/staffList.html", {"staff_list": staff_list})
 
 def ChamCong(request):
+    if request.method == 'POST':
+        staff_id = request.POST.get('staff_id')
+        staff = CourtStaff.objects.get(id=staff_id)
+        staff.days_worked += 1
+        staff.save()
+        return redirect('chamCong')
+
     staff_list = CourtStaff.objects.all()
     for staff in staff_list:
         staff.total_salary = staff.days_worked * staff.salary_per_day
     return render(request, "home/chamCong.html", {"staff_list": staff_list})
 
 def payment(request):
-    return render(request, "home/payment.html")
+    transactions = Transaction.objects.all()
+    return render(request, "home/payment.html",{'transactions':transactions})
 
 def Revenue(request):
     daily_stats = DailyStat.objects.all()
     total_revenue = sum(stat.revenue for stat in daily_stats)
     total_bookings = sum(stat.bookings for stat in daily_stats)
-    return render(request, "home/Revenue.html", 
-        {"daily_stats": daily_stats,
-         "total_revenue": total_revenue, 
-         "total_bookings": total_bookings
-         })
-
+    return render(request, "home/Revenue.html", {
+        "daily_stats": daily_stats,
+        "total_revenue": total_revenue,
+        "total_bookings": total_bookings
+    })

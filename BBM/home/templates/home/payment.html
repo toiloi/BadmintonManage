@@ -26,7 +26,7 @@
             <tr>
                 <td>{{ txn.transaction_id }}</td>
                 <td>{{ txn.customer_name }}</td>
-                <td>{{ txn.date }}</td>
+                <td>{{ txn.date|date:"d/m/Y H:i:s" }}</td>  <!-- Định dạng ngày và giờ -->
                 <td>{{ txn.amount|intcomma }} VNĐ</td>
                 <td class="{% if txn.status == 'Đã Thanh Toán' %}text-success{% else %}text-danger{% endif %}">
                     {% if txn.status == 'Đã Thanh Toán' %}
