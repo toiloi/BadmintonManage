@@ -4,32 +4,21 @@
             <th>Tên</th>
             <th>Email</th>
             <th>Số Điện Thoại</th>
-            <th>Vị Trí</th>
-            <th>Hành Động</th>
+            <th>Chức vụ</th>
         </tr>
     </thead>
     <tbody id="staff-list">
-        <!-- Dữ liệu sẽ được load từ localStorage -->
+        {% for staff in staff_list %}
+        <tr>
+            <td>{{ staff.name }}</td>
+            <td>{{ staff.email }}</td>
+            <td>{{ staff.phone }}</td>
+            <td>{{ staff.role }}</td>
+            <td>
+                <button class="btn btn-warning" onclick="editStaff({{ staff.id }})">Sửa</button>
+                <button class="btn btn-danger" onclick="removeStaff({{ staff.id }})">Xóa</button>
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
-<script>
-function loadStaffList() {
-    let staffList = JSON.parse(localStorage.getItem("staffList")) || [];
-    let table = document.getElementById("staff-list");
-    table.innerHTML = "";
-
-    staffList.forEach((staff, index) => {
-        let row = table.insertRow();
-        row.innerHTML = `
-            <td>${staff.name}</td>
-            <td>${staff.email}</td>
-            <td>${staff.phone}</td>
-            <td>${staff.role}</td>
-            <td>
-                <button class="btn btn-warning" onclick="editStaff(${index})">Sửa</button>
-                <button class="btn btn-danger" onclick="removeStaff(${index})">Xóa</button>
-            </td>
-        `;
-    });
-}
-</script>

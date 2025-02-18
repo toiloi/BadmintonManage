@@ -9,27 +9,17 @@
         </tr>
     </thead>
     <tbody id="staff-requests">
-        <!-- Dữ liệu sẽ được load từ localStorage -->
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.name }}</td>
+            <td>{{ request.email }}</td>
+            <td>{{ request.phone }}</td>
+            <td>{{ request.date }}</td>
+            <td>
+                <button class="btn btn-success" onclick="approveStaff({{ request.id }})">Duyệt</button>
+                <button class="btn btn-danger" onclick="rejectStaff({{ request.id }})">Từ Chối</button>
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
-<script>
-function loadStaffRequests() {
-    let requests = JSON.parse(localStorage.getItem("staffRequests")) || [];
-    let table = document.getElementById("staff-requests");
-    table.innerHTML = "";
-
-    requests.forEach((staff, index) => {
-        let row = table.insertRow();
-        row.innerHTML = `
-            <td>${staff.name}</td>
-            <td>${staff.email}</td>
-            <td>${staff.phone}</td>
-            <td>${staff.date}</td>
-            <td>
-                <button class="btn btn-success" onclick="approveStaff(${index})">Duyệt</button>
-                <button class="btn btn-danger" onclick="rejectStaff(${index})">Từ Chối</button>
-            </td>
-        `;
-    });
-}
-</script>

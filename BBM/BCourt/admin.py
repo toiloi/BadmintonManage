@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Court, San, Sonha, Duong, Phuong, Quan, Tinh
+from .models import Court, San, Sonha, Duong, Phuong, Quan, Tinh, CourtStaff
 
 # Register your models here.
 
@@ -24,6 +24,10 @@ class QuanAd(admin.ModelAdmin):
 class TinhAd(admin.ModelAdmin):
   list_display = ("name",)
 
+class CourtStaffAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'role')
+    search_fields = ('name', 'email', 'phone', 'role')
+
 admin.site.register(Court, CourtAd)
 admin.site.register(San, SanAd)
 admin.site.register(Sonha, SonhaAd)
@@ -31,3 +35,4 @@ admin.site.register(Duong, DuongAd)
 admin.site.register(Phuong, PhuongAd)
 admin.site.register(Quan, QuanAd)
 admin.site.register(Tinh, TinhAd)
+admin.site.register(CourtStaff)

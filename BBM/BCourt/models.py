@@ -59,6 +59,10 @@ class San(models.Model):
     def __str__(self):
         return f"{self.maSan} {self.tinhTrang}"
 
-
+class CourtStaff(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    role = models.CharField(max_length=50)
 
 
