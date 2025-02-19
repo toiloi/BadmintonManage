@@ -58,3 +58,10 @@ def role(request):
 def datSan(request):
     return render(request, "home/datsan.html")
 
+def Confirm(request):
+    return render(request,"home/confirm.html")
+def Vip(request):
+    return render(request,"home/vip.html")
+def Voucher(request):
+    return render(request,"home/voucher.html")
+

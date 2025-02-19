@@ -1,0 +1,109 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a8ff78, #78ffd6);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Container chính */
+.container {
+    display: flex;
+    width: 900px;
+    height: 700px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Khu vực form */
+.form-section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: white;
+}
+
+/* Khu vực ảnh */
+.image-section {
+    display: flex;
+    justify-content: center; /* Căn giữa ngang */
+    align-items: center; /* Căn giữa dọc */
+    height: 100vh; /* Chiều cao 100% màn hình */
+}
+
+/* Nhóm form */
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* Nút bấm */
+.button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #a8ff78, #00c896);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #78ffd6, #00a67d);
+}
+
+/* Ẩn phần tử */
+.hidden {
+    display: none;
+}
+
+/* Thông báo lỗi */
+.error-message {
+    background: #ffdddd;
+    color: #d8000c;
+    padding: 10px;
+    border-left: 5px solid #d8000c;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+/* Chuyển đổi trang đăng nhập */
+.switch-text {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.switch-text a {
+    color: #00a67d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-text a:hover {
+    text-decoration: underline;
+}

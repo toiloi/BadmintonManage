@@ -1,0 +1,42 @@
+{% extends "master_page.html" %}
+{% load static %}
+
+{%block header%}
+    {%include '../header.html' %}
+{%endblock%}
+
+{%block search%}
+    {%include '../search.html' %}
+{%endblock%}
+
+{%block navbar%}
+    {%include '../navbar.html' %}
+{%endblock%}
+
+{%block content%}
+<div class="row g-4">
+    {%for court in lc%}
+        <div class="col-lg-4 col-md-6 wow fadeInUp">
+            <div class="property-court rounded overflow-hidden">
+                <div class="position-relative overflow-hidden">
+                    <a href="{% url 'detail' court.maCourt %}"><img class="img-fluid" style="height: 450px;" src="{{court.img.url}}" alt=""></a>
+                </div>
+                <div class="p-4 pb-0">
+                    <h5 class="text-primary mb-3">{{court.price}}đ/h</h5>
+                    <a class="d-block h5 mb-2" href="{% url 'detail' court.maCourt %}">{{court.name}}</a>
+                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{court.address}}</p>
+                </div>
+                <div class="d-flex border-top">
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
+                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
+{%endblock%}
+
+{%block footer%}
+    {%include '../footer.html' %}
+{%endblock%}

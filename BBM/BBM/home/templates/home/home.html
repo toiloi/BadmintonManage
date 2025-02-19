@@ -1,0 +1,157 @@
+{% extends "master_page.html" %}
+
+{%block navbar%}
+    {%include '../navbar.html' %}
+{%endblock%}
+
+{%block header%}
+    {%include '../header.html' %}
+{%endblock%}
+
+{%block content%}
+{%load static%}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">CHỨC NĂNG CHÍNH CỦA BBM</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                    <div class="rounded p-4">
+                        <div class="icon mb-3">
+                            <img class="img-fluid" src="{% static 'home/img/icon-chinhsach.png' %}" alt="Icon" style="width: 50px; height: auto;">
+                        </div>
+                        <h6>Chính sách huỷ dời minh bạch</h6>
+                        <span>Cung cấp chính sách hủy hoặc
+                            dời lịch rõ ràng và linh hoạt.
+                            Hệ thống tự động thông báo
+                            trạng thái đặt chỗ và cập nhật
+                            thay đổi nhanh chóng.</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                    <div class="rounded p-4">
+                        <div class="icon mb-3">
+                            <img class="img-fluid" src="{% static 'home/img/icon-datlich.png' %}" alt="Icon" style="width: 50px; height: auto;">
+                        </div>
+                        <h6>Đặt lịch linh hoạt, dễ dàng</h6>
+                        <span>Bạn có thể đặt lịch chơi phù hợp tuỳ theo nhu cầu của bạn. Toàn bộ quy trình
+                            chỉ mất vài phút và đảm bảo giữ
+                            chỗ cho bạn một cách nhanh chóng.</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                    <div class="rounded p-4">
+                        <div class="icon mb-3">
+                            <img class="img-fluid" src="{% static 'home/img/icon-timkiem.png' %}" alt="Icon" style="width: 50px; height: auto;">
+                        </div>
+                        <h6>Tìm kiếm sân dễ dàng</h6>
+                        <span>Chỉ cần nhập vị trí sân, chúng tôi sẽ
+                            gợi ý các sân phù hợp nhất với
+                            giờ hoạt động và giá cả minh
+                            bạch. Bạn có thể xem hình ảnh,
+                            cơ sở vật chất, và đánh giá từ
+                            người chơi trước.</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                    <div class="rounded p-4">
+                        <div class="icon mb-3">
+                            <img class="img-fluid" src="{% static 'home/img/icon-thongke.png' %}" alt="Icon" style="width: 50px; height: auto;">
+                        </div>
+                        <h6>Thống kê doanh thu</h6>
+                        <span>Dành riêng cho chủ sân, tính
+                            năng thống kê doanh thu chi
+                            tiết giúp bạn theo dõi tình
+                            hình kinh doanh hàng ngày,
+                            hàng tuần, hoặc hàng tháng
+                            một cách dễ dàng.</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{%load static%}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{%static 'home/img/sancaulong.jpg' %}">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="mb-4">GIỚI THIỆU VỀ CHÚNG TÔI</h1>
+                <p class="mb-4">Badminton Booking Master tự hào là một trong những nền tảng đặt sân cầu lông trực tuyến tốt nhất
+                    tại Việt Nam. Chúng tôi không ngừng cải tiến để mang lại trải nghiệm tốt nhất dành cho người chơi, từ
+                    việc đặt sân dễ dàng, chính sách minh bạch, đến dịch vụ chăm sóc khách hàng tận tâm. </p>
+                <p><i class="fa fa-check text-primary me-3"></i>Phục vụ hàng chục khách hàng với sự tin tưởng cao. </p>
+                <p><i class="fa fa-check text-primary me-3"></i>Cam kết mang đến sự hài lòng tuyệt đối.</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Kết nối cộng đồng người chơi rộng khắp.</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Không ngừng nâng cao chất lượng với nhiều năm kinh nghiệm.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{%load static%}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">TẠI SAO BẠN NÊN CHỌN CHÚNG TÔI</h1>
+            <p>Badminton Booking Master được thành lập để giúp những người đam mê cầu lông dễ dàng tìm và đặt sân phù hợp.
+                Chúng tôi cung cấp hệ thống đặt lịch thông minh, chính sách giá minh bạch, và dịch vụ hỗ trợ khách hàng tận tâm.</p>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="testimonial-item bg-light rounded p-3">
+                <div class="bg-white border rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="ps-3">
+                            <h5 class="fw-bold mb-1">UY TÍN</h5>
+                        </div>
+                    </div>
+                    <p>Chúng tôi cam kết bảo mật tuyệt đối thông tin của khách hàng và giao
+                        dịch trực tuyến. Đã hơn 500 sân cầu lông trên toàn quốc hợp tác cùng
+                        với chúng tôi và chúng tôi đảm bảo rằng bạn sẽ nhận được sự phục vụ
+                        tốt nhất tại đây.</p>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3">
+                <div class="bg-white border rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="ps-3">
+                            <h5 class="fw-bold mb-1">TIỆN LỢI</h5>
+                        </div>
+                    </div>
+                    <p>Với khả năng tối ưu hóa lịch đặt và gợi ý sân bằng công nghệ AI, bạn
+                        sẽ quản lý lịch một cách dễ dàng và tìm kiếm sân nhanh chóng. Đối
+                        với chủ sân, bạn sẽ có thêm tính năng quản lý doanh thu theo hàng
+                        tháng giúp bạn dễ dàng quản lý doanh thu của sân</p>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3">
+                <div class="bg-white border rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="ps-3">
+                            <h5 class="fw-bold mb-1">CHUYÊN NGHIỆP</h5>
+                        </div>
+                    </div>
+                    <p>Chúng tôi có đội ngũ hỗ trợ luôn sẵn sàng giải đáp mọi thắc mắc của
+                        bạn 24/24.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block footer%}
+    {%include '../footer.html' %}
+{%endblock%}

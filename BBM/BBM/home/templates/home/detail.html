@@ -1,0 +1,54 @@
+{% extends "master_page.html" %}
+{% load static %}
+
+{%block navbar%}
+    {%include '../navbar.html' %}
+{%endblock%}
+
+{%block footer%}
+    {%include '../footer.html' %}
+{%endblock%}
+
+{%block content%}
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    <img class="card-img img-fluid" src="{{court.img.url}}" alt="Card image cap" id="product-detail">
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">{{court.name}}</h1>
+                        <p class="h3 py-2">{{court.price}}đ/h</p>
+                        <div class="py-2 pb-0">
+                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{court.address}}</p>
+                        </div>
+
+                        <p><strong style="color: #0e2e50;">Sân:</strong> 5 sân</p>
+                        <h6>Description:</h6>
+                        <p>{{court.decription}}</p>
+
+                        <p class="py-2">
+                            <span class="list-inline-item text-dark">Rating: 4.8 <i class="fa fa-star text-warning"></i></span>
+                        </p>
+
+                        <form action="" method="GET">
+                            <input type="hidden" name="product-title" value="Activewear">
+                            <div class="row pb-3">
+                                <div class="col d-grid">
+                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Đặt sân</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}
