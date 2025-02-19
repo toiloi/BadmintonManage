@@ -21,10 +21,11 @@
                 </div>
                 <div class="card-body">
                     <form id="bookingForm" method="POST">
+                        {% csrf_token %}
                         <div class="d-grid gap-3">
-                            <a href="FixedBooking.html"><button type="button" class="btn btn-custom">Đặt lịch cố định</button></a>
-                            <a href="{%url 'dateBooking' court.maCourt %}"><button type="button" class="btn btn-custom">Đặt lịch theo ngày</button></a>
-                            <a href="FlexibleBooking.html"><button type="button" class="btn btn-custom">Đặt lịch linh hoạt</button></a>
+                            <button type="submit" name="type" value="codinh" class="btn btn-custom">Đặt lịch cố định</button>
+                            <button type="submit" name="type" value="theongay" class="btn btn-custom">Đặt lịch theo ngày</button>
+                            <button type="submit" name="type" value="linhhoat" class="btn btn-custom">Đặt lịch linh hoạt</button>
                         </div>
                     </form>
                 </div>

@@ -20,18 +20,19 @@
             </div>
             <div class="card-body">
                 <form id="bookingForm" method="POST">
+                    {%csrf_token%}
                     <div class="form-group">
                     
                         <div class="form-group">
                             <label>Mã giảm giá</label>
-                            <input type="text" placeholder="Nhập mã giảm giá">
+                            <input type="text" placeholder="Nhập mã giảm giá" name="voucher">
                         </div>
 
                     </div>
 
                     <div class="button-container">
-                        <a href="booking.html"><button type="button" class="a.btn-left">Quay về</button></a>
-                        <a href="Tongtien.html"><button type="button" class="a.btn-right">Tiếp theo</button></a>
+                        <a href="{%url 'dateBooking' maCourt tp%}"><button type="button" class="a.btn-left">Quay về</button></a>
+                        <button type="submit" class="a.btn-right">Tiếp theo</button>
                     </div>
 
                 </form>
