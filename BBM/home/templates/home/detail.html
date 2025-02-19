@@ -1,3 +1,4 @@
+
 {% extends "master_page.html" %}
 {% load static %}
 
@@ -43,6 +44,24 @@
                                     <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Đặt sân</button>
                                 </div>
                             </div>
+                        </form>
+
+                        <!-- Form đánh giá -->
+                        <hr>
+                        <h5>Đánh giá sân</h5>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Chọn số sao:</label>
+                                <select name="rating" id="rating" class="form-select" required>
+                                    <option value="5">5 Sao</option>
+                                    <option value="4">4 Sao</option>
+                                    <option value="3">3 Sao</option>
+                                    <option value="2">2 Sao</option>
+                                    <option value="1">1 Sao</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
                         </form>
                     </div>
                 </div>

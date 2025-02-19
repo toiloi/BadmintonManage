@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Đăng Ký Đặt Sân Cầu Lông</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="{% static 'home/css/booking.css' %}">
     <style>    
     </style>
 </head>
@@ -18,38 +19,34 @@
                 <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
             </div>
             <div class="card-body">
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <form id="bookingForm" method="POST">
-                    <div class="form-group">
-                        <label for="San">Sân:</label>
-                        <select id="fixedDay" name="fixedDay">
-                            <option value="1">Số 1</option>
-                            <option value="2">Số 2</option>
-                            <option value="3">Số 3</option>
-                            <option value="4">Số 4</option>
-                            <option value="5">Số 5</option>
-                        </select> 
+                    {% csrf_token %}
+                    <!-- Chọn sân -->
+                    <label for="san">Sân:</label>
+                    {{form.san}}
+                    <!-- Chọn khung giờ -->
+                    <label for="time-slot">Time-slot:</label>
+                    {{form.timeslot}}
+                    <label for="starDate">Ngày bắt đầu:</label>
+                    <input type="date" id="starDate" name="{{ form.date.name }}" required>
+                    <p id="startDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
 
-                        <label for="time-slot">Time-slot:</label>
-                        <select id="fixedDay" name="fixedDay">
-                            <option value="1">05:00</option>
-                            <option value="2">06:00</option>
-                            <option value="3">07:00</option>
-                            <option value="4">08:00</option>
-                            <option value="5">09:00</option>
-                        </select> 
-                        <label for="starDate">Ngày bắt đầu:</label>
-                        <input type="date" id="starDate" name="starDate" required>
-                        <p id="startDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
-
-                        <label for="endDate">Ngày kết thúc:</label>
-                        <input type="date" id="endDate" name="endDate" required>
-                        <p id="endDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
-                         
-                    </div>
+                    <label for="endDate">Ngày kết thúc:</label>
+                    <input type="date" id="endDate" name="endDate" required>
+                    <p id="endDateDisplay"></p> <!-- Hiển thị thứ + ngày/tháng/năm -->
 
                     <div class="button-container">
-                        <a href="booking.html"><button type="button" class="a.btn-left">Quay về</button></a>
-                        <a href="InputDiscount.html"><button type="button" class="a.btn-right">Tiếp theo</button></a>
+                        <a href="{%url 'booking' court.maCourt%}"><button type="button" class="a.btn-left">Quay về</button></a>
+                        <button type="submit" class="a.btn-right">Tiếp theo</button>
                     </div>
 
                 </form>
@@ -58,6 +55,6 @@
     </div>
 </div>
 
-<script src="booking.js"></script>
+<script src="{% static 'home/js/booking.js' %}"></script>
 
 

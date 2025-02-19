@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
-from BCourt.models import Court, San
+from BCourt.models import Court, San, Rating
 from BBooking.models import VeDatSan
+from django.urls import reverse
 
 
 def home(request):
@@ -50,7 +51,7 @@ def user_logout(request):
     return redirect("home")
 
 @login_required (login_url="login")
-@role_required("customer")
+# @role_required(["customer", "courtmanager", "courtstaff"])
 def role(request):
     user = request.user
     role = getattr(user, "role", None)
@@ -74,6 +75,22 @@ def deleteHistory(request, maVe):
 def chiTiet(request, maCourt):
     court = get_object_or_404(Court, maCourt = maCourt)
     san=San.objects.filter(court=court).count()
+    if request.method == "POST":
+        user=request.user
+        rate=request.POST.get("rating")
+        check=Rating.objects.filter(customer=user,court=court).exists()
+        if check:
+            r=get_object_or_404(Rating,customer=user,court=court)
+            r.rate=rate
+            r.save()
+        else:
+            r=Rating.objects.create(
+                customer=user,
+                rate=rate,
+                court=court
+            )
+        url = reverse("detail", kwargs={"maCourt": maCourt})
+        return redirect(url)
     return render(request, "home/detail.html", {"court":court, "san":san})
 
 def search(request):
