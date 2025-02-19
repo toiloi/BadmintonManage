@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
-from BCourt.models import Court, Tinh, Quan, Phuong, Duong
+from BCourt.models import Court
 from BBooking.models import VeDatSan
 
 
@@ -99,16 +99,16 @@ def courtFilter(request):
 
     # Lọc theo địa chỉ
     if selected_tinh:
-        courts = courts.filter(address__name__icontains=selected_tinh)
+        courts = courts.filter(address__tinh__icontains=selected_tinh)
 
     if selected_quan:
-        courts = courts.filter(address__quan__name__icontains=selected_quan)
+        courts = courts.filter(address__quan__icontains=selected_quan)
 
     if selected_phuong:
-        courts = courts.filter(address__quan__phuong__name__icontains=selected_phuong)
+        courts = courts.filter(address__phuong__icontains=selected_phuong)
 
     if selected_duong:
-        courts = courts.filter(address__quan__phuong__duong__name__icontains=selected_duong)
+        courts = courts.filter(address__duong__icontains=selected_duong)
 
     context = {
         "courts": courts,
