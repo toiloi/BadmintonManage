@@ -169,24 +169,28 @@ def themLich(request, maCourt, tp):
     timeslots = TimeSlot.objects.filter(court=court)
     sans=San.objects.filter(court=court)
     if request.method == "POST":
-        form = FlagForm(request.POST)
-        if form.is_valid():
-            form.save()
-            ts = form.cleaned_data.get("timeslot")
-            d = form.cleaned_data.get("date")
-            san = form.cleaned_data.get("san")
-            flag=get_object_or_404(Flag, timeslot=ts, date=d, san=san)
-            ve=VeDatSan.objects.create(
-            type=tp,
-            flag=flag,
-            customer=request.user
-            )
-            url = reverse("successBooking", kwargs={"maCourt": maCourt})
-            time.time-=1
-            time.save()
-            return redirect(url)
+        if time.time==0:
+            form = FlagForm()
+            messages.error(request, "Bạn đã hết giờ!")
         else:
-            messages.error(request, "Thời gian này sân đã được đặt trước đó!")
+            form = FlagForm(request.POST)
+            if form.is_valid():
+                form.save()
+                ts = form.cleaned_data.get("timeslot")
+                d = form.cleaned_data.get("date")
+                san = form.cleaned_data.get("san")
+                flag=get_object_or_404(Flag, timeslot=ts, date=d, san=san)
+                ve=VeDatSan.objects.create(
+                type=tp,
+                flag=flag,
+                customer=request.user
+                )
+                url = reverse("successBooking", kwargs={"maCourt": maCourt})
+                time.time-=1
+                time.save()
+                return redirect(url)
+            else:
+                messages.error(request, "Thời gian này sân đã được đặt trước đó!")
     else:
         form = FlagForm()
     return render(request, "home/CalendarType.html", {"maCourt":maCourt, "form": form, "tp":tp, "timeslots": timeslots, 'court':court, 'sans':sans, 'time':time})

@@ -17,6 +17,15 @@
                 <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
             </div>
             <div class="card-body">
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <form id="bookingForm" method="POST">
                     {% csrf_token %}
                     <label for="time">Số giờ còn lại: {{time.time}}</label>
