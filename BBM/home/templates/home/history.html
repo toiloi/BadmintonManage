@@ -32,18 +32,20 @@
                     {% endif %}
                 </p>
                 <p><strong>Trạng thái: </strong>
-                    {% if ve.checkin == 'da_checkin' %}
+                    {% if ve.checkin == 'dacheckin' %}
                         Đã check-in
                     {% elif ve.checkin == 'chua_checkin' %}
                         Chưa check-in
                     {% endif %}
                 </p>
+                {% if ve.checkin == 'chua_checkin' %}
                 <div class="text-center">
                     <!-- Nút Huỷ vé -->
                     <a href="{% url 'deleteHis' ve.maVe %}">
                         <button class="btn btn-primary py-2 px-4 animated fadeIn" data-bs-toggle="modal" data-bs-target="#cancelModal">Huỷ vé</button>
                     </a>
                 </div>  
+                {% endif %}
             </div>
         </div>
     </div>
