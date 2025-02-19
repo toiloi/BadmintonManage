@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
-from BCourt.models import Court
+from BCourt.models import Court, San
 from BBooking.models import VeDatSan
 
 
@@ -68,12 +68,13 @@ def history(request):
     lb = VeDatSan.objects.filter(customer=user)
     return render(request, 'home/history.html', {"lb":lb})
 
-def deleteHistory(request, ve):
-    return render(request, 'home/deleteHistory', {"ve":ve})
+def deleteHistory(request, maVe):
+    return render(request, 'home/deleteHistory.html', {"maVe":maVe})
 
 def chiTiet(request, maCourt):
     court = get_object_or_404(Court, maCourt = maCourt)
-    return render(request, "home/detail.html", {"court":court})
+    san=San.objects.filter(court=court).count()
+    return render(request, "home/detail.html", {"court":court, "san":san})
 
 def search(request):
     query = request.GET.get('q')  

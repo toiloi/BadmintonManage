@@ -12,15 +12,15 @@
     <div class="col-lg-4 col-md-6 wow fadeInUp">
         <div class="property-court rounded overflow-hidden" style="max-width: 350px; margin: 50px;">
             <div class="position-relative overflow-hidden">
-                <img class="img-fluid" style="height: 350px;" src="{{ve.timeslot.san.court.img.url}}" alt="">
+                <img class="img-fluid" style="height: 350px;" src="{{ve.flag.timeslot.court.img.url}}" alt="">
             </div>
             <div class="p-2 pb-0">
                 <h5 class="text-primary mb-2">{{ve.tongTien}}đ</h5>
-                <div class="d-block h5 mb-1">{{ve.timeslot.san.court.nameCourt}}</div>
-                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ve.timeslot.san.court.address}}</p>
-                <p><strong>Sân: </strong>{{ve.timeslot.san.numSan}}</p>
-                <p><strong>Time-slot: </strong>{{ve.timeslot}}</p>
-                <p><strong>Ngày chơi: </strong>{{ve.date}}</p>
+                <div class="d-block h5 mb-1">{{ve.flag.timeslot.court.name}}</div>
+                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ve.flag.timeslot.court.address}}</p>
+                <p><strong>Sân: </strong>{{ve.flag.san.numSan}}</p>
+                <p><strong>Time-slot: </strong>{{ve.flag.timeslot.timeslot}}</p>
+                <p><strong>Ngày chơi: </strong>{{ve.flag.date}}</p>
                 <p><strong>Ngày đặt lịch: </strong>{{ve.ngayTao}}</p>
                 <p><strong>Loại: </strong>
                     {% if ve.type == 'codinh' %}
@@ -40,7 +40,7 @@
                 </p>
                 <div class="text-center">
                     <!-- Nút Huỷ vé -->
-                    <a href="{% url 'deleteHis' ve %}">
+                    <a href="{% url 'deleteHis' ve.maVe %}">
                         <button class="btn btn-primary py-2 px-4 animated fadeIn" data-bs-toggle="modal" data-bs-target="#cancelModal">Huỷ vé</button>
                     </a>
                 </div>  
