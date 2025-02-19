@@ -32,18 +32,21 @@ def dateBooking(request, maCourt):
     if request.method == "POST":
         form = FlagForm(request.POST)
         if form.is_valid():
-            form.save()
+            # form.save()
             ts = form.cleaned_data.get("timeslot")
             d = form.cleaned_data.get("date")
             s = form.cleaned_data.get("san")
-            flag=Flag.objects.filter(san=s,timeslot=ts,date=d).first()
-            url = reverse("tongtien", kwargs={"maCourt": maCourt, "flagid":flag.id})
+            # flag=Flag.objects.filter(san=s,timeslot=ts,date=d).first()
+            url = reverse("voucher", kwargs={"maCourt": maCourt, "ts":ts, "d":d, "s":s})
             return redirect(url)
         else:
             messages.error(request, "Thời gian này sân đã được đặt trước đó!")
     else:
         form = FlagForm()
     return render(request, 'home/dateBooking.html', {"form": form, "timeslots": timeslots, 'court':court, 'sans':sans})
+
+def voucher(request, maCourt, ts, d, s):
+    return render(request, "home/InputDiscount.html", {"maCourt":maCourt, "ts":ts, "d":d, "s":s})
 
 def tongTien(request, maCourt, flagid):
     return render(request, "home/Tongtien.html", {"maCourt":maCourt, "flagid":flagid})

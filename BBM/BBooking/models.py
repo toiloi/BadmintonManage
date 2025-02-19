@@ -25,6 +25,8 @@ class Voucher(models.Model):
     percent=models.IntegerField(default=5,
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
+    def __str__(self):
+        return f"{self.voucher} {self.court.maCourt} - {self.percent}"
 
 class VeDatSan(models.Model):
     CHECKIN_CHOICES = [
@@ -62,3 +64,4 @@ class CheckIn(models.Model):
 
     def __str__(self):
         return f"Check-in: {self.vedatsan} bởi {self.courtstaff.username} lúc {self.timeCheckin}"
+    
