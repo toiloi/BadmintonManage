@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Court, VeDatSan, San, TimeSlot, Flag, Voucher
+from .models import Court, VeDatSan, San, TimeSlot, Flag, Voucher, flexTime
 from .forms import VeDatSanForm, FlagForm
 from django.contrib import messages
 from django.urls import reverse
@@ -12,13 +12,11 @@ def booking(request, maCourt):
         tp=request.POST.get("type")
         if tp=="codinh":
             url=reverse('fixedBooking', kwargs={'maCourt':maCourt, 'tp':tp})
-            return redirect(url)
         elif tp=="theongay":
             url=reverse('dateBooking' , kwargs={'maCourt':maCourt, 'tp':tp})
-            return redirect(url)
         else:
-            url=reverse('flexBookinf')
-            return redirect(url)
+            url=reverse('flexBooking' ,kwargs={'maCourt':maCourt, 'tp':tp})
+        return redirect(url)
     return render(request, "home/booking.html")
 
 def fixedBooking(request, maCourt, tp):
@@ -42,8 +40,9 @@ def fixedBooking(request, maCourt, tp):
         form = FlagForm()
     return render(request, "home/FixedBooking.html", {"form": form, "timeslots": timeslots, 'court':court, 'sans':sans})
 
-def flexBooking(request, maCourt):
-    return render(request, "home/FlexBooking.html")
+def flexBooking(request, maCourt, tp):
+    court = get_object_or_404(Court, maCourt=maCourt)
+    return render(request, "home/FlexibleBooking.html", {'court':court, 'tp':tp})
 
 def dateBooking(request, maCourt, tp):
     court = get_object_or_404(Court, maCourt=maCourt)
@@ -77,8 +76,6 @@ def voucher(request, maCourt, tp, ts, d, s):
                 tien = gia_san
             elif tp=="codinh":
                 tien =gia_san*4
-            else:
-                tien=gia_san
             if v:
                 tien -= (tien * v.percent / 100)
             tien=int(tien)
@@ -99,6 +96,7 @@ def TongTien(request, maCourt, tp, ts, d, s, tien):
             date=d
         )
         ve=VeDatSan.objects.create(
+            type=tp,
             flag=flag,
             customer=request.user,
             tongTien=tien,
@@ -111,9 +109,84 @@ def TongTien(request, maCourt, tp, ts, d, s, tien):
                     timeslot=ts,
                     date=d
                 )
+                ve=VeDatSan.objects.create(
+                type=tp,
+                flag=flag,
+                customer=request.user,
+                tongTien=tien,
+        )
         url = reverse("successBooking", kwargs={"maCourt": maCourt})
         return redirect(url)
     return render(request, "home/Tongtien.html", {"maCourt":maCourt, "tp":tp, "ts":ts, "d":d, "s":s, "tien":tien})
 
 def successBooking(request, maCourt):
     return render(request, "home/booking-success.html", {"maCourt":maCourt})
+
+def themGio(request, maCourt, tp):
+    if request.method == "POST":
+        time = request.POST.get("time")
+        url = reverse("voucher1", kwargs={"maCourt": maCourt, "tp":tp, "time":time})
+        return redirect(url)
+    return render(request, "home/HourType.html", {"maCourt":maCourt, "tp":tp})
+
+def voucher1(request, maCourt, tp, time):
+    court = get_object_or_404(Court, maCourt=maCourt)
+    if request.method == "POST":
+            voucher_id = request.POST.get("voucher", None)
+            v = Voucher.objects.filter(voucher=voucher_id, court=court).first() if voucher_id else None
+            gia_san = court.price
+            tien=gia_san*time
+            if v:
+                tien -= (tien * v.percent / 100)
+            tien=int(tien)
+            url = reverse("tongtien1", kwargs={"maCourt": maCourt, "tp":tp, "time":time, "tien":tien})
+            return redirect(url)
+    return render(request, "home/InputDiscount.html", {"maCourt":maCourt, "tp":tp, "time":time})
+
+def TongTien1(request, maCourt, tp, time, tien):
+    if request.method == "POST":
+        court=get_object_or_404(Court,maCourt=maCourt)
+        user=request.user
+        check=flexTime.objects.filter(court=court, customer=user).exists()
+        if check:
+            ft=get_object_or_404(flexTime, court=court, customer=user)
+            ft.time+=time
+            ft.save()
+        else:
+            ft=flexTime.objects.create(
+                court=court,
+                customer=user,
+                time=time
+            )
+        url = reverse("successBooking", kwargs={"maCourt": maCourt})
+        return redirect(url)
+    return render(request, "home/Tongtien1.html", {"maCourt":maCourt, "tp":tp, "time":time, "tien":tien})
+
+def themLich(request, maCourt, tp):
+    user=request.user
+    court = get_object_or_404(Court, maCourt=maCourt)
+    time=get_object_or_404(flexTime,court=court,customer=user)
+    timeslots = TimeSlot.objects.filter(court=court)
+    sans=San.objects.filter(court=court)
+    if request.method == "POST":
+        form = FlagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            ts = form.cleaned_data.get("timeslot")
+            d = form.cleaned_data.get("date")
+            san = form.cleaned_data.get("san")
+            flag=get_object_or_404(Flag, timeslot=ts, date=d, san=san)
+            ve=VeDatSan.objects.create(
+            type=tp,
+            flag=flag,
+            customer=request.user
+            )
+            url = reverse("successBooking", kwargs={"maCourt": maCourt})
+            time.time-=1
+            time.save()
+            return redirect(url)
+        else:
+            messages.error(request, "Thời gian này sân đã được đặt trước đó!")
+    else:
+        form = FlagForm()
+    return render(request, "home/CalendarType.html", {"maCourt":maCourt, "form": form, "tp":tp, "timeslots": timeslots, 'court':court, 'sans':sans, 'time':time})

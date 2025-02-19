@@ -21,7 +21,7 @@ class Court(models.Model):
     maCourt = models.CharField(default='',max_length=10, primary_key=True)
     name = models.CharField(max_length=100)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
-    price = models.IntegerField()
+    price = models.IntegerField(validators=[MinValueValidator(10000)])
     description = models.CharField(default='',max_length=255, null=True, blank= True)
     img = models.ImageField(upload_to="images/", verbose_name="Hình ảnh sân")
     courtStaff=models.ManyToManyField("BUser.User", limit_choices_to={'role':'courtstaff'}, related_name="staffed_courts", blank=True)

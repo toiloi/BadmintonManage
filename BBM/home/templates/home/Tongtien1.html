@@ -20,19 +20,21 @@
             </div>
             <div class="card-body">
                 <form id="bookingForm" method="POST">
-                    {% csrf_token %}
+                    {%csrf_token%}
                     <div class="form-group">
-                        <label>Số giờ muốn đặt</label>
-                        <input type="text" placeholder="Nhập số giờ" name="time">
+                        <!-- Hiển thị số tiền cần trả -->
+                        <div class="mt-3">
+                            <label for="amount">Số Tiền Cần Phải Trả (VNĐ): {{tien}}đ</label>
+                        </div>
                     </div>
-
                     <div class="button-container">
-                        <a href="{%url 'flexBooking' maCourt tp%}"><button type="button" class="a.btn-left">Quay về</button></a>
-                        <button type="submit" class="a.btn-right">Tiếp theo</button>
+                        <a href="{%url 'voucher1' maCourt tp time%}"><button type="button" class="a.btn-left">Quay về</button></a>
+                        <button type="submit" class="a.btn-right">Xác nhận thanh toán</button>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script src="{% static 'home/js/booking.js' %}"></script>

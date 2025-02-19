@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Đăng Ký Đặt Sân Cầu Lông</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="{% static 'home/css/booking.css' %}">
     <style>    
     </style>
 </head>
@@ -21,12 +22,12 @@
                 <div class="card-body">
                     <form id="bookingForm" method="POST">
                         <div class="d-grid gap-3">
-                            <a href="HourType.html"><button type="button" class="btn btn-custom">Thêm giờ</button></a>
-                            <a href="CalendarType.html"><button type="button" class="btn btn-custom">Thêm lịch</button></a>
+                            <a href="{%url 'themgio' court.maCourt tp%}"><button type="button" class="btn btn-custom">Thêm giờ</button></a>
+                            <a href="{%url 'themlich' court.maCourt tp%}"><button type="button" class="btn btn-custom">Thêm lịch</button></a>
                         </div>
 
                         <div class="button-container mt-3">
-                            <a href="booking.html"><button type="button" class="a.btn-left">Quay về</button></a>
+                            <a href="{%url 'booking' court.maCourt%}"><button type="button" class="a.btn-left">Quay về</button></a>
                         </div>
 
                     </form>

@@ -1,30 +1,28 @@
+
 {% extends "master_page.html" %}
 {% load static %}
 
-{% block navbar %}
-    {% include '../navbar.html' %}
-{% endblock %}
+{%block navbar%}
+    {%include '../navbar.html' %}
+{%endblock%}
 
-{% block content %}
-<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cancelModalLabel">Xác nhận huỷ vé</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn huỷ vé không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                <button type="button" class="btn btn-primary">Xác nhận</button>
+{%block footer%}
+    {%include '../footer.html' %}
+{%endblock%}
+
+{%block content%}
+<section class="bg-light">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 text-center">
+            <h4 class="mb-4">Bạn có chắc chắn muốn hủy sân?</h4>
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'his'%}" class="btn btn-secondary me-3">Quay về</a>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
+                </form>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
-
-{% block footer %}
-    {% include '../footer.html' %}
-{% endblock %}
+</section>
+{%endblock%}

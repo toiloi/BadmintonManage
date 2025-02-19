@@ -70,6 +70,10 @@ def history(request):
     return render(request, 'home/history.html', {"lb":lb})
 
 def deleteHistory(request, maVe):
+    if request.method == 'POST':
+        ve=get_object_or_404(VeDatSan, maVe=maVe)
+        ve.delete()
+        return redirect('his')
     return render(request, 'home/deleteHistory.html', {"maVe":maVe})
 
 def chiTiet(request, maCourt):

@@ -65,3 +65,12 @@ class CheckIn(models.Model):
     def __str__(self):
         return f"Check-in: {self.vedatsan} bởi {self.courtstaff.username} lúc {self.timeCheckin}"
     
+class flexTime(models.Model):
+    customer=models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role': 'customer'})
+    court = models.ForeignKey(Court, on_delete=models.CASCADE)
+    time=models.IntegerField(default=0,validators=[MinValueValidator(0)])
+    class Meta:
+        unique_together = ('customer', 'court')
+    def __str__(self):
+        return f"{self.customer.username} {self.court.name} {self.time}"
+    
