@@ -1,0 +1,52 @@
+{% extends "master_page.html" %}
+{% load static %}
+
+{% block navbar %}
+    {% include '../navbar.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include '../footer.html' %}
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa thông tin người dùng</title>
+    <link href="{% static 'home/css/userdetail.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <h1 style="text-align:center;">Chỉnh sửa thông tin</h1>
+    <div id="editForm" class="form-container">
+        <h2>Chỉnh sửa thông tin</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">Họ:</label>
+            {{form.last_name}}
+
+            <label for="name">Tên:</label>
+            {{form.first_name}}
+
+            <label for="gender">Giới tính:</label>
+            {{form.gender}}
+
+            <label for="phone">Số điện thoại:</label>
+            {{form.sdt}}
+
+            <label for="email">Email:</label>
+            {{form.email}}
+
+            <button type="submit">Lưu thay đổi</button>
+        </form>
+
+        <form action="{% url 'userdetail' %}" method="get">
+            <button type="submit">Hủy</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,42 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng Ký Đặt Sân Cầu Lông</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'home/css/booking.css' %}">
+    <style>    
+    </style>
+</head>
+
+<div class="page-wrapper bg-gra-01 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+            <div class="card-heading">
+                <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
+            </div>
+            <div class="card-body">
+                <form id="bookingForm" method="POST">
+                    {%csrf_token%}
+                    <div class="form-group">
+                    
+                        <div class="form-group">
+                            <label>Mã giảm giá</label>
+                            <input type="text" placeholder="Nhập mã giảm giá" name="voucher">
+                        </div>
+
+                    </div>
+
+                    <div class="button-container">
+                        <a href="{%url 'dateBooking' maCourt tp%}"><button type="button" class="a.btn-left">Quay về</button></a>
+                        <button type="submit" class="a.btn-right">Tiếp theo</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core import serializers
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from BCourt.models import Court,CourtStaff,DailyStat,Transaction,StaffRequest
-from BUser.models import  User
+from django.contrib.auth.decorators import login_required, user_passes_test
+from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
+from BCourt.models import Court, San
+from BBooking.models import VeDatSan
+from django.http import JsonResponse
+from datetime import datetime, timedelta
+from django.db.models import Sum, Count
+
 
 def home(request):
     return render(request, 'home/home.html')
+
+def role_required(role):
+    def check_role(user):
+        return user.is_authenticated and user.role == role
+    return user_passes_test(check_role, login_url="login")
 
 def user_register(request):
     if request.method == 'POST':
@@ -43,6 +54,7 @@ def user_logout(request):
     return redirect("home")
 
 @login_required (login_url="login")
+# @role_required(["customer", "courtmanager", "courtstaff"])
 def role(request):
     user = request.user
     role = getattr(user, "role", None)
@@ -54,50 +66,116 @@ def role(request):
         return render(request, "home/role2.html")  # Đường dẫn cho CourtStaff
     elif role == "courtmanager":
         return render(request, "home/role3.html")  # Đường dẫn cho CourtManager
-    else:
-        return HttpResponse("Không xác định được vai trò của bạn.", status=400)
     
-def datSan(request):
-    return render(request, "home/datsan.html")
+def history(request):
+    user=request.user
+    lb = VeDatSan.objects.filter(customer=user)
+    return render(request, 'home/history.html', {"lb":lb})
+
+def deleteHistory(request, maVe):
+    return render(request, 'home/deleteHistory.html', {"maVe":maVe})
 
 def chiTiet(request, maCourt):
     court = get_object_or_404(Court, maCourt = maCourt)
-    return render(request, "home/detail.html", {"court":court})
+    san=San.objects.filter(court=court).count()
+    return render(request, "home/detail.html", {"court":court, "san":san})
+
+def search(request):
+    query = request.GET.get('q')  
+    results = Court.objects.filter(name__icontains=query) if query else []  
+    return render(request, "home/search.html", {'results': results, 'query': query})
+
+def courtFilter(request):
+    selected_price = request.GET.get("price", "")
+    selected_tinh = request.GET.get("tinh", "")
+    selected_quan = request.GET.get("quan", "")
+    selected_phuong = request.GET.get("phuong", "")
+    selected_duong = request.GET.get("duong", "")
+
+    courts = Court.objects.all()
+
+    # Lọc theo mức giá
+    if selected_price == "low":
+        courts = courts.filter(price__lt=50000)
+    elif selected_price == "medium":
+        courts = courts.filter(price__gte=50000, price__lte=100000)
+    elif selected_price == "high":
+        courts = courts.filter(price__gt=100000)
+
+    # Lọc theo địa chỉ
+    if selected_tinh:
+        courts = courts.filter(address__tinh__icontains=selected_tinh)
+
+    if selected_quan:
+        courts = courts.filter(address__quan__icontains=selected_quan)
+
+    if selected_phuong:
+        courts = courts.filter(address__phuong__icontains=selected_phuong)
+
+    if selected_duong:
+        courts = courts.filter(address__duong__icontains=selected_duong)
+
+    context = {
+        "courts": courts,
+    }
+
+    return render(request, "home/filter.html", context)
 
 def xetduyetNhanVien(request):
-    return render(request, "home/xetduyetNhanVien.html")
+    user = User.objects.filter(role="courtstaff")
+    return render(request, "home/xetduyetNhanVien.html", {"user":user})
 
 def staffList(request):
-    staff_list = CourtStaff.objects.all()
-    return render(request, "home/staffList.html", {"staff_list": staff_list})
+    user = User.objects.filter(role="courtstaff")
+    return render(request, "home/staffList.html", {"user":user})
 
-def ChamCong(request):
-    if request.method == 'POST':
-        staff_id = request.POST.get('staff_id')
-        staff = CourtStaff.objects.get(id=staff_id)
-        staff.days_worked += 1
-        staff.save()
-        return redirect('chamCong')
+def chamCong(request):
+    user = User.objects.filter(role="courtstaff")
+    return render(request, "home/chamCong.html", {"user":user})
 
-    staff_list = CourtStaff.objects.all()
-    for staff in staff_list:
-        staff.total_salary = staff.days_worked * staff.salary_per_day
-    return render(request, "home/chamCong.html", {"staff_list": staff_list})
 
-def payment(request):
-    transactions = Transaction.objects.all()
-    return render(request, "home/payment.html",{'transactions':transactions})
+
+
+#Xet duyet nhan vien
+def approveStaff(request, staff_id):
+    staff = get_object_or_404(User, id=staff_id, role="courtstaff")
+    staff.is_active = True  # Hoặc bất kỳ logic nào để duyệt nhân viên
+    staff.save()
+    staff_json = serializers.serialize('json', [staff])
+    return JsonResponse({"status": "approved", "staff": staff_json})
+
+#Từ chối nhân viên``
+def rejectStaff(request, staff_id):
+    staff = get_object_or_404(User, id=staff_id, role="courtstaff")
+    staff.delete()  # Hoặc bất kỳ logic nào để từ chối nhân viên
+    return JsonResponse({"status": "rejected"})
+
 
 def Revenue(request):
-    daily_stats = DailyStat.objects.all()
-    total_revenue = sum(stat.revenue for stat in daily_stats)
-    total_bookings = sum(stat.bookings for stat in daily_stats)
-    return render(request, "home/Revenue.html", {
-        "daily_stats": daily_stats,
-        "total_revenue": total_revenue,
-        "total_bookings": total_bookings
-    })
+    # Lấy ngày đầu tiên và ngày cuối cùng của tháng hiện tại
+    today = datetime.today()
+    first_day_of_month = today.replace(day=1)
+    last_day_of_month = (first_day_of_month + timedelta(days=32)).replace(day=1) - timedelta(days=1)
 
-def xetduyetNhanVien(request):
-    requests = StaffRequest.objects.all()
-    return render(request, "home/xetduyetNhanVien.html", {"requests": requests})
+    # Tính tổng doanh thu và số lượt đặt sân trong tháng hiện tại
+    total_revenue = VeDatSan.objects.filter(flag__date__range=[first_day_of_month, last_day_of_month]).aggregate(Sum('tongTien'))['tongTien__sum'] or 0
+    total_bookings = VeDatSan.objects.filter(flag__date__range=[first_day_of_month, last_day_of_month]).count()
+
+    # Tính doanh thu và số lượt đặt sân hàng ngày trong tháng hiện tại
+    daily_stats = VeDatSan.objects.filter(flag__date__range=[first_day_of_month, last_day_of_month]).values('flag__date').annotate(revenue=Sum('tongTien'), bookings=Count('maVe')).order_by('flag__date')
+
+    context = {
+        'total_revenue': total_revenue,
+        'total_bookings': total_bookings,
+        'daily_stats': daily_stats,
+    }
+
+    return render(request, "home/Revenue.html", context)
+
+
+def payment(request):
+    transactions = VeDatSan.objects.all()
+    context = {
+        'transactions': transactions,
+    }
+    return render(request, "home/payment.html", context)

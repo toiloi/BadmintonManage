@@ -9,8 +9,7 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h2 class="mb-4">Thống Kê Doanh Thu</h2>
-
+    <h2 class="mb-4 text-center">Thống Kê Doanh Thu</h2>
     <div class="row">
         <div class="col-md-6">
             <h4>Doanh Thu Tháng Này</h4>
@@ -21,8 +20,7 @@
             <p class="stats text-primary">📅 {{ total_bookings }} lượt đặt</p>
         </div>
     </div>
-
-    <table class="table table-bordered mt-3">
+    <table class="table table-hover table-bordered mt-3">
         <thead class="table-dark">
             <tr>
                 <th>Ngày</th>
@@ -33,7 +31,7 @@
         <tbody>
             {% for stat in daily_stats %}
             <tr>
-                <td>{{ stat.date|date:"d/m/Y" }}</td>
+                <td>{{ stat.flag__date|date:"d/m/Y" }}</td>
                 <td>{{ stat.revenue|intcomma }}</td>
                 <td>{{ stat.bookings }}</td>
             </tr>

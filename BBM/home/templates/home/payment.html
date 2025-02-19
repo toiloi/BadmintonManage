@@ -9,9 +9,8 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h2 class="mb-4">Quản Lý Thanh Toán</h2>
-
-    <table class="table table-bordered">
+    <h2 class="mb-4 text-center">Quản Lý Thanh Toán</h2>
+    <table class="table table-hover table-bordered">
         <thead class="table-dark">
             <tr>
                 <th>Mã Giao Dịch</th>
@@ -24,15 +23,15 @@
         <tbody>
             {% for txn in transactions %}
             <tr>
-                <td>{{ txn.transaction_id }}</td>
-                <td>{{ txn.customer_name }}</td>
-                <td>{{ txn.date|date:"d/m/Y H:i:s" }}</td>  <!-- Định dạng ngày và giờ -->
-                <td>{{ txn.amount|intcomma }} VNĐ</td>
-                <td class="{% if txn.status == 'Đã Thanh Toán' %}text-success{% else %}text-danger{% endif %}">
-                    {% if txn.status == 'Đã Thanh Toán' %}
-                        ✔ {{ txn.status }}
+                <td>{{ txn.maVe }}</td>
+                <td>{{ txn.customer.username }}</td>
+                <td>{{ txn.flag.date|date:"d/m/Y" }}</td>
+                <td>{{ txn.tongTien|intcomma }} VNĐ</td>
+                <td class="{% if txn.checkin == 'dacheckin' %}text-success{% else %}text-danger{% endif %}">
+                    {% if txn.checkin == 'dacheckin' %}
+                        ✔ Đã Thanh Toán
                     {% else %}
-                        ❌ {{ txn.status }}
+                        ❌ Chưa Thanh Toán
                     {% endif %}
                 </td>
             </tr>

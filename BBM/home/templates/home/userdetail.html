@@ -1,0 +1,45 @@
+{% extends "master_page.html" %}
+{% load static %}
+
+{% block navbar %}
+    {% include '../navbar.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include '../footer.html' %}
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin người dùng</title>
+    <link href="{% static 'home/css/userdetail.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <h1 style="text-align:center;">Thông tin người dùng</h1>
+    <div id="userInfo" class="info-container">
+        <p><strong>Họ và tên:</strong> {{user.last_name}} {{user.first_name}}</p>
+        <p><strong>Giới tính:</strong> 
+            {% if user.gender == 'M' %}
+                Nam
+            {% elif user.gender == 'F' %}
+                Nữ
+            {% elif user.gender == 'O' %}
+                Khác
+            {% endif %}
+        </p>        
+        <p><strong>Số điện thoại:</strong> 0{{user.sdt}}</p>
+        <p><strong>Email:</strong> {{user.email}}</p>
+
+        <form action="{% url 'changeinf' %}" method="get">
+            <button type="submit">Chỉnh sửa</button>
+        </form>
+        <a href="{% url 'password_change' %}"><button type="submit">Đổi mật khẩu</button></a>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng Ký Đặt Sân Cầu Lông</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="booking.css">
+    <style>    
+    </style>
+</head>
+
+<div class="page-wrapper bg-gra-01 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+            <div class="card-heading">
+                <h2 class="title">Đăng Ký Đặt Sân Cầu Lông</h2>
+            </div>
+            <div class="card-body">
+                <form id="bookingForm" method="POST">
+                    <!-- Chọn sân -->
+                    <label for="San">Sân:</label>
+                    <select id="fixedDay" name="fixedDay">
+                        <option value="1">Số 1</option>
+                        <option value="2">Số 2</option>
+                        <option value="3">Số 3</option>
+                        <option value="4">Số 4</option>
+                        <option value="5">Số 5</option>
+                    </select> 
+
+                    <label for="time-slot">Time-slot:</label>
+                    <select id="fixedDay" name="fixedDay">
+                        <option value="1">05:00</option>
+                        <option value="2">06:00</option>
+                        <option value="3">07:00</option>
+                        <option value="4">08:00</option>
+                        <option value="5">09:00</option>
+                    </select> 
+
+                    <label for="playDate">Ngày, tháng, năm:</label>
+                    <input type="date" id="playDate" name="playDate" required> 
+
+                    <div class="button-container mt-3">
+                        <a href="booking.html"><button type="button" class="a.btn-left">Quay về</button></a>
+                        <a href="booking-success.html"><button type="button" class="a.btn-right">Xác nhận thanh toán</button></a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

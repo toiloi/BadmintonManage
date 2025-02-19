@@ -28,15 +28,15 @@
                             <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{court.address}}</p>
                         </div>
 
-                        <p><strong style="color: #0e2e50;">Sân:</strong> 5 sân</p>
+                        <p><strong style="color: #0e2e50;">Sân:</strong> {{san}} sân</p>
                         <h6>Description:</h6>
                         <p>{{court.decription}}</p>
 
                         <p class="py-2">
-                            <span class="list-inline-item text-dark">Rating: 4.8 <i class="fa fa-star text-warning"></i></span>
+                            <span class="list-inline-item text-dark">Rating: {{court.rateAvr}} <i class="fa fa-star text-warning"></i></span>
                         </p>
 
-                        <form action="" method="GET">
+                        <form action="{% url 'booking' court.maCourt %}" method="GET">
                             <input type="hidden" name="product-title" value="Activewear">
                             <div class="row pb-3">
                                 <div class="col d-grid">
@@ -44,7 +44,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

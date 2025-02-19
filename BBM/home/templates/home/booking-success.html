@@ -1,0 +1,23 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng Ký Đặt Sân Cầu Lông</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'home/css/booking.css' %}">
+    <style>    
+    </style>
+</head>
+
+<div class="container text-center">
+    <h2 class="text-success">🎉 Đặt sân thành công!</h2>
+    <p>Bạn đã đặt sân thành công. Chúc bạn có trận đấu vui vẻ!</p>
+    <a href="{%url 'booking' maCourt%}"><button type="button" class="btn btn-custom">Tiếp tục đặt sân</button></a>
+    <p>
+        
+    </p>
+    <a href="{%url 'role'%}"><button type="button" class="btn btn-custom">Trở về trang chủ</button></a>
+</div>

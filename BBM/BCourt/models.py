@@ -1,94 +1,59 @@
 from django.db import models
-# <<<<<<< HEAD
-from django.http import JsonResponse 
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from django.core.serializers import serialize
-import json 
-
-
-
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import Avg
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 # Create your models here.
 
-class Sonha (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+class Address(models.Model):
+    soNha=models.CharField(max_length=100)
+    duong=models.CharField(max_length=100)
+    phuong=models.CharField(max_length=100)
+    quan=models.CharField(max_length=100)
+    tinh=models.CharField(max_length=100)
+    class Meta:
+        unique_together = ['soNha', 'duong', 'phuong', 'quan', 'tinh']
     def __str__(self):
-        return f"{self.name}"
-
-class Duong (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    sonha = models.ForeignKey(Sonha, on_delete=models.CASCADE)
-    def __str__(self):
-        return f"{self.name}"
-
-class Phuong (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    duong = models.ForeignKey(Duong, on_delete=models.CASCADE)
-    def __str__(self):
-        return f"{self.name}"
-
-class Quan (models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    phuong = models.ForeignKey(Phuong, on_delete=models.CASCADE)
-    def __str__(self):
-        return f"{self.name}"
-
-class Tinh(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    quan = models.ForeignKey(Quan, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.quan.phuong.duong.sonha.name} {self.quan.phuong.duong.name} P.{self.quan.phuong.name} Q.{self.quan.name} {self.name}"
+        return f"{self.soNha} {self.duong} {self.phuong} {self.quan} {self.tinh} "
 
 class Court(models.Model):
     courtManager = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role':'courtmanager'})
     maCourt = models.CharField(default='',max_length=10, primary_key=True)
     name = models.CharField(max_length=100)
-    address = models.OneToOneField(Tinh, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
     price = models.IntegerField()
     description = models.CharField(default='',max_length=255, null=True, blank= True)
     img = models.ImageField(upload_to="images/", verbose_name="Hình ảnh sân")
+    courtStaff=models.ManyToManyField("BUser.User", limit_choices_to={'role':'courtstaff'}, related_name="staffed_courts", blank=True)
+    rateAvr = models.FloatField(default=0.0)  # Trung bình rating
+
+    def update_rating(self):
+        avg_rating = self.rating_set.aggregate(Avg("rate"))["rate__avg"]  # Tính trung bình
+        self.rateAvr = avg_rating if avg_rating is not None else 0.0
+        self.save()
     def __str__(self):
         return f"{self.maCourt} {self.name}"
+    
+class Rating(models.Model):
+    court = models.ForeignKey(Court, on_delete=models.CASCADE)
+    customer = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role': 'customer'})
+    rate = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    class Meta:
+        unique_together = ('court', 'customer')
+    def __str__(self):
+        return f"{self.customer.username} - {self.rate}"
+    
+@receiver(post_save, sender=Rating)
+@receiver(post_delete, sender=Rating)
+def update_court_rating(sender, instance, **kwargs):
+    instance.court.update_rating()
 
 class San(models.Model):
     maSan = models.CharField(default='',max_length=10, primary_key=True)
     numSan = models.IntegerField()
-    tinhTrang = models.BooleanField(default=True)
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):
-        return f"{self.maSan} {self.tinhTrang}"
-
-class CourtStaff(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
-    role = models.CharField(max_length=50)
-    days_worked = models.IntegerField(default=0)
-    salary_per_day = models.DecimalField(max_digits=10, decimal_places=2)
-
-class DailyStat(models.Model):
-    date = models.DateField()
-    revenue = models.DecimalField(max_digits=10, decimal_places=2)
-    bookings = models.IntegerField()
-
-class Transaction(models.Model):
-    STATUS_CHOICES = [
-        ('Đã Thanh Toán', 'Đã Thanh Toán'),
-        ('Chưa Thanh Toán', 'Chưa Thanh Toán'),
-    ]
-
-    transaction_id = models.CharField(max_length=100)
-    customer_name = models.CharField(max_length=100)
-    date = models.DateTimeField()  # Sử dụng DateTimeField để lưu cả ngày và giờ
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Chưa Thanh Toán')
-    # Thêm các trường khác nếu cần
-
-
-class StaffRequest(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
-    date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, default='Pending')
+        return f"Sân {self.numSan}"
+    

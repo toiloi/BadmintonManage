@@ -1,30 +1,67 @@
 from django.db import models
 from BCourt.models import Court, San
-from BUser.models import User, CourtStaff
+from BUser.models import User
+from django.utils.timezone import now
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class TimeSlot(models.Model):
     timeslot = models.TimeField(primary_key=True)
+    court = models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.timeslot}"
-
-
-class VeDatSan(models.Model):
-    thanhToan = models.BooleanField(default=True)
+    
+class Flag(models.Model):
     san = models.ForeignKey(San, on_delete=models.CASCADE)
     timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     date = models.DateField()
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role':'customer'})
     class Meta:
-        unique_together = ('san', 'date', 'timeslot')
-    def __str__(self):
-        return f"{self.san} {self.date} {self.timeslot}"
+        unique_together = ('date', 'timeslot')
 
-class HoaDon(models.Model):
-    maHoaDon = models.CharField(default='',max_length=10, primary_key=True)
-    tongTien = models.IntegerField(default=0)
-    ngayTao = models.DateTimeField()
-    vedatsan = models.OneToOneField(VeDatSan,on_delete=models.CASCADE)
-    courtStaff = models.ForeignKey(CourtStaff, on_delete=models.CASCADE, blank=True, null=True)
+
+class Voucher(models.Model):
+    voucher=models.CharField(max_length=10)
+    court=models.ForeignKey(Court, on_delete=models.CASCADE)
+    percent=models.IntegerField(default=5,
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
     def __str__(self):
-        return f"{self.maHoaDon} {self.ngayTao}"
+        return f"{self.voucher} {self.court.maCourt} - {self.percent}"
+
+class VeDatSan(models.Model):
+    CHECKIN_CHOICES = [
+        ("chuacheckin", "Chưa check-in"),
+        ("dacheckin", "Đã check-in"),
+    ]
+    TYPE_CHOICES = [
+        ("codinh", "Cố định"),
+        ("theongay", "Theo ngày"),
+        ("linhhoat", "Linh hoạt"),
+    ]
+    maVe=models.AutoField(primary_key=True)
+    flag = models.ForeignKey(Flag, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'customer'})
+    tongTien = models.IntegerField(default=0)
+    ngayTao = models.DateTimeField(auto_now_add=True)
+    voucher=models.ForeignKey(Voucher, on_delete=models.CASCADE, blank=True, null=True)
+    checkin = models.CharField(
+        max_length=20, choices=CHECKIN_CHOICES, default="chua_checkin"
+    )
+    type = models.CharField(max_length=8,choices=TYPE_CHOICES, default="codinh")
+
+    def mark_as_checked_in(self):
+        """Cập nhật trạng thái check-in khi nhân viên check-in."""
+        self.checkin = "da_checkin"
+        self.save()
+
+    def __str__(self):
+        return f"{self.flag.date} {self.flag.timeslot} - {self.checkin}"
+
+class CheckIn(models.Model):
+    vedatsan = models.OneToOneField(VeDatSan, on_delete=models.CASCADE, related_name="checkins")
+    courtstaff = models.ForeignKey("BUser.User", on_delete=models.CASCADE, limit_choices_to={'role': 'courtstaff'})
+    timeCheckin = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"Check-in: {self.vedatsan} bởi {self.courtstaff.username} lúc {self.timeCheckin}"
+    

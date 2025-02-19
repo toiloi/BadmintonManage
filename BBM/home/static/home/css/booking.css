@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #effdf5;
+}
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card-heading {
+  background-color: #00b98e;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.select-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.select-slot {
+  text-align: center;
+  padding: 10px;
+  background: #eee;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+.select-slot.selected {
+  background: #32e0a0;
+  color: #fff;
+}
+
+.btn-custom {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-custom:nth-child(1) {
+  background: #00B98E;
+}
+
+.btn-custom:nth-child(2) {
+  background: #00B98E;
+}
+
+.btn-custom:nth-child(3) {
+  background: #00B98E;
+}
+
+.btn-custom:hover {
+  opacity: 0.8;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-left, .btn-right {
+  width: 48%; /* Mỗi nút chiếm 48% chiều rộng */
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-left {
+  background-color: #007bff;
+}
+
+.btn-right {
+  background-color: #00B98E;
+}
+
+.btn-left:hover, .btn-right:hover {
+  opacity: 0.8;
+}
+
+
