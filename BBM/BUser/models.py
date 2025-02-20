@@ -25,6 +25,7 @@ class User(AbstractUser):
     ]
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
     sdt= models.IntegerField(default=0, null=True, blank=True)
+    day_worked = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.first_name} {self.username}"
 

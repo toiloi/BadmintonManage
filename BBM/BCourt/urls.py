@@ -26,4 +26,6 @@ urlpatterns = [
     path('chamcong/', views.chamCong, name='chamCong'),
     path('payment/', views.payment, name='payment'),
     path('revenue/', views.Revenue, name='Revenue'),
+    path('approveStaff/<int:staff_id>/', views.approveStaff, name='approveStaff'),
+    path('rejectStaff/<int:staff_id>/', views.rejectStaff, name='rejectStaff'),
 ]

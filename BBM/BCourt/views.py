@@ -136,3 +136,68 @@ def courtFilter(request):
     }
 
     return render(request, "home/filter.html", context)
+
+
+def chamCong(request):
+    # Só tiền lương trên 1 ngày
+    daily_wage = input("Nhập số tiền lương trên 1 ngày: ")
+
+    # Lấy danh sách nhân viên và tính toán số ngày công và lương
+    staff_list = User.objects.filter(role="courtstaff").annotate(
+        days_worked=F('days_worked'),  # Số ngày công
+        total_salary=F('days_worked') * daily_wage
+    )
+
+    context = {
+        'staff_list': staff_list,
+    }
+    return render(request, "home/chamCong.html", context)
+
+
+
+
+#Xet duyet nhan vien
+def approveStaff(request, staff_id):
+    staff = get_object_or_404(User, id=staff_id, role="courtstaff")
+    staff.is_active = True  # Hoặc bất kỳ logic nào để duyệt nhân viên
+    staff.save()
+    staff_json = serializers.serialize('json', [staff])
+    return JsonResponse({"status": "approved", "staff": staff_json})
+
+#Từ chối nhân viên``
+def rejectStaff(request, staff_id):
+    staff = get_object_or_404(User, id=staff_id, role="courtstaff")
+    staff.delete()  # Hoặc bất kỳ logic nào để từ chối nhân viên
+    return JsonResponse({"status": "rejected"})
+
+
+def Revenue(request):
+    # Lấy ngày đầu tiên và ngày cuối cùng của tháng hiện tại
+    today = datetime.today()
+    first_day_of_month = today.replace(day=1)
+    last_day_of_month = (first_day_of_month + timedelta(days=32)).replace(day=1) - timedelta(days=1)
+
+    # Tính tổng doanh thu và số lượt đặt sân trong tháng hiện tại
+    total_revenue = VeDatSan.objects.filter(flag__date__range=[first_day_of_month, last_day_of_month]).aggregate(Sum('tongTien'))['tongTien__sum'] or 0
+    total_bookings = VeDatSan.objects.filter(flag__date__range=[first_day_of_month, last_day_of_month]).count()
+
+    # Tính doanh thu và số lượt đặt sân hàng ngày trong tháng hiện tại
+    daily_stats = VeDatSan.objects.filter(flag__date__range=[first_day_of_month, last_day_of_month]).values('flag__date').annotate(revenue=Sum('tongTien'), bookings=Count('maVe')).order_by('flag__date')
+
+    context = {
+        'total_revenue': total_revenue,
+        'total_bookings': total_bookings,
+        'daily_stats': daily_stats,
+    }
+
+    return render(request, "home/Revenue.html", context)
+
+
+def payment(request):
+    transactions = VeDatSan.objects.all()
+    context = {
+        'transactions': transactions,
+    }
+    return render(request, "home/payment.html", context)
+
+

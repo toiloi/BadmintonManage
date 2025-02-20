@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import F
 from .models import RegisterForm
 from BCourt.models import Court, San
 from BBooking.models import VeDatSan
@@ -130,8 +131,19 @@ def staffList(request):
     return render(request, "home/staffList.html", {"user":user})
 
 def chamCong(request):
-    user = User.objects.filter(role="courtstaff")
-    return render(request, "home/chamCong.html", {"user":user})
+    # Só tiền lương trên 1 ngày
+    daily_wage = input("Nhập số tiền lương trên 1 ngày: ")
+
+    # Lấy danh sách nhân viên và tính toán số ngày công và lương
+    staff_list = User.objects.filter(role="courtstaff").annotate(
+        days_worked=F('days_worked'),  # Số ngày công
+        total_salary=F('days_worked') * daily_wage
+    )
+
+    context = {
+        'staff_list': staff_list,
+    }
+    return render(request, "home/chamCong.html", context)
 
 
 
