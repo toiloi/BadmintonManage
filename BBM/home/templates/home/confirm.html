@@ -1,0 +1,50 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{%block sidebar%}
+    {% include '../sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../search.html'%}
+{%endblock%}
+
+{%block foot%}
+    {% include '../foot.html'%}
+{%endblock%}
+
+{%block content%}
+<div class="container-fluid mt-4">
+    <h2 class="mb-4 text-center">📅 Quản Lý Lịch Đặt Sân</h2>
+    <!-- Hiển thị danh sách đặt sân và khoảng trống -->
+    <table class="table table-bordered table-striped table-sm" style="width: 60%; margin: 0 auto">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Khách Hàng</th>
+                <th>Thời Gian</th>
+                <th>Sân</th>
+                <th>Trạng Thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ve in danh_sach %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ve.customer.last_name }} {{ ve.customer.first_name }}</td>
+                <td>{{ve.ngayTao}}</td>
+                <td>{{ ve.maVe }}</td>
+                <td>
+                    {% if ve.thanhToan %}
+                        <span class="badge bg-success">Đã thanh toán</span>
+                    {% else %}
+                         <span class="badge bg-warning">Chờ thanh toán</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+</div>
+{%endblock%}
