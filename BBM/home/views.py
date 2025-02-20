@@ -8,6 +8,8 @@ from .models import RegisterForm
 from BCourt.models import Court, San, Rating, xinViec
 from BBooking.models import VeDatSan
 from django.urls import reverse
+from BBooking.forms import Gangzbit
+from BBooking.models import Voucher as Voucher_model
 
 
 def home(request):
@@ -173,3 +175,22 @@ def r2checkIn(request, maCourt):
         except VeDatSan.DoesNotExist:
             return HttpResponse("Vé không tồn tại!", status=400)
     return render(request, "home/r2checkin.html", {'lve': lve})
+
+def Confirm(request):
+    danh_sach=VeDatSan.objects.all()
+    return render(request,'home/confirm.html',{'danh_sach':danh_sach})
+
+def Vip(request):
+    danh_sach_vip=Voucher_model.objects.all()
+    return render(request,"home/vip.html",{'danh_sach_vip':danh_sach_vip})
+
+def Voucher(request):
+    if request.method == 'POST':
+        form = Gangzbit(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('vip')  # Chuyển hướng sau khi lưu thành công
+    else:
+        form = Gangzbit()
+
+    return render(request, 'home/voucher.html', {'form': form})

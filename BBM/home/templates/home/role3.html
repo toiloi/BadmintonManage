@@ -1,0 +1,78 @@
+{% extends "master.html" %}
+{%load static%}
+
+
+{%block sidebar%}
+    {% include '../sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../search.html' %}
+{%endblock%}
+
+{%block content%}
+<div id="page-content-wrapper" class="container-fluid main-content ">
+        <!-- Nội dung trang sẽ hiển thị tại đây -->
+         
+        <div class="container mt-4" style="margin-left: -250px;">
+            <h2 class="mb-4" style="text-align: left;">📊 Tổng Quan</h2>
+            <div class="row">
+                <!-- Tổng doanh thu -->
+                <div class="col-md-3">
+                    <div class="card bg-success text-white shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Doanh Thu</h5>
+                            <p>Hôm nay: <strong>5,000,000đ</strong></p>
+                            <p>Tuần này: <strong>35,000,000đ</strong></p>
+                            <p>Tháng này: <strong>150,000,000đ</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lịch đặt sân -->
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Lịch Đặt Sân</h5>
+                            <ul class="list-unstyled">
+                                <li>09:00 - 10:00: Sân 1 - Khách A</li>
+                                <li>10:00 - 11:00: Sân 2 - Khách B</li>
+                                <li>11:00 - 12:00: Sân 3 - Khách C</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Số lượng khách hàng -->
+                <div class="col-md-3">
+                    <div class="card bg-warning text-dark shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Khách Hàng</h5>
+                            <p>Mới hôm nay: <strong>15</strong></p>
+                            <p>Tổng cộng: <strong>500</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thông báo quan trọng -->
+                <div class="col-md-3">
+                    <div class="card bg-danger text-white shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Thông Báo</h5>
+                            <ul class="list-unstyled">
+                                <li>✅ Đơn đặt sân mới từ Khách D</li>
+                                <li>❌ Hủy đặt sân từ Khách E</li>
+                                <li>📝 Phản hồi từ Khách F</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+</div>
+{%endblock%}
+
+{%block foot%}
+    {% include '../foot.html' %}
+{%endblock%}

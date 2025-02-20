@@ -17,4 +17,8 @@ urlpatterns = [
     path('r2dangky/', views.r2dangky, name='r2dangky'),
     path('r2court/', views.r2court, name='r2court'),
     path('r2checkin/<str:maCourt>/', views.r2checkIn, name='r2checkin'),
+    
+    path('confirm',views.Confirm,name='confirm'),
+    path('vip',views.Vip,name='vip'),
+    path('voucher',views.Voucher,name='voucher')
 ]
