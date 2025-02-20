@@ -13,4 +13,8 @@ urlpatterns = [
     path('deleteHis/<str:maVe>/', views.deleteHistory, name='deleteHis'),
     path('detail/<str:maCourt>/', views.chiTiet, name='detail'),
     
+
+    path('r2dangky/', views.r2dangky, name='r2dangky'),
+    path('r2court/', views.r2court, name='r2court'),
+    path('r2checkin/<str:maCourt>/', views.r2checkIn, name='r2checkin'),
 ]

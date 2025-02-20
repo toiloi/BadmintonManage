@@ -104,17 +104,23 @@ def TongTien(request, maCourt, tp, ts, d, s, tien):
         if tp == "codinh":
             for i in range(3):
                 d += timedelta(days=7)
-                flag=Flag.objects.create(
+                check=Flag.objects.filter(
                     san=san,
                     timeslot=ts,
                     date=d
-                )
-                ve=VeDatSan.objects.create(
-                type=tp,
-                flag=flag,
-                customer=request.user,
-                tongTien=tien,
-        )
+                ).exists()
+                if not check:
+                    flag=Flag.objects.create(
+                        san=san,
+                        timeslot=ts,
+                        date=d
+                    )
+                    ve=VeDatSan.objects.create(
+                    type=tp,
+                    flag=flag,
+                    customer=request.user,
+                    tongTien=tien,
+                    )
         url = reverse("successBooking", kwargs={"maCourt": maCourt})
         return redirect(url)
     return render(request, "home/Tongtien.html", {"maCourt":maCourt, "tp":tp, "ts":ts, "d":d, "s":s, "tien":tien})

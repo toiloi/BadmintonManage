@@ -1,0 +1,48 @@
+{% extends "r2master_page.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {%include '../r2sidebar.html' %}
+{%endblock%}
+
+{%block navbar%}
+    {%include '../r2navbar.html' %}
+{%endblock%}
+
+{%block footer%}
+    {%include '../r2footer.html' %}
+{%endblock%}
+
+{%block content%}
+<div class="container mt-4">
+    <h2>Danh Sách Court (Đăng ký ở đây)</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Tên Sân</th>
+                    <th class="text-center">Địa Chỉ</th>
+                    <th class="text-center">Giá</th>
+                    <th class="text-center">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for c in lc%}
+                <form method="POST">
+                    {% csrf_token %}
+                    <tr>
+                        <td>{{ c.name }}</td>
+                        <td>{{ c.address }}</td>
+                        <td class="text-primary">{{ c.price }}đ/h</td>
+                        <td class="text-center">
+                            <input type="hidden" name="maCourt" value="{{ c.maCourt }}">
+                            <button class="btn btn-success btn-sm" type="submit">✅ Gửi đơn xin việc</button>
+                        </td>
+                    </tr>
+                </form>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

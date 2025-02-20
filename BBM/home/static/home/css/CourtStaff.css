@@ -1,0 +1,12 @@
+body { font-family: 'Arial', sans-serif; background-color: #effdf5; }
+.sidebar-wrapper { width: 250px; height: 100vh; background-color: #00B98E; position: fixed; transition: 0.3s; }
+.sidebar-heading { padding: 15px; font-size: 1.2rem; font-weight: bold; color: white; text-align: center; }
+.list-group-item { color: white; border: none; cursor: pointer; background-color: transparent; transition: 0.3s; }
+.list-group-item:hover, .list-group-item.active { background-color: #00FFB2; }
+.submenu {padding-left: 20px; }
+a {text-decoration: none; color: inherit;}
+a:hover {text-decoration: none;}
+a:visited, a:active {color: inherit;}
+.main-content { margin-left: 260px; padding: 20px; transition: 0.3s; }
+.main-content.ml-0 { margin-left: 0; }
+footer { position: fixed; bottom: 0; width: 100%; color: rgb(0, 0, 0); padding: 10px; text-align: center; }

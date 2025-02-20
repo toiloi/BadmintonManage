@@ -56,3 +56,34 @@ class San(models.Model):
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     def __str__(self):
         return f"Sân {self.numSan}"
+    
+class xinViec(models.Model):
+    DUYET_CHOICES = [
+        ("pending", "Chờ duyệt"),
+        ("approved", "Đã duyệt"),
+        ("rejected", "Từ chối"),
+    ]
+
+    court = models.ForeignKey(Court, on_delete=models.CASCADE)
+    courtStaff = models.ForeignKey(
+        "BUser.User", limit_choices_to={"role": "courtstaff"}, on_delete=models.CASCADE
+    )
+    duyet = models.CharField(
+        max_length=10, choices=DUYET_CHOICES, default="pending"
+    )  # Trạng thái duyệt
+
+    def __str__(self):
+        return f"Xin việc tại {self.court.name} - {self.duyet}"
+    
+def update_duyet(xin_viec_id, status):
+    try:
+        xin_viec = xinViec.objects.get(id=xin_viec_id)
+        xin_viec.duyet = status
+        xin_viec.save()
+
+        if status == "approved":
+            xin_viec.court.courtStaff.add(xin_viec.courtStaff)  # Thêm vào Court
+
+        return True
+    except xinViec.DoesNotExist:
+        return False

@@ -1,0 +1,24 @@
+<div class="sidebar-wrapper">
+    <div class="sidebar-heading" style="cursor: pointer;">
+        <a href="CourtStaff.html">BBM - Staff</a>
+    </div>
+    <div class="list-group list-group-flush">
+        <!-- Quản Lý Khách Hàng -->
+        <div class="list-group-item toggle-menu">
+            <i class="fas fa-users"></i> Quản Lý Khách Hàng
+            <i class="fas fa-chevron-down float-end"></i>
+        </div>
+        <div class="submenu">
+            <a href="{%url 'r2court'%}" class="text-white d-block">Xác Nhận Khách Đến</a>
+        </div>
+
+        <!-- Xác Nhận Việc Làm -->
+        <div class="list-group-item toggle-menu">
+            <i class="fas fa-basketball-ball"></i> Xác Nhận Việc Làm
+            <i class="fas fa-chevron-down float-end"></i>
+        </div>
+        <div class="submenu">
+            <a href="{%url 'r2dangky'%}" class="text-white d-block">Danh sách Court</a>
+        </div>
+    </div>
+</div>

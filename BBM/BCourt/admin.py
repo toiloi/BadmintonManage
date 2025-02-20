@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Court, San, Address, Rating
+from .models import Court, San, Address, Rating, xinViec
 
 # Register your models here.
 
@@ -15,7 +15,11 @@ class AddressAd(admin.ModelAdmin):
 class RatingAd(admin.ModelAdmin):
   list_display = ("customer", "rate",)
 
+class xinViecAd(admin.ModelAdmin):
+  list_display = ("court", "courtStaff",)
+
 admin.site.register(Court, CourtAd)
 admin.site.register(San, SanAd)
 admin.site.register(Address, AddressAd)
 admin.site.register(Rating, RatingAd)
+admin.site.register(xinViec, xinViecAd)

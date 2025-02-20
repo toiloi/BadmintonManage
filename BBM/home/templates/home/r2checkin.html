@@ -1,0 +1,58 @@
+{% extends "r2master_page.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {%include '../r2sidebar.html' %}
+{%endblock%}
+
+{%block navbar%}
+    {%include '../r2navbar.html' %}
+{%endblock%}
+
+{%block footer%}
+    {%include '../r2footer.html' %}
+{%endblock%}
+
+{%block content%}
+<div id="page-content">
+    <div class="container mt-4">
+        <h2>Xác Nhận Khách Đến</h2>
+        
+        <!-- Hiển thị danh sách đặt sân và khoảng trống -->
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Khách Hàng</th>
+                    <th>Thời Gian</th>
+                    <th>Ngày Tháng</th>
+                    <th>Sân</th>
+                    <th>Giá</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="booking-list">
+                {%for ve in lve%}
+                <form method="POST">
+                    {% csrf_token %}
+                    <tr>
+                        <td>{{ve.maVe}}</td>
+                        <td>{{ve.customer.last_name}} {{ve.customer.first_name}}</td>
+                        <td>{{ve.flag.timeslot}}</td>
+                        <td>{{ve.flag.date}}</td>
+                        <td>{{ve.flag.san}}</td>
+                        <td>{{ve.tongTien}}</td>
+                        <td><span class="badge bg-warning">{{ve.checkin}}</span></td>
+                        <td>
+                            <input type="hidden" name="maVe" value="{{ ve.maVe }}">
+                            <button class="btn btn-success btn-sm" type="submit" name="action" value="confirm">✅ Xác Nhận</button>
+                            <button class="btn btn-danger btn-sm" type="submit" name="action" value="cancel">❌ Hủy</button>
+                        </td>
+                    </tr>
+                </form>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>    
+{%endblock%}

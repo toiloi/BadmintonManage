@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from BUser.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import RegisterForm
-from BCourt.models import Court, San, Rating
+from BCourt.models import Court, San, Rating, xinViec
 from BBooking.models import VeDatSan
 from django.urls import reverse
 
@@ -72,7 +72,7 @@ def history(request):
 def deleteHistory(request, maVe):
     if request.method == 'POST':
         ve=get_object_or_404(VeDatSan, maVe=maVe)
-        ve.delete()
+        ve.flag.delete()
         return redirect('his')
     return render(request, 'home/deleteHistory.html', {"maVe":maVe})
 
@@ -138,3 +138,38 @@ def courtFilter(request):
 
     return render(request, "home/filter.html", context)
 
+def r2dangky(request):
+    lc=Court.objects.all()
+    if request.method == 'POST':
+        maCourt=request.POST.get("maCourt") 
+        court=get_object_or_404(Court,maCourt=maCourt)
+        user=request.user
+        check =xinViec.objects.filter(court=court, courtStaff=user).exists()
+        if not check:
+            xv=xinViec.objects.create(court=court, courtStaff=user)
+    return render(request, "home/r2workRegister.html", {"lc":lc})
+
+def r2court(request):
+    user=request.user 
+    lc = Court.objects.filter(courtStaff=user)
+    print (lc)
+    return render(request, "home/r2court.html", {"lc":lc})
+
+def r2checkIn(request, maCourt):
+    court=get_object_or_404(Court,maCourt=maCourt)
+    lve = VeDatSan.objects.filter(checkin='chuacheckin', flag__san__court=court)
+
+    if request.method == 'POST':
+        action = request.POST.get("action")  
+        ma_ve = request.POST.get("maVe") 
+
+        try:
+            ve = VeDatSan.objects.get(maVe=ma_ve) 
+            if action == "confirm":
+                ve.checkin = "dacheckin"  
+                ve.save()
+            elif action == "cancel":
+                ve.flag.delete()  
+        except VeDatSan.DoesNotExist:
+            return HttpResponse("Vé không tồn tại!", status=400)
+    return render(request, "home/r2checkin.html", {'lve': lve})
