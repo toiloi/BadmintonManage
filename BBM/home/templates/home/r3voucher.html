@@ -1,0 +1,31 @@
+{% extends "r3master.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {% include '../r3sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html' %}
+{%endblock%}
+
+
+{%block foot%}
+    {% include '../r3foot.html' %}
+{%endblock%}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center"style="width: 60%; margin: 0 auto">Thêm Khuyến Mãi</h2>
+    <form id="promoForm" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-success"style="">✅ Thêm Khuyến Mãi</button>
+            </div>
+        </div>
+    </form>
+</div>
+{%endblock%}

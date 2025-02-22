@@ -10,6 +10,7 @@ from BBooking.models import VeDatSan
 from django.urls import reverse
 from BBooking.forms import Gangzbit
 from BBooking.models import Voucher as Voucher_model
+from django.db.models import Q
 
 
 def home(request):
@@ -141,15 +142,47 @@ def courtFilter(request):
     return render(request, "home/filter.html", context)
 
 def r2dangky(request):
-    lc=Court.objects.all()
+    user=request.user
+     # Danh sách các sân mà nhân viên đã gửi đơn nhưng chưa bị từ chối
+    lc = Court.objects.exclude(
+    xinviec__courtStaff=user, xinviec__duyet__in=["approved", "pending"]
+    )
     if request.method == 'POST':
         maCourt=request.POST.get("maCourt") 
-        court=get_object_or_404(Court,maCourt=maCourt)
-        user=request.user
+        court=get_object_or_404(Court,maCourt=maCourt) 
         check =xinViec.objects.filter(court=court, courtStaff=user).exists()
         if not check:
             xv=xinViec.objects.create(court=court, courtStaff=user)
     return render(request, "home/r2workRegister.html", {"lc":lc})
+
+def list_nhanvien(request):
+    ls = User.objects.filter(id__in=Court.objects.values_list("courtStaff", flat=True)).distinct()
+    return render(request, "home/r3staffList-dinh.html", {"ls":ls})
+
+def list_xinviec(request):
+    user=request.user
+    lx = xinViec.objects.filter(court__courtManager=user, duyet="pending")
+    if request.method == 'POST':
+        action = request.POST.get("action")
+        c=request.POST.get("court")
+        s=request.POST.get("staff")
+        
+        url = reverse("r3duyet", kwargs={"court": c, "staff":s, "action":action})
+        return redirect(url)
+    return render(request, "home/r3xetduyet-dinh.html", {"lx":lx})
+
+def duyetDon(request, court, staff, action):
+    staff=get_object_or_404(User, username=staff)
+    court=get_object_or_404(Court, maCourt=court)
+    don=get_object_or_404(xinViec, court=court,courtStaff=staff)
+    if action == 'approve':
+        don.duyet = 'approved'
+        court.courtStaff.add(staff)
+    else:
+        don.duyet = 'rejected'
+    don.save()
+    return redirect('r3listxv')
+    
 
 def r2court(request):
     user=request.user 
@@ -178,19 +211,24 @@ def r2checkIn(request, maCourt):
 
 def Confirm(request):
     danh_sach=VeDatSan.objects.all()
-    return render(request,'home/confirm.html',{'danh_sach':danh_sach})
+    return render(request,'home/r3confirm.html',{'danh_sach':danh_sach})
 
 def Vip(request):
     danh_sach_vip=Voucher_model.objects.all()
-    return render(request,"home/vip.html",{'danh_sach_vip':danh_sach_vip})
+    return render(request,"home/r3vip.html",{'danh_sach_vip':danh_sach_vip})
 
 def Voucher(request):
     if request.method == 'POST':
         form = Gangzbit(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('vip')  # Chuyển hướng sau khi lưu thành công
+            return redirect('r3vip')  # Chuyển hướng sau khi lưu thành công
     else:
         form = Gangzbit()
 
-    return render(request, 'home/voucher.html', {'form': form})
+    return render(request, 'home/r3voucher.html', {'form': form})
+
+def delete_voucher(request,voucher):
+    v=get_object_or_404(Voucher_model,voucher=voucher)
+    v.delete()
+    return render(request, 'home/r3vip.html')

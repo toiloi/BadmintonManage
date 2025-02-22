@@ -8,6 +8,6 @@ urlpatterns = [
     path('userdetail/', views.userDetail, name='userdetail'),
     path('userdetail2/', views.userDetail2, name='userdetail2'),
     path('password_change/', auth_views.PasswordChangeView.as_view(template_name='home/changepas.html'), name='password_change'),
-    path('password_change2/', auth_views.PasswordChangeView.as_view(template_name='home/changepas2.html'), name='password_change2'),
+    path('password_change2/', auth_views.PasswordChangeView.as_view(template_name='home/r2changepas.html'), name='password_change2'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='home/changepasdone.html'), name='password_change_done'),
 ]

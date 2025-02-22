@@ -1,0 +1,37 @@
+{% extends "r3master.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {% include '../r3sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html' %}
+{%endblock%}
+
+
+{%block foot%}
+    {% include '../r3foot.html' %}
+{%endblock%}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mt-4">Danh Sách Khung Giờ Đã Thêm</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Sân</th>
+                <th>Giờ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for time in timeslot %}
+            <tr>
+                <td>{{time.court.name}}</td>    
+                <td>{{time.timeslot}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

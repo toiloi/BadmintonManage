@@ -20,3 +20,8 @@ class Gangzbit(forms.ModelForm):
             'court': forms.Select(attrs={'class': 'form-control'}),
             'percent': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Nhập phần trăm giảm giá', 'min': 0, 'max': 40}),
         }
+        
+class TimeslotForm(forms.ModelForm):
+    class Meta:
+        model= TimeSlot
+        fields= ['timeslot','court']

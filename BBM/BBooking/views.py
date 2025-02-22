@@ -200,3 +200,29 @@ def themLich(request, maCourt, tp):
     else:
         form = FlagForm()
     return render(request, "home/CalendarType.html", {"maCourt":maCourt, "form": form, "tp":tp, "timeslots": timeslots, 'court':court, 'sans':sans, 'time':time})
+
+def time_slot(request,maCourt):
+    court = get_object_or_404(Court,maCourt=maCourt)
+    if request.method == "POST":
+        print('co1')
+        ts=request.POST.get('time')
+        check=TimeSlot.objects.filter(timeslot=ts,court=court).exists()
+        if not check:
+            print('co2')
+            t=TimeSlot.objects.create(timeslot=ts, court=court)
+            sans = San.objects.filter(court=court)
+            times=TimeSlot.objects.filter(court=court)
+            return render(request, "home/r3detail.html", {"court": court, "sans": sans,"times":times})
+        else:
+            messages.error(request, "Court đã có timeslot này trước đó!")
+    return render(request,"home/r3time_slot.html",{'maCourt':maCourt})
+
+def delete_timeslot(request, time, maCourt):
+    court=get_object_or_404(Court,maCourt=maCourt)
+    ts = datetime.strptime(time, "%H:%M:%S").time()
+    t=get_object_or_404(TimeSlot, timeslot=ts, court=court)
+    if request.method == "POST":
+        t.delete()
+        return redirect("chiTiet", maCourt=maCourt)  # Điều hướng về trang chi tiết sân
+
+    return redirect("r3manage_court")

@@ -1,0 +1,54 @@
+{% extends "r3master.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {% include '../r3sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html' %}
+{%endblock%}
+
+
+{%block foot%}
+    {% include '../r3foot.html' %}
+{%endblock%}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Thêm Sân</h2>
+
+    <form method="post" enctype="multipart/form-data" class="mx-auto p-5 border rounded shadow bg-light" style="max-width: 900px;">
+        {% csrf_token %}
+        
+        <!-- Hiển thị lỗi nếu có -->
+        {% if san_form.errors %}
+            <div class="alert alert-danger">
+                <strong>Lỗi nhập liệu:</strong>
+                {{ san_form.errors }}
+            </div>
+        {% endif %}
+    
+        <!-- Mã sân & Tên sân -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Mã Sân</label>
+                {{ san_form.maSan }}
+            </div>
+            <div class="col-md-6 mb-4">
+                {% comment %} <label class="form-label fw-bold">Tên Sân</label>
+                {{ san_form.numSan }} {% endcomment %}
+                <label class="form-label fw-bold"for = "numSan">Tên Sân:</label>
+                {{ san_form.numSan }}
+            </div>
+        </div>
+    
+        <!-- Nút Submit -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-lg btn-success px-4 py-2">✅ Thêm Sân</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

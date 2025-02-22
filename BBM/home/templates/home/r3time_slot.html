@@ -1,0 +1,41 @@
+{% extends "r3master.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {% include '../r3sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html' %}
+{%endblock%}
+
+
+{%block foot%}
+    {% include '../r3foot.html' %}
+{%endblock%}
+
+
+
+{% block content %}
+<div class="container mt-4">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h2 class="mb-4">Đặt Khung Giờ Sân</h2>
+    {% csrf_token %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="time" class="form-label">Chọn Khung Giờ</label>
+            <input type="time" class="form-control" id="time" name="time" step="3600" required>
+        </div>
+        <button type="submit" class="btn btn-primary">📅 Thêm khung giờ</button>
+    </form>
+</div>
+{% endblock %}

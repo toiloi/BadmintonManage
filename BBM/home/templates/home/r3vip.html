@@ -1,0 +1,55 @@
+{% extends "r3master.html" %}
+
+{% load static %}
+
+{%block sidebar%}
+ {% include '../r3sidebar.html'%}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html'%}
+{%endblock%}
+
+{%block content%}
+<div class="container mt-4" style="width:60%;margin: 0 auto ;">
+    <h2 class="mb-4">Danh Sách Khuyến Mãi</h2>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Mã Khuyến Mãi</th>
+                <th>Court</th>
+                <th>Giảm Giá (%)</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for ma in danh_sach_vip %}
+                <th> {{forloop.counter}}</th>
+                <th>{{ma.voucher}}</th>
+                <th> {{ma.court}}</th>
+                <th>{{ma.percent}}</th>
+                <th>
+                    <form action="{% url 'delete-voucher' ma.voucher %}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sân này không?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Xóa Voucher</button>
+                    </form> 
+                </th>
+                   
+        </tbody>
+    </table>
+</div>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{%endblock%}
+
+{%block foot%}
+    {% include '../r3foot.html'%}
+{%endblock%}
+    

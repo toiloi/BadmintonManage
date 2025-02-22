@@ -1,0 +1,38 @@
+{% extends "r3master.html" %}
+{% load static %}
+
+{% block sidebar %}
+    {% include '../r3sidebar.html' %}
+{% endblock %}
+
+{% block search %}
+    {% include '../r3search.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Danh Sách Nhân Viên</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+            </tr>
+        </thead>
+        <tbody id="staff-list">
+            {% for staff in ls %}
+            <tr>
+                <td>{{ staff.first_name }}</td>
+                <td>{{ staff.email }}</td>
+                <td>{{ staff.sdt }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block foot %}
+    {% include '../r3foot.html' %}
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends "r3master.html" %}
+{% load static %}
+
+{% block sidebar %}
+    {% include '../r3sidebar.html' %}
+{% endblock %}
+
+{% block search %}
+    {% include '../r3search.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Xét Duyệt Nhân Viên</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody id="staff-requests">
+            {% for request in lx %}
+            <tr id="staff-{{ request.id }}">
+                <td>{{ request.courtStaff.first_name}}</td>
+                <td>{{ request.courtStaff.email }}</td>
+                <td>{{ request.courtStaff.sdt }}</td>
+                <td>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="court" value="{{ request.court.maCourt }}">
+                        <input type="hidden" name="staff" value="{{ request.courtStaff.username }}">
+                        <button type="submit" class="btn btn-success btn-action" name="action" value="approve">
+                            Duyệt
+                        </button>
+                        <button type="submit" class="btn btn-danger btn-action" name="action" value="reject">
+                            Từ chối
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block foot %}
+    {% include '../r3foot.html' %}
+{% endblock %}

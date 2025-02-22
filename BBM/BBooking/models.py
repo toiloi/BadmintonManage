@@ -20,7 +20,8 @@ class Flag(models.Model):
 
 
 class Voucher(models.Model):
-    voucher=models.CharField(max_length=10)
+    voucher=models.CharField(max_length=255,primary_key=True)
+    
     court=models.ForeignKey(Court, on_delete=models.CASCADE)
     percent=models.IntegerField(default=5,
         validators=[MinValueValidator(0), MaxValueValidator(100)]

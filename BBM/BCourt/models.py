@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models import Avg
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+
 # Create your models here.
 
 class Address(models.Model):
@@ -57,6 +58,14 @@ class San(models.Model):
     def __str__(self):
         return f"Sân {self.numSan}"
     
+class CourtTimeSlot(models.Model):
+    court = models.ForeignKey(Court, on_delete=models.CASCADE)  # Liên kết với sân
+    date = models.DateField()
+    time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.court.name} - {self.date} - {self.time}"
+    
 class xinViec(models.Model):
     DUYET_CHOICES = [
         ("pending", "Chờ duyệt"),
@@ -74,16 +83,5 @@ class xinViec(models.Model):
 
     def __str__(self):
         return f"Xin việc tại {self.court.name} - {self.duyet}"
+
     
-def update_duyet(xin_viec_id, status):
-    try:
-        xin_viec = xinViec.objects.get(id=xin_viec_id)
-        xin_viec.duyet = status
-        xin_viec.save()
-
-        if status == "approved":
-            xin_viec.court.courtStaff.add(xin_viec.courtStaff)  # Thêm vào Court
-
-        return True
-    except xinViec.DoesNotExist:
-        return False

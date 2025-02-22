@@ -1,0 +1,52 @@
+{% extends "r3master.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {% include '../r3sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html' %}
+{%endblock%}
+
+
+{%block foot%}
+    {% include '../r3foot.html' %}
+{%endblock%}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Danh Sách Sân</h2>
+   
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Tên Sân</th>
+                    <th class="text-center">Địa Chỉ</th>
+                    <th class="text-center">Giá</th>
+                    <th class="text-center">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for court in courts %}
+                <tr>
+                    <td>{{ court.name }}</td>
+                    <td>{{ court.address.soNha }}, {{ court.address.duong }}, {{ court.address.phuong }}, {{ court.address.quan }}, {{ court.address.tinh }}</td>
+                    <td class="text-primary">{{ court.price }} đ/h</td>
+                    <td class="text-center">
+                        <a href="{% url 'chiTiet' court.maCourt %}" class="btn btn-success">Xem</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">Chưa có sân nào được thêm.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

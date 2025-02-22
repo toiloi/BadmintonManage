@@ -1,0 +1,90 @@
+{% extends "r3master.html" %}
+{%load static%}
+
+{%block sidebar%}
+    {% include '../r3sidebar.html' %}
+{%endblock%}
+
+{%block search%}
+    {% include '../r3search.html' %}
+{%endblock%}
+
+
+
+
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Thêm Court</h2>
+
+    <form method="post" enctype="multipart/form-data" class="mx-auto p-5 border rounded shadow bg-light" style="max-width: 900px;">
+        {% csrf_token %}
+
+        <!-- Hiển thị lỗi nếu có -->
+        {% if court_form.errors or address_form.errors %}
+            <div class="alert alert-danger">
+                <strong>Lỗi nhập liệu:</strong>
+                {{ court_form.errors }}
+                {{ address_form.errors }}
+            </div>
+        {% endif %}
+
+        <!-- Mã sân & Tên sân -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Mã Court</label>
+                {{ court_form.maCourt }}
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Tên Court</label>
+                {{ court_form.name }}
+            </div>
+        </div>
+
+        <!-- Địa chỉ (Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố) -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Số Nhà</label>
+                {{ address_form.soNha }}
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Đường</label>
+                {{ address_form.duong }}
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Phường/Xã</label>
+                {{ address_form.phuong }}
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">Quận/Huyện</label>
+                {{ address_form.quan }}
+            </div>
+            <div class="col-md-12 mb-4">
+                <label class="form-label fw-bold">Tỉnh/Thành phố</label>
+                {{ address_form.tinh }}
+            </div>
+        </div>
+
+        <!-- Giá sân & Mô tả -->
+        <div class="mb-4">
+            <label class="form-label fw-bold">Giá Sân (VNĐ)</label>
+            {{ court_form.price }}
+        </div>
+        <div class="mb-4">
+            <label class="form-label fw-bold">Mô Tả</label>
+            {{ court_form.description }}
+        </div>
+
+        <!-- Hình ảnh -->
+        <div class="mb-4">
+            <label class="form-label fw-bold">Hình Ảnh</label>
+            {{ court_form.img }}
+        </div>
+
+        <!-- Nút Submit -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-lg btn-success px-5 py-3">✅ Thêm Sân</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

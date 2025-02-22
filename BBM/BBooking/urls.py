@@ -13,4 +13,8 @@ urlpatterns = [
     path('voucher1/<str:maCourt>/<str:tp>/<int:time>/', views.voucher1, name='voucher1'),
     path('tongtien1/<str:maCourt>/<str:tp>/<int:time>/<int:tien>/', views.TongTien1, name='tongtien1'),
     path('successBooking/<str:maCourt>/', views.successBooking, name='successBooking'),
+    
+    
+    path('timeslot/<str:maCourt>/',views.time_slot,name='r3time_slot'),
+    path('delete_timeslot/<str:maCourt>/<str:time>/',views.delete_timeslot,name='delete_timeslot')
 ]

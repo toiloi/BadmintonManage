@@ -1,0 +1,35 @@
+
+<div class="sidebar-wrapper">
+    <div class="sidebar-heading">
+        <a href="{% url 'role' %}">BBM Quản Lý</a>
+    </div>
+    <div class="list-group list-group-flush">
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-basketball-ball"></i> Sân Cầu Lông
+            <div class="submenu">
+                <a href="{% url 'r3add_court' %}" class="text-white d-block">Thêm Sân</a>
+                <a href="{% url 'r3manage_court' %}" class="text-white d-block" >Quản Lý Sân</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-user"></i> Nhân Viên
+            <div class="submenu">
+                <a href="{% url 'r3liststaff' %}" class="text-white d-block">Danh Sách</a>
+                <a href="{% url 'r3listxv' %}" class="text-white d-block">Xét duyệt</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-trophy"></i> Lịch
+            <div class="submenu">
+                <a href="{% url 'r3confirm' %}" class="text-white d-block" >Quản lý lịch đặt sân</a>
+            </div>
+        </div>
+        <div class="list-group-item" onclick="this.classList.toggle('active')">
+            <i class="fas fa-gift"></i> Khuyến Mãi
+            <div class="submenu">
+                <a href="{% url 'r3voucher' %}" class="text-white d-block" >Thêm Khuyến Mãi</a>
+                <a href="{% url 'r3vip' %}" class="text-white d-block" >Mã Khuyến Mãi</a>
+            </div>
+        </div>
+    </div>
+</div> 

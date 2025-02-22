@@ -18,7 +18,11 @@ urlpatterns = [
     path('r2court/', views.r2court, name='r2court'),
     path('r2checkin/<str:maCourt>/', views.r2checkIn, name='r2checkin'),
     
-    path('confirm',views.Confirm,name='confirm'),
-    path('vip',views.Vip,name='vip'),
-    path('voucher',views.Voucher,name='voucher')
+    path('r3confirm',views.Confirm,name='r3confirm'),
+    path('r3vip',views.Vip,name='r3vip'),
+    path('r3voucher',views.Voucher,name='r3voucher'),
+    path('delete-voucher/<str:voucher>/',views.delete_voucher,name='delete-voucher'),
+    path('r3liststaff',views.list_nhanvien,name='r3liststaff'),
+    path('r3listxv',views.list_xinviec,name='r3listxv'),
+    path('r3duyet/<str:court>/<str:staff>/<str:action>',views.duyetDon,name='r3duyet'),
 ]
